@@ -1,0 +1,364 @@
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C full_assembly all
+make[1]: Nothing to be done for `all'.
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C full_c all
+make[1]: Nothing to be done for `all'.
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C full_assembly verify
+python3 verify.py
+{
+  "result": "PASS",
+  "bytes": 65536,
+  "sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "source": "original Intel HEX decoded with checksum validation",
+  "hardware_execution": false,
+  "standalone_build_inputs": [
+    "firmware.S",
+    "firmware.ld",
+    "Makefile"
+  ],
+  "standalone_build_without_input_binary": true,
+  "source_sha256": "dca10123c58fe31c8ededfa5d420428772b2cbc7d3938f2667609a87fbccfb17"
+}
+python3 tools/check_artifacts.py
+{
+  "result": "PASS",
+  "source_sha256": "22b4c0a573576b2f0f9ea93fc3459f22163f3c5305875a245f3ea82c4a373ccf",
+  "binary_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "image_bytes": 65536,
+  "independent_objcopy_match": true,
+  "analysis_elf_flash_match": true,
+  "c_syntax_checked": [
+    "recovery/reconstructed/application.c",
+    "recovery/reconstructed/application_main.c",
+    "recovery/reconstructed/business_handlers.c",
+    "recovery/reconstructed/firmware_update.c",
+    "recovery/reconstructed/serial_protocol.c",
+    "recovery/reconstructed/startup_boot.c"
+  ],
+  "limitations": [
+    "Syntax and byte identity do not prove reconstructed firmware links or is behaviorally equivalent."
+  ]
+}
+python3 verification/check_serial.py
+{
+  "parser_byte_steps": 10400,
+  "tx_payload_lengths": 256,
+  "parameter_payload_cases": 200,
+  "result": "PASS",
+  "method": "compiled reconstructed C differential against original Thumb via Unicorn 2.1.4",
+  "limitations": [
+    "External frame dispatch and TX calls are intercepted, not emulated.",
+    "No hardware, DMA, peripheral timing, interrupt concurrency, or full application equivalence verified.",
+    "Parser buffer mapped as 256 bytes to observe malformed-input semantics; not a claim of firmware allocation."
+  ]
+}
+python3 tools/verify_semantics.py
+{"passed": true, "cases": 5360, "failures": 0, "report": "/Users/zhuning/Projects/charge/charge-hex/recovery/artifacts/verification_semantics.json"}
+python3 verification/check_update_crc.py
+length=   0 crc=0x0000 matched
+length=   9 crc=0x31c3 matched
+length= 128 crc=0x0000 matched
+length= 128 crc=0xe80a matched
+length=1024 crc=0xc2e0 matched
+python3 verification/check_application_main.py
+{
+  "result": "PASS",
+  "method": "Original Thumb main versus explicit compiled C lift, identical mocked external-call register effects",
+  "cases": 347,
+  "main_instruction_count": 1053,
+  "executed_instruction_addresses": 695,
+  "instruction_coverage_fraction": 0.6600189933523267,
+  "external_call_events_compared": 23873,
+  "source_sha256": "bab540562de153a4201d60f9685f24a655c31e822dffa23222649b6300264d73",
+  "limitations": [
+    "External functions are mock callbacks, not real driver or business implementations.",
+    "No interrupts, hardware timing, input press loops, or asynchronous mutation modeled.",
+    "Full static CFG emitted; finite dynamic coverage does not prove every possible state."
+  ]
+}
+python3 verification/check_business.py
+{
+  "result": "PASS",
+  "cases": {
+    "dispatcher": 10752,
+    "identifier": 2777
+  },
+  "instruction_coverage": {
+    "dispatcher": {
+      "static_instructions": 660,
+      "visited_instructions": 659,
+      "not_visited": [
+        "0x800b2ec"
+      ]
+    },
+    "identifier": {
+      "static_instructions": 751,
+      "visited_instructions": 751,
+      "not_visited": []
+    }
+  },
+  "failures": [],
+  "source_sha256": "54423415d1b55f6e8ed69360fd59d3479dc74fcc0268bced12b77d5283baba94",
+  "firmware_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "limitations": [
+    "Opaque external callees have deterministic scripted return values/effects; this validates dispatcher/handler behavior under those stubs only.",
+    "Peripheral and full firmware execution are not verified.",
+    "Incoming dispatcher stack payload is supplied explicitly for invalid selectors."
+  ]
+}
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C full_c verify
+python3 verify.py
+single instruction cases passed: 42138
+{
+  "result": "PASS",
+  "single_instruction_cases": 42138,
+  "instruction_addresses_tested": 21069,
+  "mnemonics_tested": [
+    "adcs",
+    "add",
+    "adds",
+    "adr",
+    "ands",
+    "asrs",
+    "b",
+    "beq",
+    "bge",
+    "bgt",
+    "bhi",
+    "bhs",
+    "bics",
+    "bl",
+    "ble",
+    "blo",
+    "bls",
+    "blt",
+    "blx",
+    "bmi",
+    "bne",
+    "bpl",
+    "bx",
+    "cmn",
+    "cmp",
+    "cpsid",
+    "cpsie",
+    "dsb",
+    "eors",
+    "isb",
+    "ldm",
+    "ldr",
+    "ldrb",
+    "ldrh",
+    "ldrsb",
+    "ldrsh",
+    "lsls",
+    "lsrs",
+    "mov",
+    "movs",
+    "msr",
+    "muls",
+    "mvns",
+    "nop",
+    "orrs",
+    "pop",
+    "push",
+    "rev16",
+    "rsbs",
+    "sbcs",
+    "stm",
+    "str",
+    "strb",
+    "strh",
+    "sub",
+    "subs",
+    "sxth",
+    "tst",
+    "uxtb",
+    "uxth"
+  ],
+  "whole_function_cases": 1354,
+  "explicit_fault_boundary_tests": [
+    {
+      "entry": "0x800ff00",
+      "expected": -1,
+      "actual": -1
+    },
+    {
+      "entry": "0x80000be",
+      "expected": -3,
+      "actual": -3
+    },
+    {
+      "entry": "0x80000be",
+      "expected": -4,
+      "actual": -4
+    },
+    {
+      "entry": "0x08000234",
+      "expected": -2,
+      "actual": -2
+    }
+  ],
+  "independent_alignment_tests": [
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x40000001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x20002002",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x40000002",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x20002003",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x40000003",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x40000001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x20002002",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x40000002",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x20002003",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x40000003",
+      "fault": -5
+    },
+    {
+      "instruction": "0x0800038e",
+      "access": "ldrh",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x0800038e",
+      "access": "ldrh",
+      "address": "0x40000001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x0800037a",
+      "access": "strh",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x0800037a",
+      "access": "strh",
+      "address": "0x40000001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08004986",
+      "access": "ldrsh",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08004986",
+      "access": "ldrsh",
+      "address": "0x40000001",
+      "fault": -5
+    }
+  ],
+  "first_fault_retention_tests": [
+    {
+      "instruction": "0x080001e2",
+      "access": "ldm",
+      "bus_calls": 1,
+      "fault_address": "0x40001000"
+    },
+    {
+      "instruction": "0x0800030e",
+      "access": "stm",
+      "bus_calls": 1,
+      "fault_address": "0x40001000"
+    },
+    {
+      "instruction": "0x0800010e",
+      "access": "pop",
+      "bus_calls": 1,
+      "fault_address": "0x40001000"
+    }
+  ],
+  "firmware_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "model_source_sha256": "fd9eae59017e724cd8b744ce346f7e3136bc556a3816733b8438867480c6470d",
+  "elapsed_seconds": 10.659,
+  "method": "Generated C compiled by host compiler, differential against original Thumb via Unicorn; no function stubs",
+  "comparison": [
+    "r0..r14",
+    "PC",
+    "APSR NZCV",
+    "PRIMASK",
+    "all 64KiB test SRAM"
+  ],
+  "limitations": [
+    "Instruction tests use aligned mapped addresses and valid Thumb branch targets, not all possible CPU states.",
+    "Alignment faults are tested independently against the architecture rule, not Unicorn, which permits those accesses.",
+    "Faults retain the first address and suppress subsequent memory/bus effects, but precise exception entry/register rollback is not modeled.",
+    "Whole-function tests cover selected pure/state routines, not complete boot/main execution.",
+    "No IRQ/exception-return, peripheral, DMA, hardware timing, or Flash-controller validation."
+  ]
+}
+python3 tools/audit_recovery.py
+{
+  "firmware_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "rebuilt_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "byte_identical": true,
+  "decompiled_functions": 433,
+  "all_export_file_hashes_match": true,
+  "classified_instructions": 21069,
+  "instructions_within_decompiler_bodies": 21059,
+  "limitations": [
+    "Function bodies and code/data labels are analysis results, not original source metadata.",
+    "A successful C pseudocode export is not a successful C compilation or semantic equivalence proof.",
+    "Byte identity verifies the assembly build. C semantic tests have separate finite coverage."
+  ]
+}
+outside body instructions: 10 warning lines: 197

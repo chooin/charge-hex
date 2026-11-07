@@ -1,0 +1,21 @@
+{
+  "name": "ghidra_12.1.4_PUBLIC_20260921.zip",
+  "size": 569649598,
+  "browser_download_url": "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip",
+  "digest": "sha256:ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db",
+  "release_url": "https://github.com/NationalSecurityAgency/ghidra/releases/tag/Ghidra_12.1.4_build",
+  "tag": "Ghidra_12.1.4_build",
+  "local_native_decompiler": {
+    "path": "/Users/zhuning/.cache/firmware-recovery-tools/ghidra_12.1.4_PUBLIC/Ghidra/Features/Decompiler/os/mac_arm_64/decompile",
+    "sha256": "da3182166dbe8d0177e8db178759c928c3d579a36fe30a4c258bd57ec5aad1f6",
+    "built_from_verified_release_source": true,
+    "make_arguments": [
+      "-j8",
+      "ghidra_opt",
+      "ARCH_TYPE=-arch arm64",
+      "OSDIR=mac_arm_64",
+      "ADDITIONAL_FLAGS=-mmacosx-version-min=11.0"
+    ]
+  },
+  "scope": "Per-command environment only; no global REA/MCP configuration edited"
+}

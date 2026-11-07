@@ -1,0 +1,79 @@
+{
+  "kind": "offline-original-vs-recompiled-C-differential-emulation",
+  "passed": true,
+  "firmware_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "application_c_sha256": "7103b244f4bbe68562578ee2df774e1ab19a7afb7eef8ac447c1f20cc2163f6c",
+  "compiled_image_sha256": "b097c7dcd3b9d4fae9aa92225134347538cbda0949200fa45b6e4632d84e425e",
+  "transcript_sha256": "9cb2d3f9f6d894dbf295b74b3ff5a20a89d749bce57e9164a29b217ef9fc17ba",
+  "seed": 15741128,
+  "unicorn_version": "2.1.4",
+  "capstone_version": "5.0.7",
+  "compiler": "arm-none-eabi-gcc (GCC) 16.2.0",
+  "build_flags": [
+    "-std=c11",
+    "-mcpu=cortex-m0",
+    "-mthumb",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-nostdlib",
+    "-Wl,--gc-sections",
+    "-Wl,-Ttext=0x08100000",
+    "-Wl,-e,recovered_set_channel_state",
+    "-Wl,--undefined=recovered_set_channel_state",
+    "-Wl,--undefined=recovered_clear_channel_accounting",
+    "-Wl,--undefined=recovered_pulse_command",
+    "-Wl,--undefined=recovered_send_configured_command"
+  ],
+  "functions": {
+    "channel_state": {
+      "original_entry": "0x0800c85c",
+      "recovered_function": "recovered_set_channel_state",
+      "recovered_entry": "0x08100000",
+      "cases": 3072,
+      "passed": 3072,
+      "failed": 0
+    },
+    "clear_accounting": {
+      "original_entry": "0x08009e14",
+      "recovered_function": "recovered_clear_channel_accounting",
+      "recovered_entry": "0x08100054",
+      "cases": 240,
+      "passed": 240,
+      "failed": 0
+    },
+    "pulse_command": {
+      "original_entry": "0x0800cdb8",
+      "recovered_function": "recovered_pulse_command",
+      "recovered_entry": "0x08100070",
+      "cases": 1536,
+      "passed": 1536,
+      "failed": 0
+    },
+    "configured_command": {
+      "original_entry": "0x0800cda4",
+      "recovered_function": "recovered_send_configured_command",
+      "recovered_entry": "0x08100120",
+      "cases": 512,
+      "passed": 512,
+      "failed": 0
+    }
+  },
+  "total_cases": 5360,
+  "failure_count": 0,
+  "failures": [],
+  "elapsed_seconds": 1.097,
+  "comparison": {
+    "memory_range": "0x20000000..0x20002FFF (all bytes)",
+    "call_events": "ordered GPIO port/pins/state and delay routine/argument",
+    "hardware_execution": false
+  },
+  "limitations": [
+    "Finite cases with deterministic random initial SRAM; not a proof for every possible state.",
+    "GPIO and delay subroutines are intercepted. Timing, electrical effects, interrupts and devices are not modeled.",
+    "Stack scratch bytes and caller-saved registers are excluded; lower SRAM and ordered call events are compared.",
+    "Only the four listed functions are validated. Full firmware, parser and main state-machine equivalence remain unverified."
+  ]
+}

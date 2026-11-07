@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "cases": {
+    "dispatcher": 10752,
+    "identifier": 2777
+  },
+  "instruction_coverage": {
+    "dispatcher": {
+      "static_instructions": 660,
+      "visited_instructions": 659,
+      "not_visited": [
+        "0x800b2ec"
+      ]
+    },
+    "identifier": {
+      "static_instructions": 751,
+      "visited_instructions": 751,
+      "not_visited": []
+    }
+  },
+  "failures": [],
+  "source_sha256": "54423415d1b55f6e8ed69360fd59d3479dc74fcc0268bced12b77d5283baba94",
+  "firmware_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "limitations": [
+    "Opaque external callees have deterministic scripted return values/effects; this validates dispatcher/handler behavior under those stubs only.",
+    "Peripheral and full firmware execution are not verified.",
+    "Incoming dispatcher stack payload is supplied explicitly for invalid selectors."
+  ]
+}

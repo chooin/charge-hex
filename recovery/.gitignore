@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+*.o
+ghidra/initial_decompile/
+ghidra/prior_classification_decompile/

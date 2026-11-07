@@ -1,0 +1,2846 @@
+{
+  "image_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "rebuilt_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "image_bytes": 65536,
+  "exact_flash_roundtrip": true,
+  "instructions": 21069,
+  "classified_instruction_bytes": 44750,
+  "mnemonic_instructions": 20732,
+  "exact_encoding_fallbacks": 337,
+  "remaining_explicit_data_bytes": 20786,
+  "unclassified_bytes_within_code_ranges": 369,
+  "unclassified_ranges_within_code_ranges": [
+    {
+      "start": "0x80001d6",
+      "end_exclusive": "0x80001d8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800022a",
+      "end_exclusive": "0x800022c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800024a",
+      "end_exclusive": "0x800024c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80002ea",
+      "end_exclusive": "0x80002ec",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800031e",
+      "end_exclusive": "0x8000320",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800033a",
+      "end_exclusive": "0x800033c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800037e",
+      "end_exclusive": "0x8000380",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80003d2",
+      "end_exclusive": "0x80003d4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800049e",
+      "end_exclusive": "0x80004a0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800061e",
+      "end_exclusive": "0x8000620",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800066e",
+      "end_exclusive": "0x8000670",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80006de",
+      "end_exclusive": "0x80006e0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800078e",
+      "end_exclusive": "0x8000790",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8000802",
+      "end_exclusive": "0x8000804",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8000a86",
+      "end_exclusive": "0x8000a88",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8000a8e",
+      "end_exclusive": "0x8000a90",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8000b26",
+      "end_exclusive": "0x8000b28",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8000ce2",
+      "end_exclusive": "0x8000ce4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8000f86",
+      "end_exclusive": "0x8000f88",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8000fb6",
+      "end_exclusive": "0x8000fb8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800101a",
+      "end_exclusive": "0x800101c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001052",
+      "end_exclusive": "0x8001054",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001092",
+      "end_exclusive": "0x8001094",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80010be",
+      "end_exclusive": "0x80010c0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80010de",
+      "end_exclusive": "0x80010e0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80010f6",
+      "end_exclusive": "0x80010f8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80011de",
+      "end_exclusive": "0x80011e0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80012de",
+      "end_exclusive": "0x80012e0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800170e",
+      "end_exclusive": "0x8001710",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001742",
+      "end_exclusive": "0x8001744",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80017ba",
+      "end_exclusive": "0x80017bc",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80017da",
+      "end_exclusive": "0x80017dc",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001862",
+      "end_exclusive": "0x8001864",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001a5e",
+      "end_exclusive": "0x8001a60",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001ad6",
+      "end_exclusive": "0x8001ad8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001b0a",
+      "end_exclusive": "0x8001b0c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001ba6",
+      "end_exclusive": "0x8001ba8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001cae",
+      "end_exclusive": "0x8001cb0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001d8e",
+      "end_exclusive": "0x8001d90",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001dea",
+      "end_exclusive": "0x8001dec",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8001eee",
+      "end_exclusive": "0x8001ef0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002042",
+      "end_exclusive": "0x8002044",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002132",
+      "end_exclusive": "0x8002134",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002242",
+      "end_exclusive": "0x8002244",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002312",
+      "end_exclusive": "0x8002314",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002492",
+      "end_exclusive": "0x8002494",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002606",
+      "end_exclusive": "0x8002608",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002666",
+      "end_exclusive": "0x8002668",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002786",
+      "end_exclusive": "0x8002788",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80028a2",
+      "end_exclusive": "0x80028a4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80029e6",
+      "end_exclusive": "0x80029e8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80029f2",
+      "end_exclusive": "0x80029f4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002ab6",
+      "end_exclusive": "0x8002ab8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002ae2",
+      "end_exclusive": "0x8002ae4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002c4a",
+      "end_exclusive": "0x8002c4c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002cf2",
+      "end_exclusive": "0x8002cf4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8002e4a",
+      "end_exclusive": "0x8002e4c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80040c4",
+      "end_exclusive": "0x80040c8",
+      "bytes": 4,
+      "hex": "c046c046"
+    },
+    {
+      "start": "0x8004312",
+      "end_exclusive": "0x8004314",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8004336",
+      "end_exclusive": "0x8004338",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800452e",
+      "end_exclusive": "0x8004530",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800464e",
+      "end_exclusive": "0x8004650",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80047ca",
+      "end_exclusive": "0x80047cc",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800493a",
+      "end_exclusive": "0x800493c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8004956",
+      "end_exclusive": "0x8004958",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8004976",
+      "end_exclusive": "0x8004978",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8004aea",
+      "end_exclusive": "0x8004aec",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8004b0e",
+      "end_exclusive": "0x8004b10",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8004fd2",
+      "end_exclusive": "0x8004fd4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800503e",
+      "end_exclusive": "0x8005040",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800516a",
+      "end_exclusive": "0x800516c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005192",
+      "end_exclusive": "0x8005194",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80051ae",
+      "end_exclusive": "0x80051b0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800520a",
+      "end_exclusive": "0x800520c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800528a",
+      "end_exclusive": "0x800528c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80052be",
+      "end_exclusive": "0x80052c0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80052da",
+      "end_exclusive": "0x80052dc",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800531e",
+      "end_exclusive": "0x8005320",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005376",
+      "end_exclusive": "0x8005378",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005442",
+      "end_exclusive": "0x8005444",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80055fe",
+      "end_exclusive": "0x8005600",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005616",
+      "end_exclusive": "0x8005618",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005786",
+      "end_exclusive": "0x8005788",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800583e",
+      "end_exclusive": "0x8005840",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80059b6",
+      "end_exclusive": "0x80059b8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005a26",
+      "end_exclusive": "0x8005a28",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005afa",
+      "end_exclusive": "0x8005afc",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005b6e",
+      "end_exclusive": "0x8005b70",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005bc6",
+      "end_exclusive": "0x8005bc8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005d52",
+      "end_exclusive": "0x8005d54",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005d5a",
+      "end_exclusive": "0x8005d5c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005df2",
+      "end_exclusive": "0x8005df4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8005fae",
+      "end_exclusive": "0x8005fb0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8006252",
+      "end_exclusive": "0x8006254",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80062ae",
+      "end_exclusive": "0x80062b0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8006312",
+      "end_exclusive": "0x8006314",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800632a",
+      "end_exclusive": "0x800632c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800635a",
+      "end_exclusive": "0x800635c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800639a",
+      "end_exclusive": "0x800639c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80063c6",
+      "end_exclusive": "0x80063c8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80063de",
+      "end_exclusive": "0x80063e0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80063fe",
+      "end_exclusive": "0x8006400",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80064e2",
+      "end_exclusive": "0x80064e4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80065e2",
+      "end_exclusive": "0x80065e4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8006a12",
+      "end_exclusive": "0x8006a14",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8006a46",
+      "end_exclusive": "0x8006a48",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8006aa2",
+      "end_exclusive": "0x8006aa4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8006dc2",
+      "end_exclusive": "0x8006dc4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8006e96",
+      "end_exclusive": "0x8006e98",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800709a",
+      "end_exclusive": "0x800709c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8007112",
+      "end_exclusive": "0x8007114",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8007266",
+      "end_exclusive": "0x8007268",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800748e",
+      "end_exclusive": "0x8007490",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8007496",
+      "end_exclusive": "0x8007498",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80074f6",
+      "end_exclusive": "0x80074f8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80075fa",
+      "end_exclusive": "0x80075fc",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800774e",
+      "end_exclusive": "0x8007750",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800783e",
+      "end_exclusive": "0x8007840",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8007896",
+      "end_exclusive": "0x8007898",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80078f2",
+      "end_exclusive": "0x80078f4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80079f3",
+      "end_exclusive": "0x80079f4",
+      "bytes": 1,
+      "hex": "00"
+    },
+    {
+      "start": "0x8007cda",
+      "end_exclusive": "0x8007cdc",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8007da6",
+      "end_exclusive": "0x8007da8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8007f12",
+      "end_exclusive": "0x8007f14",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8007fb2",
+      "end_exclusive": "0x8007fb4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80080a6",
+      "end_exclusive": "0x80080a8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8008252",
+      "end_exclusive": "0x8008254",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8008276",
+      "end_exclusive": "0x8008278",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80082de",
+      "end_exclusive": "0x80082e0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800847a",
+      "end_exclusive": "0x800847c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800850a",
+      "end_exclusive": "0x800850c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8008516",
+      "end_exclusive": "0x8008518",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8008612",
+      "end_exclusive": "0x8008614",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8008722",
+      "end_exclusive": "0x8008724",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80087b6",
+      "end_exclusive": "0x80087b8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8008826",
+      "end_exclusive": "0x8008828",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8008e5a",
+      "end_exclusive": "0x8008e5c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8008eaa",
+      "end_exclusive": "0x8008eac",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8008f7a",
+      "end_exclusive": "0x8008f7c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800904e",
+      "end_exclusive": "0x8009050",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80090ae",
+      "end_exclusive": "0x80090b0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8009206",
+      "end_exclusive": "0x8009208",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8009322",
+      "end_exclusive": "0x8009324",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8009466",
+      "end_exclusive": "0x8009468",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800949a",
+      "end_exclusive": "0x800949c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80094ae",
+      "end_exclusive": "0x80094b0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x80094e2",
+      "end_exclusive": "0x80094e4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8009d46",
+      "end_exclusive": "0x8009d48",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x8009f7e",
+      "end_exclusive": "0x8009f80",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a012",
+      "end_exclusive": "0x800a014",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a062",
+      "end_exclusive": "0x800a064",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a08a",
+      "end_exclusive": "0x800a08c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a11e",
+      "end_exclusive": "0x800a120",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a1de",
+      "end_exclusive": "0x800a1e0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a242",
+      "end_exclusive": "0x800a244",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a2ba",
+      "end_exclusive": "0x800a2bc",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a37a",
+      "end_exclusive": "0x800a37c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a38a",
+      "end_exclusive": "0x800a38c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a3ee",
+      "end_exclusive": "0x800a3f0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a466",
+      "end_exclusive": "0x800a468",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a4da",
+      "end_exclusive": "0x800a4dc",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a68a",
+      "end_exclusive": "0x800a68c",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800a8e1",
+      "end_exclusive": "0x800a8e2",
+      "bytes": 1,
+      "hex": "00"
+    },
+    {
+      "start": "0x800b6b2",
+      "end_exclusive": "0x800b6b4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800b702",
+      "end_exclusive": "0x800b704",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800b746",
+      "end_exclusive": "0x800b748",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800ba72",
+      "end_exclusive": "0x800ba74",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800bab2",
+      "end_exclusive": "0x800bab4",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800bb36",
+      "end_exclusive": "0x800bb38",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800bc26",
+      "end_exclusive": "0x800bc28",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800bcce",
+      "end_exclusive": "0x800bcd0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800c19e",
+      "end_exclusive": "0x800c1a0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800c27e",
+      "end_exclusive": "0x800c280",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800c692",
+      "end_exclusive": "0x800c694",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800c6e6",
+      "end_exclusive": "0x800c6e8",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800c702",
+      "end_exclusive": "0x800c704",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800c7be",
+      "end_exclusive": "0x800c7c0",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800c82e",
+      "end_exclusive": "0x800c830",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800c856",
+      "end_exclusive": "0x800c858",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800c889",
+      "end_exclusive": "0x800c88a",
+      "bytes": 1,
+      "hex": "00"
+    },
+    {
+      "start": "0x800cc5e",
+      "end_exclusive": "0x800cc60",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800cc7e",
+      "end_exclusive": "0x800cc80",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800cd36",
+      "end_exclusive": "0x800cd38",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800cd96",
+      "end_exclusive": "0x800cd98",
+      "bytes": 2,
+      "hex": "0000"
+    },
+    {
+      "start": "0x800cdb2",
+      "end_exclusive": "0x800cdb4",
+      "bytes": 2,
+      "hex": "0000"
+    }
+  ],
+  "literal_pool_words": 656,
+  "switch8_tables": [
+    {
+      "call": "0x8008936",
+      "helper": "0x80095d2",
+      "start": "0x800893a",
+      "bytes": 36,
+      "case_count": 34,
+      "default_index": 34,
+      "targets": [
+        "0x80089dc",
+        "0x800895e",
+        "0x8008b22",
+        "0x8008b20",
+        "0x8008b20",
+        "0x8008b1e",
+        "0x8008b1c",
+        "0x8008b1a",
+        "0x8008b18",
+        "0x8008b16",
+        "0x8008b14",
+        "0x8008b12",
+        "0x8008b12",
+        "0x8008b12",
+        "0x8008b12",
+        "0x8008b10",
+        "0x8008b10",
+        "0x8008b10",
+        "0x8008b0e",
+        "0x8008b0c",
+        "0x8008b0a",
+        "0x8008b08",
+        "0x8008b06",
+        "0x8008b04",
+        "0x8008b02",
+        "0x8008b00",
+        "0x8008afe",
+        "0x80089dc",
+        "0x8008afc",
+        "0x8008afc",
+        "0x8008afc",
+        "0x8008afa",
+        "0x8008af8",
+        "0x8008af6",
+        "0x80089dc"
+      ]
+    },
+    {
+      "call": "0x800a88a",
+      "helper": "0x80095d2",
+      "start": "0x800a88e",
+      "bytes": 83,
+      "case_count": 81,
+      "default_index": 81,
+      "targets": [
+        "0x800a8e2",
+        "0x800a914",
+        "0x800a966",
+        "0x800a96c",
+        "0x800a9da",
+        "0x800a982",
+        "0x800a912",
+        "0x800a9f2",
+        "0x800aa1e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa2e",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa4a",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800aa74",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800a912",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa72",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800aa70",
+        "0x800a912"
+      ]
+    },
+    {
+      "call": "0x800c876",
+      "helper": "0x80095d2",
+      "start": "0x800c87a",
+      "bytes": 15,
+      "case_count": 13,
+      "default_index": 13,
+      "targets": [
+        "0x800c8b0",
+        "0x800c88a",
+        "0x800c8b2",
+        "0x800c8d6",
+        "0x800c8fa",
+        "0x800c91e",
+        "0x800c93e",
+        "0x800c962",
+        "0x800c982",
+        "0x800c9a4",
+        "0x800c9c4",
+        "0x800c9e8",
+        "0x800ca08",
+        "0x800c8b0"
+      ]
+    },
+    {
+      "call": "0x800a2e2",
+      "helper": "0x80095d2",
+      "start": "0x800a2e6",
+      "bytes": 18,
+      "case_count": 16,
+      "default_index": 16,
+      "targets": [
+        "0x800a300",
+        "0x800a2f8",
+        "0x800a306",
+        "0x800a30a",
+        "0x800a318",
+        "0x800a320",
+        "0x800a328",
+        "0x800a330",
+        "0x800a338",
+        "0x800a340",
+        "0x800a348",
+        "0x800a350",
+        "0x800a358",
+        "0x800a360",
+        "0x800a368",
+        "0x800a370",
+        "0x800a300"
+      ]
+    },
+    {
+      "call": "0x8007912",
+      "helper": "0x80095d2",
+      "start": "0x8007916",
+      "bytes": 18,
+      "case_count": 16,
+      "default_index": 16,
+      "targets": [
+        "0x800796e",
+        "0x8007928",
+        "0x80079c2",
+        "0x80079c2",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x8007b00",
+        "0x800796e"
+      ]
+    },
+    {
+      "call": "0x800b10a",
+      "helper": "0x80095d2",
+      "start": "0x800b10e",
+      "bytes": 24,
+      "case_count": 22,
+      "default_index": 22,
+      "targets": [
+        "0x800b150",
+        "0x800b22a",
+        "0x800b23e",
+        "0x800b150",
+        "0x800b24e",
+        "0x800b270",
+        "0x800b150",
+        "0x800b29e",
+        "0x800b150",
+        "0x800b2ce",
+        "0x800b150",
+        "0x800b150",
+        "0x800b2d8",
+        "0x800b2ee",
+        "0x800b150",
+        "0x800b2ea",
+        "0x800b150",
+        "0x800b150",
+        "0x800b150",
+        "0x800b150",
+        "0x800b2e8",
+        "0x800b2e6",
+        "0x800b150"
+      ]
+    },
+    {
+      "call": "0x80079cc",
+      "helper": "0x80095d2",
+      "start": "0x80079d0",
+      "bytes": 35,
+      "case_count": 33,
+      "default_index": 33,
+      "targets": [
+        "0x80079f4",
+        "0x80079f6",
+        "0x80079f4",
+        "0x80079f4",
+        "0x80079f4",
+        "0x80079f4",
+        "0x8007a22",
+        "0x8007a3c",
+        "0x8007a58",
+        "0x8007a76",
+        "0x8007a94",
+        "0x8007ab2",
+        "0x8007ab2",
+        "0x8007ab2",
+        "0x8007ab2",
+        "0x8007ada",
+        "0x8007ada",
+        "0x8007ada",
+        "0x8007b02",
+        "0x8007b1e",
+        "0x8007b3a",
+        "0x8007b58",
+        "0x8007b78",
+        "0x8007bb8",
+        "0x8007bae",
+        "0x8007bac",
+        "0x8007baa",
+        "0x80079f4",
+        "0x80079f4",
+        "0x80079f4",
+        "0x80079f4",
+        "0x8007ba8",
+        "0x8007ba6",
+        "0x80079f4"
+      ]
+    },
+    {
+      "call": "0x800b13e",
+      "helper": "0x80095d2",
+      "start": "0x800b142",
+      "bytes": 8,
+      "case_count": 6,
+      "default_index": 6,
+      "targets": [
+        "0x800b150",
+        "0x800b16c",
+        "0x800b170",
+        "0x800b174",
+        "0x800b178",
+        "0x800b18a",
+        "0x800b150"
+      ]
+    }
+  ],
+  "seeded_function_entries": 430,
+  "unresolved_indirect_branches": [
+    {
+      "address": "0x80001e8",
+      "instruction": "blx r3"
+    },
+    {
+      "address": "0x800052e",
+      "instruction": "blx r1"
+    },
+    {
+      "address": "0x80005ee",
+      "instruction": "bx r1"
+    },
+    {
+      "address": "0x8001914",
+      "instruction": "blx r1"
+    },
+    {
+      "address": "0x8001964",
+      "instruction": "blx r1"
+    },
+    {
+      "address": "0x8002e46",
+      "instruction": "blx r0"
+    },
+    {
+      "address": "0x8004540",
+      "instruction": "blx r3"
+    },
+    {
+      "address": "0x80058c6",
+      "instruction": "blx r1"
+    },
+    {
+      "address": "0x8005938",
+      "instruction": "bx r1"
+    },
+    {
+      "address": "0x8006f50",
+      "instruction": "blx r1"
+    },
+    {
+      "address": "0x8006fa0",
+      "instruction": "blx r1"
+    },
+    {
+      "address": "0x80095ea",
+      "instruction": "bx r3"
+    }
+  ],
+  "classification_conflicts": [],
+  "rejected_decode_paths": [],
+  "fallbacks": [
+    {
+      "address": "0x8000108",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800015e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000198",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800019a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000208",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000392",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000398",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000462",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800048e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000492",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80007f2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80008ee",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000a56",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000c58",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000c5e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000c64",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000da8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000dae",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000db6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000ef6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000efc",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8000f02",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8001082",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80015e0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8001720",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80017c8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80017d2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8001c86",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8001c8a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8001ca4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8001d4a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8001d4e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8001d7a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8001e9a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002384",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80023b2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80023b4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80023c2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80023c6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80023d0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002482",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80024b6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800284c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002a06",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002a80",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002a9c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002aa6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002ad2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002b18",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002b5e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002b7a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002b90",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002b96",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002b98",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002bb0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002bb2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002cd8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002cea",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8002db6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800410c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800418a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80041c4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80041c6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004222",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800422e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004236",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004240",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004292",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80043f2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004420",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004428",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004430",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800444e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004462",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004478",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004594",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004604",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800461a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800463c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80046ac",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80046f0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004730",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004770",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800483e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004882",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80048c6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800490a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80049f2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004a92",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004ad8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004b58",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004d3c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004d54",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004e16",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004e52",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004ea2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004ee2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004f54",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8004f82",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005078",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800509c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800515c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005200",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005332",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005338",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005406",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005432",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005436",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80054e8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80055b6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005762",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005b5e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005d16",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005f24",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005f2a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8005f30",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8006074",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800607a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8006082",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80061c2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80061c8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80061ce",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800638a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80063fa",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80068e4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8006a24",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8006d4a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8006e54",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8006e8e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8007376",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800738a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80073ba",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80073ce",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80073d6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80073ee",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80073f6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8007442",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80075a6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800793a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8007a40",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8007a5c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8007a7a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8007ca2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8007cba",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80080c4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008116",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008188",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800818c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008264",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800826c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80082c4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80082fe",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008316",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008338",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800834c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008354",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800836c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008380",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008394",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80083ae",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80083c2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80083e4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80083f8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800840c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008420",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008438",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800844c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008672",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80086be",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80086c6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800877e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008870",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80088de",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008ba2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008c02",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008c18",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008dee",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008dfc",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e06",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e0e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e16",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e1e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e26",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e2e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e36",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e42",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e4e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e54",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008e92",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008f28",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008f56",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008f5e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8008f74",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80092cc",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009512",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009520",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800953e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009542",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800954c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009562",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800958c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009594",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80095d6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80095da",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009634",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009646",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009806",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x80098a4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009980",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009982",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009a0e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009a26",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009b2c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009b30",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009b44",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009b52",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009b64",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009b74",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009b7c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009b94",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009bfc",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009c00",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009c0c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009c24",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009c28",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009cd4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009ce0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009d36",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009d96",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009dec",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009ee2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009f00",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x8009fac",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a212",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a384",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a3e2",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a458",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a64c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a6ee",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a700",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a718",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a930",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800a994",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800aaf0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ac02",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ac5a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ae1a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ae92",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800af2c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800af58",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800af80",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800afa4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b00c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b012",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b04a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b08c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b1c8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b248",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b314",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b4bc",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b4ce",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b63c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b646",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b650",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b65a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b664",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b6d6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b8f6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b900",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b908",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b910",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b918",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b91e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b926",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b92e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b9e8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b9f0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800b9fa",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba02",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba0a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba12",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba1a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba22",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba2a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba32",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba3a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba42",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ba4c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800bc5c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800bc66",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800bc76",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800bcc6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800bf5e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800bf7a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800bfe4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800bfe8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800bffe",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c014",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c028",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c03a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c03e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c058",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c0f8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c0fc",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c10a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c124",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c128",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c188",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c196",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c1e8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c230",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c23c",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c2b0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c2e0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c2ec",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c2f6",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c33a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c490",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c520",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c52a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c534",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c576",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c688",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c7e0",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c7fc",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c808",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800c85e",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ca86",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800caa8",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800cc10",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800cc54",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800cc6a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800cc74",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800cc90",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800cc9a",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800cca4",
+      "reason": "assembler selected a different equivalent encoding"
+    },
+    {
+      "address": "0x800ce46",
+      "reason": "assembler selected a different equivalent encoding"
+    }
+  ],
+  "limitations": [
+    "A byte-identical rebuilt image proves preservation of bytes, not correctness of every code/data classification.",
+    "Function seeds include vectors, known entries, direct calls and a bounded pointer-word heuristic; these are analyst names.",
+    "Unclassified bytes may contain additional code. They are explicit data, not silently represented as recovered source functions.",
+    "All original absolute addresses and instruction widths are retained; changing layout requires updating literal data and pointers.",
+    "No hardware execution or flashing was performed."
+  ]
+}

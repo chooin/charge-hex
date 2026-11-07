@@ -1,0 +1,30 @@
+[
+  {
+    "file": "bootloader_partition.bin",
+    "load_address": "0x8000000",
+    "size": 16384,
+    "sha256": "d62a46493bfed1991243ffad07ae60bb996dad9c47d63abf366fb274b6560f80",
+    "boundary_basis": "Analyst-selected from vector table and flash data boundaries; not linker section metadata"
+  },
+  {
+    "file": "application_partition.bin",
+    "load_address": "0x8004000",
+    "size": 47104,
+    "sha256": "d1c943b1314085f75e6372fbf002bff31eaa34414257a5b19325b24b8bbe6649",
+    "boundary_basis": "Analyst-selected from vector table and flash data boundaries; not linker section metadata"
+  },
+  {
+    "file": "update_metadata.bin",
+    "load_address": "0x800f800",
+    "size": 1024,
+    "sha256": "72f61d668ea1aabdcff1c771abc41709f1f45993e9e6ccafa7f246efd46a0027",
+    "boundary_basis": "Analyst-selected from vector table and flash data boundaries; not linker section metadata"
+  },
+  {
+    "file": "configuration_page.bin",
+    "load_address": "0x800fc00",
+    "size": 1024,
+    "sha256": "105af3a042479b3a4fdd782a457578721bde6908c4e427205169bcec356c3b92",
+    "boundary_basis": "Analyst-selected from vector table and flash data boundaries; not linker section metadata"
+  }
+]

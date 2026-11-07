@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "command": "make -C recovery verify (core suite); independent review executed separately against identical final model",
+  "original_hex_sha256": "22b4c0a573576b2f0f9ea93fc3459f22163f3c5305875a245f3ea82c4a373ccf",
+  "model_sha256": "fd9eae59017e724cd8b744ce346f7e3136bc556a3816733b8438867480c6470d",
+  "core_log_sha256": "88d71b86b231a81e08a415a9aa52b3cb798ade467c3d50d911661cf66a679cee",
+  "independent_boundary_cases": 3584,
+  "independent_boundary_result": "PASS",
+  "no_hardware_execution": true,
+  "limitations": [
+    "Validation applies to preserved assembly bytes and documented C test scopes, not whole-board timing or interrupt equivalence."
+  ]
+}

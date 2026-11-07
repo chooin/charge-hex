@@ -1,0 +1,12 @@
+{
+  "parser_byte_steps": 10400,
+  "tx_payload_lengths": 256,
+  "parameter_payload_cases": 200,
+  "result": "PASS",
+  "method": "compiled reconstructed C differential against original Thumb via Unicorn 2.1.4",
+  "limitations": [
+    "External frame dispatch and TX calls are intercepted, not emulated.",
+    "No hardware, DMA, peripheral timing, interrupt concurrency, or full application equivalence verified.",
+    "Parser buffer mapped as 256 bytes to observe malformed-input semantics; not a claim of firmware allocation."
+  ]
+}

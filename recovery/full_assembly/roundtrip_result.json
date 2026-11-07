@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "bytes": 65536,
+  "sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "source": "original Intel HEX decoded with checksum validation",
+  "hardware_execution": false,
+  "standalone_build_inputs": [
+    "firmware.S",
+    "firmware.ld",
+    "Makefile"
+  ],
+  "standalone_build_without_input_binary": true,
+  "source_sha256": "dca10123c58fe31c8ededfa5d420428772b2cbc7d3938f2667609a87fbccfb17"
+}

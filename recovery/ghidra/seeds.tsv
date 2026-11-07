@@ -1,0 +1,5 @@
+0x80095d2	function	__ARM_common_switch8
+0x800253a	function	boot_SystemInit_empty
+0x8008508	function	app_SystemInit_empty
+0x800b0dc	function	app_dispatch_frame
+0x8009694	function	app_handle_identifier_frame

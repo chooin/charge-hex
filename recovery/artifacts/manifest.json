@@ -1,0 +1,72 @@
+{
+  "source_file": "stm32_fw.hex",
+  "source_size_bytes": 157726,
+  "source_sha256": "22b4c0a573576b2f0f9ea93fc3459f22163f3c5305875a245f3ea82c4a373ccf",
+  "binary_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "validation": {
+    "all_checksums_valid": true,
+    "eof_present": true,
+    "record_types": {
+      "4": 1,
+      "0": 2048,
+      "1": 1
+    },
+    "identical_duplicate_bytes": 0
+  },
+  "image_base": "0x08000000",
+  "image_end_exclusive": "0x08010000",
+  "binary_size_bytes": 65536,
+  "explicit_bytes": 65536,
+  "gap_fill_bytes": 0,
+  "gap_fill_value": "0xFF",
+  "address_spans": [
+    {
+      "start": "0x08000000",
+      "end_exclusive": "0x08010000",
+      "size": 65536
+    }
+  ],
+  "start_address_records": [],
+  "last_non_ff_address": "0x0800FC5F",
+  "long_ff_runs": [
+    {
+      "start": "0x0800CF28",
+      "end_exclusive": "0x0800F800",
+      "size": 10456
+    },
+    {
+      "start": "0x0800F82A",
+      "end_exclusive": "0x0800FC00",
+      "size": 982
+    },
+    {
+      "start": "0x0800FC60",
+      "end_exclusive": "0x08010000",
+      "size": 928
+    }
+  ],
+  "string_candidates": 784,
+  "vector_count": 45,
+  "vector_count_basis": "Analyst-selected from the first Thumb code at 0x080000B4; not inferred by Intel HEX",
+  "initial_sp": "0x20001088",
+  "reset_vector": "0x080000C9",
+  "vector_tables": [
+    {
+      "base": "0x08000000",
+      "count": 45,
+      "initial_sp": "0x20001088",
+      "reset_vector": "0x080000C9"
+    },
+    {
+      "base": "0x08004000",
+      "count": 45,
+      "initial_sp": "0x20001680",
+      "reset_vector": "0x080040CD"
+    }
+  ],
+  "limitations": [
+    "String candidates can be accidental instruction bytes.",
+    "Intel HEX has no original function/variable names, types, or source paths.",
+    "FF bytes are explicitly present here; semantic usage is not established by byte value."
+  ]
+}

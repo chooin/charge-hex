@@ -1,0 +1,66 @@
+{
+  "result": "PASS",
+  "total_cases": 3584,
+  "groups": [
+    {
+      "group": "LSL_register",
+      "original_address": "0x80000fc",
+      "cases": 1008,
+      "result": "PASS"
+    },
+    {
+      "group": "LSR_register",
+      "original_address": "0x80000f4",
+      "cases": 1008,
+      "result": "PASS"
+    },
+    {
+      "group": "ADC_register",
+      "original_address": "0x8000158",
+      "cases": 784,
+      "result": "PASS"
+    },
+    {
+      "group": "SBC_register",
+      "original_address": "0x8000136",
+      "cases": 784,
+      "result": "PASS"
+    }
+  ],
+  "firmware_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "source_sha256": {
+    "generate.py": "21c78cc630075a93230ff2745086553b15b20df0ad629e4059805b09abf52157",
+    "firmware_model.h": "1782255fcda59ca44d4cd63e7c44481fa3a2151bffe35da41747c3745c79cdda",
+    "firmware_model.c": "fd9eae59017e724cd8b744ce346f7e3136bc556a3816733b8438867480c6470d",
+    "firmware_data.c": "147ec8ba1784a766ff98661c0b6a5475b422bc2c7fa148fe02e8491640d924d8"
+  },
+  "unicorn_version": "2.1.4",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.4.1.1)",
+  "tested_operands": [
+    "0x0",
+    "0x1",
+    "0x7fffffff",
+    "0x80000000",
+    "0xfffffffe",
+    "0xffffffff",
+    "0x12345678"
+  ],
+  "tested_shift_register_values": [
+    "0x0",
+    "0x1",
+    "0x1f",
+    "0x20",
+    "0x21",
+    "0xff",
+    "0x100",
+    "0x101",
+    "0xffffffff"
+  ],
+  "initial_nzcv_patterns": 16,
+  "elapsed_seconds": 4.75,
+  "limitations": [
+    "Tests only four representative instruction addresses and listed values, not a complete architecture proof.",
+    "No memory alignment, peripheral, fault-delivery, interrupt, or hardware timing semantics are exercised here.",
+    "Unicorn is not used as authority for unaligned Cortex-M0+ memory access or low-bit MSP behavior."
+  ]
+}

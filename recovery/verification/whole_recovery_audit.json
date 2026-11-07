@@ -1,0 +1,1075 @@
+{
+  "firmware_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "rebuilt_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "byte_identical": true,
+  "decompiled_functions": 433,
+  "all_export_file_hashes_match": true,
+  "classified_instructions": 21069,
+  "instructions_within_decompiler_bodies": 21059,
+  "whole_c_model_covers_inventory": true,
+  "whole_c_model_matches_verified_source": true,
+  "instructions_outside_decompiler_bodies": [
+    {
+      "address": "0x08000cdc",
+      "size": 2,
+      "bytes": "ffe7",
+      "mnemonic": "b",
+      "operands": "#0x8000cde"
+    },
+    {
+      "address": "0x08001970",
+      "size": 2,
+      "bytes": "05e0",
+      "mnemonic": "b",
+      "operands": "#0x800197e"
+    },
+    {
+      "address": "0x08001ca8",
+      "size": 2,
+      "bytes": "ffe7",
+      "mnemonic": "b",
+      "operands": "#0x8001caa"
+    },
+    {
+      "address": "0x08002414",
+      "size": 2,
+      "bytes": "ffe7",
+      "mnemonic": "b",
+      "operands": "#0x8002416"
+    },
+    {
+      "address": "0x08002ce2",
+      "size": 2,
+      "bytes": "7047",
+      "mnemonic": "bx",
+      "operands": "lr"
+    },
+    {
+      "address": "0x08005fa8",
+      "size": 2,
+      "bytes": "ffe7",
+      "mnemonic": "b",
+      "operands": "#0x8005faa"
+    },
+    {
+      "address": "0x08006fac",
+      "size": 2,
+      "bytes": "05e0",
+      "mnemonic": "b",
+      "operands": "#0x8006fba"
+    },
+    {
+      "address": "0x08007bb0",
+      "size": 2,
+      "bytes": "02e0",
+      "mnemonic": "b",
+      "operands": "#0x8007bb8"
+    },
+    {
+      "address": "0x0800963e",
+      "size": 2,
+      "bytes": "7047",
+      "mnemonic": "bx",
+      "operands": "lr"
+    },
+    {
+      "address": "0x0800b2ec",
+      "size": 2,
+      "bytes": "ffe7",
+      "mnemonic": "b",
+      "operands": "#0x800b2ee"
+    }
+  ],
+  "decompiler_warnings": [
+    {
+      "file": "functions/0x80000b4.c",
+      "address": "0x80000b4",
+      "warning": "/* WARNING: This function may have set the stack pointer */"
+    },
+    {
+      "file": "functions/0x80000c8.c",
+      "address": "0x80000c8",
+      "warning": "/* WARNING: This function may have set the stack pointer */"
+    },
+    {
+      "file": "functions/0x80000d0.c",
+      "address": "0x80000d0",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80000d2.c",
+      "address": "0x80000d2",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80000d4.c",
+      "address": "0x80000d4",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80000d6.c",
+      "address": "0x80000d6",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80000d8.c",
+      "address": "0x80000d8",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80000da.c",
+      "address": "0x80000da",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x800027c.c",
+      "address": "0x800027c",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x8000320.c",
+      "address": "0x8000320",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000344.c",
+      "address": "0x8000344",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000368.c",
+      "address": "0x8000368",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80003a4.c",
+      "address": "0x80003a4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80003dc.c",
+      "address": "0x80003dc",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000582.c",
+      "address": "0x8000582",
+      "warning": "                    /* WARNING: Could not recover jumptable at 0x080005ee. Too many branches */"
+    },
+    {
+      "file": "functions/0x8000582.c",
+      "address": "0x8000582",
+      "warning": "                    /* WARNING: Treating indirect jump as call */"
+    },
+    {
+      "file": "functions/0x80006e0.c",
+      "address": "0x80006e0",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000780.c",
+      "address": "0x8000780",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000794.c",
+      "address": "0x8000794",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000810.c",
+      "address": "0x8000810",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000838.c",
+      "address": "0x8000838",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800090c.c",
+      "address": "0x800090c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000a88.c",
+      "address": "0x8000a88",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000f8c.c",
+      "address": "0x8000f8c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8000fc4.c",
+      "address": "0x8000fc4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8001028.c",
+      "address": "0x8001028",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8001038.c",
+      "address": "0x8001038",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8001058.c",
+      "address": "0x8001058",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800109c.c",
+      "address": "0x800109c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80010c4.c",
+      "address": "0x80010c4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80010e4.c",
+      "address": "0x80010e4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8001104.c",
+      "address": "0x8001104",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80011ec.c",
+      "address": "0x80011ec",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80012f4.c",
+      "address": "0x80012f4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8001314.c",
+      "address": "0x8001314",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8001394.c",
+      "address": "0x8001394",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800171c.c",
+      "address": "0x800171c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800174c.c",
+      "address": "0x800174c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80017bc.c",
+      "address": "0x80017bc",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8001ad8.c",
+      "address": "0x8001ad8",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8001b14.c",
+      "address": "0x8001b14",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8001d8c.c",
+      "address": "0x8001d8c",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x8002134.c",
+      "address": "0x8002134",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800215c.c",
+      "address": "0x800215c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80021b4.c",
+      "address": "0x80021b4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800220c.c",
+      "address": "0x800220c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800224c.c",
+      "address": "0x800224c",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x8002494.c",
+      "address": "0x8002494",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80024c4.c",
+      "address": "0x80024c4",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80024c4.c",
+      "address": "0x80024c4",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80024c4.c",
+      "address": "0x80024c4",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x8002788.c",
+      "address": "0x8002788",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8002cf4.c",
+      "address": "0x8002cf4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8002cf4.c",
+      "address": "0x8002cf4",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80040b4.c",
+      "address": "0x80040b4",
+      "warning": "/* WARNING: This function may have set the stack pointer */"
+    },
+    {
+      "file": "functions/0x80040cc.c",
+      "address": "0x80040cc",
+      "warning": "/* WARNING: This function may have set the stack pointer */"
+    },
+    {
+      "file": "functions/0x80040d4.c",
+      "address": "0x80040d4",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80040d6.c",
+      "address": "0x80040d6",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80040d8.c",
+      "address": "0x80040d8",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80040da.c",
+      "address": "0x80040da",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80040dc.c",
+      "address": "0x80040dc",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80040de.c",
+      "address": "0x80040de",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x8004530.c",
+      "address": "0x8004530",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8004554.c",
+      "address": "0x8004554",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8004940.c",
+      "address": "0x8004940",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8004960.c",
+      "address": "0x8004960",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8004980.c",
+      "address": "0x8004980",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8004b10.c",
+      "address": "0x8004b10",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8004dcc.c",
+      "address": "0x8004dcc",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005210.c",
+      "address": "0x8005210",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800529c.c",
+      "address": "0x800529c",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80052c0.c",
+      "address": "0x80052c0",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80052e4.c",
+      "address": "0x80052e4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005308.c",
+      "address": "0x8005308",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005348.c",
+      "address": "0x8005348",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005380.c",
+      "address": "0x8005380",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005500.c",
+      "address": "0x8005500",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005790.c",
+      "address": "0x8005790",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80058cc.c",
+      "address": "0x80058cc",
+      "warning": "                    /* WARNING: Could not recover jumptable at 0x08005938. Too many branches */"
+    },
+    {
+      "file": "functions/0x80058cc.c",
+      "address": "0x80058cc",
+      "warning": "                    /* WARNING: Treating indirect jump as call */"
+    },
+    {
+      "file": "functions/0x8005a4c.c",
+      "address": "0x8005a4c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005aec.c",
+      "address": "0x8005aec",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005b00.c",
+      "address": "0x8005b00",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005b7c.c",
+      "address": "0x8005b7c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005bb4.c",
+      "address": "0x8005bb4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005bcc.c",
+      "address": "0x8005bcc",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8005d54.c",
+      "address": "0x8005d54",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8006258.c",
+      "address": "0x8006258",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8006330.c",
+      "address": "0x8006330",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8006340.c",
+      "address": "0x8006340",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8006360.c",
+      "address": "0x8006360",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80063a4.c",
+      "address": "0x80063a4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80063cc.c",
+      "address": "0x80063cc",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80063ec.c",
+      "address": "0x80063ec",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x8006408.c",
+      "address": "0x8006408",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80064f0.c",
+      "address": "0x80064f0",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80065f8.c",
+      "address": "0x80065f8",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8006618.c",
+      "address": "0x8006618",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8006698.c",
+      "address": "0x8006698",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8006a20.c",
+      "address": "0x8006a20",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8006af8.c",
+      "address": "0x8006af8",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8006e28.c",
+      "address": "0x8006e28",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007114.c",
+      "address": "0x8007114",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007474.c",
+      "address": "0x8007474",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007494.c",
+      "address": "0x8007494",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80078a0.c",
+      "address": "0x80078a0",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007904.c",
+      "address": "0x8007904",
+      "warning": "/* WARNING: Function: __ARM_common_switch8 replaced with injection: switch8_r3 */"
+    },
+    {
+      "file": "functions/0x8007904.c",
+      "address": "0x8007904",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x08007912) */"
+    },
+    {
+      "file": "functions/0x8007904.c",
+      "address": "0x8007904",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x080079cc) */"
+    },
+    {
+      "file": "functions/0x8007904.c",
+      "address": "0x8007904",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x08007912) */"
+    },
+    {
+      "file": "functions/0x8007904.c",
+      "address": "0x8007904",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x080079cc) */"
+    },
+    {
+      "file": "functions/0x8007904.c",
+      "address": "0x8007904",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007cf0.c",
+      "address": "0x8007cf0",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007d44.c",
+      "address": "0x8007d44",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007db0.c",
+      "address": "0x8007db0",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007de8.c",
+      "address": "0x8007de8",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007f38.c",
+      "address": "0x8007f38",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007f90.c",
+      "address": "0x8007f90",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8007fc4.c",
+      "address": "0x8007fc4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8008034.c",
+      "address": "0x8008034",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800806c.c",
+      "address": "0x800806c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80080a4.c",
+      "address": "0x80080a4",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x80080a8.c",
+      "address": "0x80080a8",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800848a.c",
+      "address": "0x800848a",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x800848a.c",
+      "address": "0x800848a",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x800848a.c",
+      "address": "0x800848a",
+      "warning": "                    /* WARNING: Do nothing block with infinite loop */"
+    },
+    {
+      "file": "functions/0x8008614.c",
+      "address": "0x8008614",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800890c.c",
+      "address": "0x800890c",
+      "warning": "/* WARNING: Function: __ARM_common_switch8 replaced with injection: switch8_r3 */"
+    },
+    {
+      "file": "functions/0x800890c.c",
+      "address": "0x800890c",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x08008936) */"
+    },
+    {
+      "file": "functions/0x800890c.c",
+      "address": "0x800890c",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x08008936) */"
+    },
+    {
+      "file": "functions/0x800890c.c",
+      "address": "0x800890c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8008dd0.c",
+      "address": "0x8008dd0",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8009208.c",
+      "address": "0x8009208",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x80095d2.c",
+      "address": "0x80095d2",
+      "warning": "/* WARNING: This is an inlined function */"
+    },
+    {
+      "file": "functions/0x80095d2.c",
+      "address": "0x80095d2",
+      "warning": "                    /* WARNING: Could not recover jumptable at 0x080095ea. Too many branches */"
+    },
+    {
+      "file": "functions/0x80095d2.c",
+      "address": "0x80095d2",
+      "warning": "                    /* WARNING: Treating indirect jump as call */"
+    },
+    {
+      "file": "functions/0x8009694.c",
+      "address": "0x8009694",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8009d04.c",
+      "address": "0x8009d04",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8009d50.c",
+      "address": "0x8009d50",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8009d84.c",
+      "address": "0x8009d84",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x8009e30.c",
+      "address": "0x8009e30",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a054.c",
+      "address": "0x800a054",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a068.c",
+      "address": "0x800a068",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a090.c",
+      "address": "0x800a090",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a128.c",
+      "address": "0x800a128",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a24c.c",
+      "address": "0x800a24c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a2d0.c",
+      "address": "0x800a2d0",
+      "warning": "/* WARNING: Function: __ARM_common_switch8 replaced with injection: switch8_r3 */"
+    },
+    {
+      "file": "functions/0x800a2d0.c",
+      "address": "0x800a2d0",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800a2e2) */"
+    },
+    {
+      "file": "functions/0x800a2d0.c",
+      "address": "0x800a2d0",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800a2e2) */"
+    },
+    {
+      "file": "functions/0x800a65c.c",
+      "address": "0x800a65c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a690.c",
+      "address": "0x800a690",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a6cc.c",
+      "address": "0x800a6cc",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a708.c",
+      "address": "0x800a708",
+      "warning": "/* WARNING: Function: __ARM_common_switch8 replaced with injection: switch8_r3 */"
+    },
+    {
+      "file": "functions/0x800a708.c",
+      "address": "0x800a708",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800b13e) */"
+    },
+    {
+      "file": "functions/0x800a708.c",
+      "address": "0x800a708",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800b10a) */"
+    },
+    {
+      "file": "functions/0x800a708.c",
+      "address": "0x800a708",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800a88a) */"
+    },
+    {
+      "file": "functions/0x800a708.c",
+      "address": "0x800a708",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800b13e) */"
+    },
+    {
+      "file": "functions/0x800a708.c",
+      "address": "0x800a708",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800b10a) */"
+    },
+    {
+      "file": "functions/0x800a708.c",
+      "address": "0x800a708",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800a88a) */"
+    },
+    {
+      "file": "functions/0x800a708.c",
+      "address": "0x800a708",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800a7d4.c",
+      "address": "0x800a7d4",
+      "warning": "/* WARNING: Function: __ARM_common_switch8 replaced with injection: switch8_r3 */"
+    },
+    {
+      "file": "functions/0x800a7d4.c",
+      "address": "0x800a7d4",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800b13e) */"
+    },
+    {
+      "file": "functions/0x800a7d4.c",
+      "address": "0x800a7d4",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800b10a) */"
+    },
+    {
+      "file": "functions/0x800a7d4.c",
+      "address": "0x800a7d4",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800a88a) */"
+    },
+    {
+      "file": "functions/0x800a7d4.c",
+      "address": "0x800a7d4",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800b13e) */"
+    },
+    {
+      "file": "functions/0x800a7d4.c",
+      "address": "0x800a7d4",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800b10a) */"
+    },
+    {
+      "file": "functions/0x800a7d4.c",
+      "address": "0x800a7d4",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800a88a) */"
+    },
+    {
+      "file": "functions/0x800a7d4.c",
+      "address": "0x800a7d4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800b0dc.c",
+      "address": "0x800b0dc",
+      "warning": "/* WARNING: Function: __ARM_common_switch8 replaced with injection: switch8_r3 */"
+    },
+    {
+      "file": "functions/0x800b0dc.c",
+      "address": "0x800b0dc",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800b10a) */"
+    },
+    {
+      "file": "functions/0x800b0dc.c",
+      "address": "0x800b0dc",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800b13e) */"
+    },
+    {
+      "file": "functions/0x800b0dc.c",
+      "address": "0x800b0dc",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800b10a) */"
+    },
+    {
+      "file": "functions/0x800b0dc.c",
+      "address": "0x800b0dc",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800b13e) */"
+    },
+    {
+      "file": "functions/0x800b0dc.c",
+      "address": "0x800b0dc",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800b7a8.c",
+      "address": "0x800b7a8",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800b87c.c",
+      "address": "0x800b87c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800b960.c",
+      "address": "0x800b960",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800bab4.c",
+      "address": "0x800bab4",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800bb7c.c",
+      "address": "0x800bb7c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800bcac.c",
+      "address": "0x800bcac",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800bcd8.c",
+      "address": "0x800bcd8",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800be24.c",
+      "address": "0x800be24",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800c1c8.c",
+      "address": "0x800c1c8",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800c20c.c",
+      "address": "0x800c20c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800c298.c",
+      "address": "0x800c298",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800c6d8.c",
+      "address": "0x800c6d8",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800c6ec.c",
+      "address": "0x800c6ec",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800c788.c",
+      "address": "0x800c788",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800c830.c",
+      "address": "0x800c830",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800c85c.c",
+      "address": "0x800c85c",
+      "warning": "/* WARNING: Function: __ARM_common_switch8 replaced with injection: switch8_r3 */"
+    },
+    {
+      "file": "functions/0x800c85c.c",
+      "address": "0x800c85c",
+      "warning": "/* WARNING (jumptable): Removing unreachable block (ram,0x0800c876) */"
+    },
+    {
+      "file": "functions/0x800c85c.c",
+      "address": "0x800c85c",
+      "warning": "/* WARNING: Removing unreachable block (ram,0x0800c876) */"
+    },
+    {
+      "file": "functions/0x800c85c.c",
+      "address": "0x800c85c",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800ca34.c",
+      "address": "0x800ca34",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800ca80.c",
+      "address": "0x800ca80",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800cc80.c",
+      "address": "0x800cc80",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    },
+    {
+      "file": "functions/0x800cd40.c",
+      "address": "0x800cd40",
+      "warning": "/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */"
+    }
+  ],
+  "limitations": [
+    "Function bodies and code/data labels are analysis results, not original source metadata.",
+    "A successful C pseudocode export is not a successful C compilation or semantic equivalence proof.",
+    "Byte identity verifies the assembly build. C semantic tests have separate finite coverage."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "result": "PASS",
+  "cases": [
+    {
+      "length": 0,
+      "crc": "0000",
+      "original_thumb_match": true,
+      "python_reference_match": true
+    },
+    {
+      "length": 9,
+      "crc": "31C3",
+      "original_thumb_match": true,
+      "python_reference_match": true
+    },
+    {
+      "length": 128,
+      "crc": "0000",
+      "original_thumb_match": true,
+      "python_reference_match": true
+    },
+    {
+      "length": 128,
+      "crc": "E80A",
+      "original_thumb_match": true,
+      "python_reference_match": true
+    },
+    {
+      "length": 1024,
+      "crc": "C2E0",
+      "original_thumb_match": true,
+      "python_reference_match": true
+    }
+  ],
+  "limitations": [
+    "Only the pure CRC function is compared; hardware and update state machine are not executed."
+  ]
+}

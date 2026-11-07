@@ -1,0 +1,238 @@
+{
+  "result": "PASS",
+  "single_instruction_cases": 42138,
+  "instruction_addresses_tested": 21069,
+  "mnemonics_tested": [
+    "adcs",
+    "add",
+    "adds",
+    "adr",
+    "ands",
+    "asrs",
+    "b",
+    "beq",
+    "bge",
+    "bgt",
+    "bhi",
+    "bhs",
+    "bics",
+    "bl",
+    "ble",
+    "blo",
+    "bls",
+    "blt",
+    "blx",
+    "bmi",
+    "bne",
+    "bpl",
+    "bx",
+    "cmn",
+    "cmp",
+    "cpsid",
+    "cpsie",
+    "dsb",
+    "eors",
+    "isb",
+    "ldm",
+    "ldr",
+    "ldrb",
+    "ldrh",
+    "ldrsb",
+    "ldrsh",
+    "lsls",
+    "lsrs",
+    "mov",
+    "movs",
+    "msr",
+    "muls",
+    "mvns",
+    "nop",
+    "orrs",
+    "pop",
+    "push",
+    "rev16",
+    "rsbs",
+    "sbcs",
+    "stm",
+    "str",
+    "strb",
+    "strh",
+    "sub",
+    "subs",
+    "sxth",
+    "tst",
+    "uxtb",
+    "uxth"
+  ],
+  "whole_function_cases": 1354,
+  "explicit_fault_boundary_tests": [
+    {
+      "entry": "0x800ff00",
+      "expected": -1,
+      "actual": -1
+    },
+    {
+      "entry": "0x80000be",
+      "expected": -3,
+      "actual": -3
+    },
+    {
+      "entry": "0x80000be",
+      "expected": -4,
+      "actual": -4
+    },
+    {
+      "entry": "0x08000234",
+      "expected": -2,
+      "actual": -2
+    }
+  ],
+  "independent_alignment_tests": [
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x40000001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x20002002",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x40000002",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x20002003",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000234",
+      "access": "ldr",
+      "address": "0x40000003",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x40000001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x20002002",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x40000002",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x20002003",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08000542",
+      "access": "str",
+      "address": "0x40000003",
+      "fault": -5
+    },
+    {
+      "instruction": "0x0800038e",
+      "access": "ldrh",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x0800038e",
+      "access": "ldrh",
+      "address": "0x40000001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x0800037a",
+      "access": "strh",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x0800037a",
+      "access": "strh",
+      "address": "0x40000001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08004986",
+      "access": "ldrsh",
+      "address": "0x20002001",
+      "fault": -5
+    },
+    {
+      "instruction": "0x08004986",
+      "access": "ldrsh",
+      "address": "0x40000001",
+      "fault": -5
+    }
+  ],
+  "first_fault_retention_tests": [
+    {
+      "instruction": "0x080001e2",
+      "access": "ldm",
+      "bus_calls": 1,
+      "fault_address": "0x40001000"
+    },
+    {
+      "instruction": "0x0800030e",
+      "access": "stm",
+      "bus_calls": 1,
+      "fault_address": "0x40001000"
+    },
+    {
+      "instruction": "0x0800010e",
+      "access": "pop",
+      "bus_calls": 1,
+      "fault_address": "0x40001000"
+    }
+  ],
+  "firmware_sha256": "3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144",
+  "model_source_sha256": "fd9eae59017e724cd8b744ce346f7e3136bc556a3816733b8438867480c6470d",
+  "elapsed_seconds": 10.675,
+  "method": "Generated C compiled by host compiler, differential against original Thumb via Unicorn; no function stubs",
+  "comparison": [
+    "r0..r14",
+    "PC",
+    "APSR NZCV",
+    "PRIMASK",
+    "all 64KiB test SRAM"
+  ],
+  "limitations": [
+    "Instruction tests use aligned mapped addresses and valid Thumb branch targets, not all possible CPU states.",
+    "Alignment faults are tested independently against the architecture rule, not Unicorn, which permits those accesses.",
+    "Faults retain the first address and suppress subsequent memory/bus effects, but precise exception entry/register rollback is not modeled.",
+    "Whole-function tests cover selected pure/state routines, not complete boot/main execution.",
+    "No IRQ/exception-return, peripheral, DMA, hardware timing, or Flash-controller validation."
+  ]
+}
