@@ -1,0 +1,3 @@
+# Only for differential checks; the firmware itself has no Python dependency.
+unicorn==2.1.4
+capstone==5.0.7

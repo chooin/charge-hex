@@ -1,4 +1,17 @@
-# 固件源码重建
+# Charge 固件开发与恢复基准
+
+日常开发入口现在位于 [`firmware/`](firmware/README.md)：协议、参数规则、通道、计时和存储服务使用可独立编译的 C 模块；硬件地址及旧固件调用约定集中在平台适配层。整体设计、迁移范围及依据见[架构说明](docs/architecture.md)，当前验收见[验证记录](docs/verification.md)。
+
+```sh
+make             # 主机 C 库 + ARM 渐进重构固件
+make test        # 主机行为、架构边界及原始 Thumb 差分
+make verify      # 另验证新固件布局、实际 ARM C 入口及调用链
+make verify-recovery  # 独立复验原恢复工程
+```
+
+新输出为 `firmware/build/charge.{elf,bin,hex}`，其中七个旧入口已经接入 C 模块，其余程序通过原汇编兼容层运行。**这是渐进重构的开发版本，尚未完成全部高层 C 迁移或板级验收；它与原固件不再字节一致。** 下文的字节一致性结论只针对 `recovery/full_assembly`。协议解析、计时和升级 CRC 的新 C API 已可独立使用，但原整机对应路径仍保留旧实现。
+
+## 固件源码重建基准
 
 从 `stm32_fw.hex` 与 `主板.png` 恢复的代码和构建工程位于 [`recovery/`](recovery/README.md)。主板主控为 Geehy APM32F030C8T6。
 
