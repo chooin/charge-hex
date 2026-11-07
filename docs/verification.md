@@ -32,3 +32,109 @@
 默认保持有效输入业务契约。新API的容量/NULL/缺失回调拒绝属于新增调用边界；未把它推广为原协议整体加固。旧主循环入口、回调观察状态和旧静态RAM分配仍有自身约束。
 
 复核中发现并修正了ABI判断：旧函数push的r3槽可能被参数/临时值覆盖，不一定保存入口r3。最终检查只比较已证实的寄存器契约，并加入真实上游调用者验证。源码和验证结果均以修正后的实现为准。
+
+## Logic compatibility follow-up (2026-11-08)
+
+The owner requires original behavior to remain unchanged even when compiled bytes
+differ. This follow-up audits the seven native replacements against the immutable
+original HEX, repairs concrete counterexamples, and expands repeatable verification.
+The earlier record above remains historical evidence. This run is based on commit
+`d09d40f` plus the local compatibility/test changes described here.
+
+### Counterexamples and fixes
+
+| Native entry | Previous discrepancy | Compatibility change |
+| --- | --- | --- |
+| Channel state `0x0800C85C` | Register channel=256, enable=1 changes channel 0 in the original but was ignored by the new entry | Explicit modulo-256 channel conversion; test full 32-bit enable before narrowing |
+| Storage write `0x080074FC` | Address=`0xFFFF0000`, size=65664 with second write failure: original attempts two 128-byte chunks and returns 1; new code attempted one and returned 0 | Preserve full-register range arithmetic, original page/tail masks, address wrapping and failure propagation in the native adapter |
+| Storage read/write | Nonempty NULL transfers were rejected before reaching original driver validation, losing handle error writes or changing raw read status | Exceptional native calls execute the original validation paths; ordinary calls retain portable services |
+| Frame send `0x0800C7C4` | Original can read a nonempty payload from mapped address zero; portable NULL rejection suppressed native output | A small assembly byte-load helper preserves machine reads without a C NULL dereference |
+
+Raw native clear/config/frame signatures also now express full-register behavior:
+unsigned wrapping clear-address arithmetic, endian exactly equal to 1, and length
+rejection before byte-field conversion. The public portable APIs and their existing
+validation contracts have not been weakened. Implementations are in
+[legacy_bridge.c](../firmware/platform/apm32/legacy_bridge.c) and
+[abi_shims.S](../firmware/platform/apm32/abi_shims.S).
+
+### Fresh results
+
+`make native` rebuilt the changed ARM image; the final `make verify` exited 0.
+
+| Check | Result | Scope |
+| --- | --- | --- |
+| Existing host, architecture and portable differential suites | PASS | Includes 76,704 parser byte steps and existing domain/service cases |
+| Existing native suite | PASS, 1,642 cases | Layout, seven C entries, caller ABI and I/O effects |
+| [Native edge suite](../tests/check_native_edges.py) | PASS, 5,884 cases | 128 page offsets, timeout 499/500/501 and wrap, errors/partial reads, config thresholds, raw register regressions, real callers |
+| [Native sequence suite](../tests/check_native_sequences.py) | PASS, 20,376 cases | Packed states, persistent sequences, all 4,096 channel-reset masks, raw register conversions, frame boundaries/fields, zero-address payloads and real identifier caller |
+
+The three native suites total **27,902 paired execution cases**. The edge suite
+includes 38 cases that execute real I²C driver validation/busy/locked prefixes and
+check their handle side effects; most device bodies remain scripted boundaries.
+Both new suites are part of the root `make verify` target. Input/source and image
+hashes are captured, and assertions reject inputs changing during a run.
+
+All **559 classified original instructions** in the seven replaced functions were
+executed at least once across the extended suites:
+
+| Original function | Executed / classified instructions | Static direct callers reviewed |
+| --- | --- | --- |
+| Storage read `7498` | 19 / 19 | 2 |
+| Storage wait `74C4` | 22 / 22 | 3 |
+| Storage write `74FC` | 102 / 102 | 2 |
+| Channel clear `9E14` | 12 / 12 | 4 |
+| Configuration `BCD8` | 144 / 144 | 2 |
+| Frame send `C7C4` | 37 / 37 | 11 |
+| Channel state `C85C` | 223 / 223 | 10 |
+
+This is instruction coverage, not proof of every input, path combination or schedule.
+Static review covered all 34 classified direct call sites and found no additional
+live-register dependency beyond the existing shim contracts. No classified direct
+branch or raw 32-bit pointer into an overwritten entry interior was found. Known
+frame/config callers supply disjoint payload buffers. Dynamic call targets remain
+outside the completeness claim.
+
+### Artifact identity and reproduction
+
+- Original HEX SHA-256 remains
+  `22b4c0a573576b2f0f9ea93fc3459f22163f3c5305875a245f3ea82c4a373ccf`.
+- Fixed native BIN SHA-256 is
+  `654e16eeb7b19c2b95835c656eefc09b640eaac5fd986abdb30694befdb87611`.
+- The new BIN and HEX represent the same 65,536 Flash bytes. There are 1,548
+  intentional differences from the original, confined to the seven entry windows
+  and C extension. Boot, metadata and configuration bytes remain unchanged.
+- The earlier byte-identical recovery BIN remains
+  `3016dafb97375b22cdb49f1ed41b05c7f1aa940d58c5ce42c2fdbe682245a144`.
+
+Generated evidence is under `firmware/build/`: `native_verification.json`,
+`native_edges_verification.json`, `native_sequences_verification.json`, and
+`logic-review/verification.log`. These outputs are local build artifacts.
+REA/Ghidra additionally re-analyzed original configuration entry `0x0800BCD8`:
+Evidence `ev_706fa630ab6e08ac66461749aa8ac6ceb101ae95004f58ea522368b1d31cd235`,
+from the recovery ELF with SHA-256
+`3ad2cf305acb090aef48d1b21055d4a0d2862daa8262946f3eed124b47537bcf`.
+This static dossier corroborates function/caller structure; it does not observe execution.
+
+### Remaining acceptance boundary
+
+The tested synchronous executions have matching live RAM, applicable return/register
+contracts, and ordered device-boundary effects after these fixes. They do not
+establish unconditional whole-firmware equivalence.
+
+- Some machine accesses still differ: config halfword writes become byte writes,
+  normal frame header stores are reordered, and channel packed-state reads occur
+  at different points. No conflict was found in inspected IRQ paths, but dynamic
+  DMA/UART callbacks prevent claiming every interrupt interleaving was proved.
+- Stack use differs. For example, the sampled storage-read paths use at most
+  64/136 bytes (original/native), write paths 96/168, and frame-send paths 16/52.
+  These figures cover executed test paths, including selected driver prefixes;
+  they exclude unexecuted driver bodies, nested IRQ frames and full-system peaks.
+- Timing, real peripheral responses, startup/upgrade operation and IRQ/DMA
+  concurrency require board evidence. No board was connected or flashed.
+- Exceptional large-register transfer tests use bounded scripted failures rather
+  than successful transfers through every possible 32-bit address. Zero-address
+  TX tests model SRAM/Flash bytes at zero, not the hardware remapping peripheral.
+
+Before declaring the development image an unconditional replacement, establish
+board acceptance for these remaining conditions. Finite matching tests must not be
+reported as an all-input/all-schedule proof.

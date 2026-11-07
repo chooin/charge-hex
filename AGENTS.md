@@ -57,6 +57,7 @@ Geehy APM32F030C8T6 board identified in the existing recovery evidence.
 - Consult the public header for each API's pointer, size, aliasing, and lifetime contract.
 - Do not wire the portable RX parser into the original buffer without resolving its allocation and timing constraints.
 - Preserve original entry behavior and verify actual callers when adding a native replacement.
+- Keep raw native register contracts and legacy error side effects in the adapter; portable API guards are separate contracts.
 - See [core beliefs](docs/design-docs/core-beliefs.md) for sources of these constraints.
 
 ## Command map

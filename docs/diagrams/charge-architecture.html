@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Charge · 当前固件架构</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@400&amp;display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--background, #f5f5f5); color: var(--foreground, #2d3142); }
+    .architecture-page {
+      --dg-paper: #f5f5f5;
+      --dg-ink: #2d3142;
+      --dg-muted: #4f5d75;
+      --dg-soft: #5a6580;
+      --dg-rule: rgba(45,49,66,.12);
+      --dg-accent: #bf4520;
+      --dg-sans: 'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --dg-serif: 'Instrument Serif', 'Noto Serif SC', 'Songti SC', serif;
+      --dg-mono: 'Geist Mono', ui-monospace, Menlo, monospace;
+      max-width: 1376px; min-width: 0; margin: 0 auto; padding: 48px;
+      color: var(--dg-ink); background: var(--dg-paper); font-family: var(--dg-sans);
+      color-scheme: light;
+    }
+    p, h1, h2, h3, figure { margin: 0; }
+    .eyebrow { font-family: var(--dg-mono); color: var(--dg-soft); font-size: 10px; letter-spacing: .14em; }
+    .page-header { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding-bottom: 32px; border-bottom: 1px solid var(--dg-rule); }
+    h1 { margin: 14px 0 16px; font-family: var(--dg-serif); font-size: 44px; font-weight: 400; line-height: 1.25; letter-spacing: -.02em; }
+    .intro { max-width: 720px; font-size: 14px; line-height: 1.9; color: var(--dg-muted); }
+    .facts { display: flex; gap: 28px; }
+    .fact { padding-left: 20px; border-left: 1px solid var(--dg-rule); }
+    .fact strong { display: block; font-family: var(--dg-serif); font-size: 40px; font-weight: 400; line-height: 1.1; }
+    .fact span { display: block; margin-top: 8px; font-size: 12px; color: var(--dg-muted); white-space: nowrap; }
+    .figure-section { margin-top: 40px; }
+    .figure-heading { display: flex; gap: 20px; align-items: baseline; }
+    .figure-number { color: var(--dg-accent); font: 12px var(--dg-mono); }
+    h2 { font-size: 20px; font-weight: 600; line-height: 1.5; }
+    .figure-subtitle { margin: 10px 0 12px 38px; color: var(--dg-muted); font-size: 13px; line-height: 1.8; }
+    .scroll-hint { display: none; color: var(--dg-soft); font-size: 12px; margin: 0 0 8px; }
+    .diagram-container { width: 100%; max-width: 100%; min-width: 0; overflow-x: auto; }
+    .diagram-container:focus-visible { outline: 2px solid var(--dg-accent); outline-offset: 4px; }
+    svg { width: 100%; min-width: 1280px; display: block; }
+    svg text { font-family: var(--dg-sans); fill: var(--dg-ink); }
+    svg .name { font-size: 12px; font-weight: 600; }
+    svg .body, svg .label, svg .legend { font-size: 12px; font-weight: 400; fill: var(--dg-muted); }
+    svg .label { font-weight: 500; }
+    svg .mono { font-family: var(--dg-mono); font-size: 9px; fill: var(--dg-soft); }
+    svg .tag { font-family: var(--dg-mono); font-size: 8px; font-weight: 500; letter-spacing: .08em; fill: var(--dg-soft); }
+    svg .zone-title { font-size: 12px; font-weight: 500; fill: var(--dg-soft); }
+    svg .figure-note { font-size: 12px; fill: var(--dg-muted); }
+    svg .connector { fill: none; stroke: #4f5d75; stroke-width: 1.2; }
+    svg .passive { stroke-dasharray: 5 4; }
+    .notes { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; margin: 16px 0 0; padding: 24px 0; border-top: 1px solid var(--dg-rule); border-bottom: 1px solid var(--dg-rule); }
+    .notes h3 { font-size: 13px; margin-bottom: 8px; font-weight: 600; }
+    .notes p { color: var(--dg-muted); font-size: 12px; line-height: 1.9; }
+    code { font-family: var(--dg-mono); font-size: .92em; overflow-wrap: anywhere; }
+    details { margin-top: 24px; padding: 18px 20px; border: 1px solid var(--dg-rule); border-radius: 6px; background: #fff; }
+    summary { cursor: pointer; font-size: 13px; font-weight: 500; }
+    .table-scroll { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; font-size: 12px; text-align: left; }
+    th { color: var(--dg-soft); font-weight: 500; }
+    th, td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--dg-rule); vertical-align: top; }
+    tr:last-child td { border-bottom: 0; }
+    .source-note { margin-top: 16px; color: var(--dg-muted); font-size: 12px; line-height: 1.9; }
+    .source-note a { color: #2e5aa8; text-underline-offset: 3px; }
+    .footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--dg-rule); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--dg-soft); font-size: 11px; line-height: 1.8; }
+    @media (max-width: 760px) {
+      .architecture-page { padding: 24px 16px; }
+      .page-header { grid-template-columns: 1fr; gap: 24px; }
+      h1 { font-size: 32px; }
+      .facts { gap: 32px; }
+      .fact strong { font-size: 32px; }
+      .notes { grid-template-columns: 1fr; gap: 20px; }
+      .figure-subtitle { margin-left: 0; }
+      .scroll-hint { display: block; }
+    }
+    @media print {
+      .architecture-page { padding: 0; }
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+      .figure-section { break-inside: avoid; }
+      details { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<main class="architecture-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">CHARGE / SYSTEM ARCHITECTURE / 2026-11-08</p>
+      <h1>Charge · 当前固件架构</h1>
+      <p class="intro">以原固件为恢复基准，将可移植 C 模块逐步接入现有裸机程序。<br>当前是部分 C 迁移的开发版本，尚未完成板级验收。</p>
+    </div>
+    <div class="facts" aria-label="迁移规模">
+      <div class="fact"><strong>7</strong><span>已替换原生入口</span></div>
+      <div class="fact"><strong>10 KiB</strong><span>预留 C 扩展区</span></div>
+    </div>
+  </header>
+
+  <section class="figure-section" aria-labelledby="runtime-heading">
+    <div class="figure-heading"><span class="figure-number">01</span><h2 id="runtime-heading">运行架构：旧入口接入新 C 模块</h2></div>
+    <p class="figure-subtitle">主路径从左向右；设备副作用经平台回到原驱动。两个平台方框表示同一适配层的不同职责。</p>
+    <p class="scroll-hint">左右滑动图面，可查看完整架构。</p>
+    <figure>
+      <div class="diagram-container" tabindex="0" aria-label="运行架构图，窄屏可横向滚动">
+        <svg id="runtime-diagram" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="charge-architecture-runtime-title charge-architecture-runtime-desc">
+          <title id="charge-architecture-runtime-title">Charge 当前固件运行架构</title>
+          <desc id="charge-architecture-runtime-desc">旧裸机程序通过七个原生入口进入平台适配层，调用领域、串口组帧和存储 C 模块，并通过平台端口回到原驱动；RX 解析、计时器与 CRC 的新 API 尚未接入原整机路径。</desc>
+          <defs>
+            <marker id="runtime-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+            <marker id="runtime-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+            <marker id="runtime-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+          </defs>
+          <rect width="1280" height="720" fill="#f5f5f5"/>
+          <text x="40" y="44" class="figure-note">Geehy APM32F030C8T6 · Cortex-M0+ · 64 KiB Flash / 8 KiB SRAM · 裸机主循环与中断</text>
+
+          <!-- Boundaries precede connections and nodes. -->
+          <rect x="40" y="84" width="296" height="492" rx="8" fill="rgba(45,49,66,.02)" stroke="rgba(45,49,66,.18)" stroke-dasharray="4 4"/>
+          <rect x="392" y="84" width="352" height="492" rx="8" fill="rgba(45,49,66,.02)" stroke="rgba(45,49,66,.18)" stroke-dasharray="4 4"/>
+          <rect x="888" y="84" width="352" height="552" rx="8" fill="rgba(45,49,66,.02)" stroke="rgba(45,49,66,.18)" stroke-dasharray="4 4"/>
+          <rect x="56" y="76" width="108" height="20" fill="#f5f5f5"/><text x="64" y="91" class="zone-title">原汇编兼容层</text>
+          <rect x="408" y="76" width="124" height="20" fill="#f5f5f5"/><text x="416" y="91" class="zone-title">APM32 平台适配</text>
+          <rect x="904" y="76" width="116" height="20" fill="#f5f5f5"/><text x="912" y="91" class="zone-title">可移植 C 模块</text>
+
+          <!-- Current call routes; each attachment point is distinct. -->
+          <path data-edge="legacy-bridge" class="connector" d="M312 224 H416" marker-end="url(#runtime-arrow)"/>
+          <path data-edge="bridge-domain" class="connector" d="M720 176 H912" marker-end="url(#runtime-arrow)"/>
+          <path data-edge="bridge-protocol" class="connector" d="M720 224 H816 Q824 224 824 232 V308 Q824 316 832 316 H912" marker-end="url(#runtime-arrow)"/>
+          <path data-edge="bridge-storage" class="connector" d="M720 272 H784 Q792 272 792 280 V428 Q792 436 800 436 H912" marker-end="url(#runtime-arrow)"/>
+          <path data-edge="storage-ports" class="connector" d="M912 472 H720" marker-end="url(#runtime-arrow)"/>
+          <path data-edge="bridge-ports" class="connector" d="M568 320 V400" marker-end="url(#runtime-arrow)"/>
+          <path data-edge="ports-drivers" class="connector" d="M416 472 H312" marker-end="url(#runtime-arrow)"/>
+          <path data-edge="legacy-drivers" class="connector" d="M188 320 V400" marker-end="url(#runtime-arrow)"/>
+
+          <g data-label="legacy-bridge"><rect x="324" y="196" width="80" height="20" rx="2" fill="#f5f5f5"/><text x="364" y="211" text-anchor="middle" class="label">7 个入口</text></g>
+          <g data-label="storage-ports"><rect x="776" y="480" width="80" height="20" rx="2" fill="#f5f5f5"/><text x="816" y="495" text-anchor="middle" class="label">同步回调</text></g>
+          <g data-label="bridge-ports"><rect x="576" y="348" width="136" height="24" rx="2" fill="#f5f5f5"/><text x="644" y="364" text-anchor="middle" class="label">发送 / 原入口兼容</text></g>
+          <g data-label="ports-drivers"><rect x="324" y="444" width="80" height="20" rx="2" fill="#f5f5f5"/><text x="364" y="459" text-anchor="middle" class="label">原驱动调用</text></g>
+          <g data-label="legacy-drivers"><rect x="196" y="348" width="80" height="24" rx="2" fill="#f5f5f5"/><text x="236" y="364" text-anchor="middle" class="label">保留路径</text></g>
+
+          <g data-node="legacy-execution">
+            <rect x="64" y="128" width="248" height="192" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="64" y="128" width="248" height="192" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75"/>
+            <rect x="80" y="144" width="48" height="16" rx="2" fill="#f5f5f5" stroke="#bfc0c0"/><text x="104" y="155" text-anchor="middle" class="tag">LEGACY</text>
+            <text x="80" y="188" class="name">原启动、主循环与复杂业务</text>
+            <text x="80" y="216" class="body">Boot / 命令分派 / IRQ / DMA</text>
+            <text x="80" y="240" class="body">保留尚未迁移的执行路径</text>
+            <text x="80" y="296" class="mono">firmware/build/legacy.S</text>
+          </g>
+          <g data-node="platform-bridge">
+            <rect x="416" y="128" width="304" height="192" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="416" y="128" width="304" height="192" rx="6" fill="rgba(191,69,32,.08)" stroke="#bf4520" stroke-width="1.2"/>
+            <rect x="432" y="144" width="64" height="16" rx="2" fill="#f5f5f5" stroke="#bf4520"/><text x="464" y="155" text-anchor="middle" class="tag" style="fill:#bf4520">ADAPTER</text>
+            <text x="432" y="188" class="name">原生入口适配 + ABI shims</text>
+            <text x="432" y="216" class="body">固定 RAM 映射 · 寄存器契约</text>
+            <text x="432" y="240" class="body">原入口语义与特殊输入兼容</text>
+            <text x="432" y="280" class="mono">platform/apm32/legacy_bridge.c</text>
+            <text x="432" y="296" class="mono">platform/apm32/abi_shims.S</text>
+          </g>
+          <g data-node="domain">
+            <rect x="912" y="128" width="304" height="104" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="912" y="128" width="304" height="104" rx="6" fill="#ffffff" stroke="#2d3142"/>
+            <text x="928" y="151" class="tag">DOMAIN / 3 ENTRIES</text>
+            <text x="928" y="176" class="name">参数转换 · 通道状态与清理</text>
+            <text x="928" y="199" class="body">12 通道；状态与记录由调用者持有</text>
+            <text x="928" y="218" class="mono">src/domain/{config,channel}.c</text>
+          </g>
+          <g data-node="protocol">
+            <rect x="912" y="264" width="304" height="104" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="912" y="264" width="304" height="104" rx="6" fill="#ffffff" stroke="#2d3142"/>
+            <text x="928" y="287" class="tag">PROTOCOL / 1 ENTRY</text>
+            <text x="928" y="312" class="name">发送帧构造 · 字节校验</text>
+            <text x="928" y="335" class="body">构造字节，由平台负责 UART 发送</text>
+            <text x="928" y="354" class="mono">src/protocol/serial.c</text>
+          </g>
+          <g data-node="storage">
+            <rect x="912" y="400" width="304" height="104" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="912" y="400" width="304" height="104" rx="6" fill="#ffffff" stroke="#2d3142"/>
+            <text x="928" y="423" class="tag">SERVICES / 3 ENTRIES</text>
+            <text x="928" y="448" class="name">存储读取 · 就绪轮询 · 分页写入</text>
+            <text x="928" y="471" class="body">128 字节分页；显式同步 I/O 回调</text>
+            <text x="928" y="490" class="mono">src/services/storage.c</text>
+          </g>
+          <g data-node="platform-ports">
+            <rect x="416" y="400" width="304" height="144" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="416" y="400" width="304" height="144" rx="6" fill="#ffffff" stroke="#2d3142"/>
+            <text x="432" y="423" class="tag">DEVICE PORTS</text>
+            <text x="432" y="448" class="name">设备调用与同步端口</text>
+            <text x="432" y="476" class="body">UART 发送 · I²C 地址 / 句柄 / 时基</text>
+            <text x="432" y="500" class="mono">ChargeStorage: read / write / probe / tick</text>
+            <text x="432" y="524" class="mono">platform/apm32/legacy_bridge.c</text>
+          </g>
+          <g data-node="legacy-drivers">
+            <rect x="64" y="400" width="248" height="144" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="64" y="400" width="248" height="144" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75"/>
+            <text x="80" y="423" class="tag">LEGACY DRIVERS</text>
+            <text x="80" y="448" class="name">原设备驱动与硬件访问</text>
+            <text x="80" y="476" class="body">UART / I²C / tick 等原有驱动</text>
+            <text x="80" y="500" class="body">继续访问板上外设与设备</text>
+            <text x="80" y="524" class="mono">fw_0800947c / fw_08005fb8 / ...</text>
+          </g>
+          <g data-node="unintegrated-apis">
+            <rect x="912" y="552" width="304" height="64" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="912" y="552" width="304" height="64" rx="6" fill="rgba(45,49,66,.02)" stroke="#4f5d75" stroke-dasharray="4 3"/>
+            <text x="928" y="577" class="name">已有 C API，原整机路径尚未接入</text>
+            <text x="928" y="601" class="body">RX parser · timer · 升级 CRC</text>
+          </g>
+          <text x="64" y="604" class="figure-note">契约：状态由调用者持有；平台 / 调用者负责中断序列化。</text>
+          <text x="64" y="628" class="figure-note">边界：可移植模块无硬件绝对地址、旧 ABI 或堆分配依赖。</text>
+          <line x1="40" y1="660" x2="1240" y2="660" stroke="#bfc0c0" stroke-width=".8"/>
+          <path d="M40 688 H76" class="connector" marker-end="url(#runtime-arrow)"/><text x="88" y="692" class="legend">当前调用路径</text>
+          <rect x="296" y="680" width="20" height="16" rx="2" fill="rgba(191,69,32,.08)" stroke="#bf4520"/><text x="328" y="692" class="legend">迁移接入点</text>
+          <rect x="536" y="680" width="20" height="16" rx="2" fill="#f5f5f5" stroke="#4f5d75" stroke-dasharray="4 3"/><text x="568" y="692" class="legend">已实现、尚未接入原整机路径</text>
+        </svg>
+      </div>
+    </figure>
+    <div class="notes">
+      <div><h3>日常开发落在可移植模块</h3><p><code>firmware/include/charge/</code> 定义公开契约。领域层处理规则，协议层处理字节，存储服务通过回调表达副作用。时序、分配和原 ABI 的兼容责任留在平台及调用者。</p></div>
+      <div><h3>迁移边界保持可见</h3><p>原启动、调度器、复杂业务、IRQ/DMA、多数驱动与 Boot 仍由汇编承担。RX 新 API 要求独立的 256 字节缓冲，其分配及回调时序尚未完成原生集成。</p></div>
+    </div>
+  </section>
+
+  <section class="figure-section" aria-labelledby="build-heading">
+    <div class="figure-heading"><span class="figure-number">02</span><h2 id="build-heading">构建架构：开发固件与恢复证据分开</h2></div>
+    <p class="figure-subtitle">原始 HEX 只作为只读基准。开发镜像通过生成的兼容汇编与新 C 链接；恢复工程保留独立构建路线。</p>
+    <p class="scroll-hint">左右滑动图面，可查看完整架构。</p>
+    <figure>
+      <div class="diagram-container" tabindex="0" aria-label="构建与证据关系图，窄屏可横向滚动">
+        <svg id="build-diagram" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="charge-architecture-build-title charge-architecture-build-desc">
+          <title id="charge-architecture-build-title">Charge 构建与恢复证据边界</title>
+          <desc id="charge-architecture-build-desc">原始 HEX 提供只读校验，恢复汇编经构建适配生成 legacy.S 后与 C 和 ABI shims 链接为开发镜像，同时恢复汇编可独立构建恢复镜像，CPU 模型与反编译资料不参与 MCU 固件链接。</desc>
+          <defs>
+            <marker id="build-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+            <marker id="build-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+            <marker id="build-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+          </defs>
+          <rect width="1280" height="720" fill="#f5f5f5"/>
+          <text x="40" y="44" class="figure-note">构建依赖从左向右 · 下方为独立恢复产物和分析证据</text>
+          <rect x="352" y="84" width="888" height="364" rx="8" fill="rgba(45,49,66,.02)" stroke="rgba(45,49,66,.18)" stroke-dasharray="4 4"/>
+          <rect x="368" y="76" width="204" height="20" fill="#f5f5f5"/><text x="376" y="91" class="zone-title">当前开发构建 · firmware/</text>
+
+          <path data-edge="hex-prepare" class="connector passive" d="M280 176 H376" marker-end="url(#build-arrow)"/>
+          <path data-edge="assembly-prepare" class="connector" d="M280 344 H320 Q328 344 328 336 V224 Q328 216 336 216 H376" marker-end="url(#build-arrow)"/>
+          <path data-edge="prepare-link" class="connector" d="M632 184 H680 Q688 184 688 192 V240 Q688 248 696 248 H752" marker-end="url(#build-arrow)"/>
+          <path data-edge="c-link" class="connector" d="M632 372 H712 Q720 372 720 364 V312 Q720 304 728 304 H752" marker-end="url(#build-arrow)"/>
+          <path data-edge="link-image" class="connector" d="M976 276 H1072" marker-end="url(#build-arrow)"/>
+          <path data-edge="assembly-recovery" class="connector" d="M160 424 V544 Q160 552 168 552 H376" marker-end="url(#build-arrow)"/>
+
+          <g data-label="hex-prepare"><rect x="284" y="148" width="88" height="20" rx="2" fill="#f5f5f5"/><text x="328" y="163" text-anchor="middle" class="label">只读校验</text></g>
+          <g data-label="assembly-prepare"><rect x="336" y="268" width="80" height="24" rx="2" fill="#f5f5f5"/><text x="376" y="284" text-anchor="middle" class="label">读取汇编</text></g>
+          <g data-label="prepare-link"><rect x="640" y="156" width="40" height="20" rx="2" fill="#f5f5f5"/><text x="660" y="171" text-anchor="middle" class="label">汇编</text></g>
+          <g data-label="c-link"><rect x="640" y="344" width="64" height="20" rx="2" fill="#f5f5f5"/><text x="672" y="359" text-anchor="middle" class="label">交叉编译</text></g>
+          <g data-label="link-image"><rect x="984" y="248" width="80" height="20" rx="2" fill="#f5f5f5"/><text x="1024" y="263" text-anchor="middle" class="label">生成镜像</text></g>
+          <g data-label="assembly-recovery"><rect x="232" y="524" width="88" height="20" rx="2" fill="#f5f5f5"/><text x="276" y="539" text-anchor="middle" class="label">独立构建</text></g>
+
+          <g data-node="original-hex">
+            <rect x="40" y="128" width="240" height="104" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="40" y="128" width="240" height="104" rx="6" fill="rgba(79,93,117,.10)" stroke="#5a6580"/>
+            <text x="56" y="151" class="tag">IMMUTABLE ORACLE</text>
+            <text x="56" y="176" class="name">原始 HEX · 文本字节不可变</text>
+            <text x="56" y="199" class="body">固定 SHA-256；仅允许读取</text>
+            <text x="56" y="218" class="mono">stm32_fw.hex</text>
+          </g>
+          <g data-node="recovery-assembly">
+            <rect x="40" y="320" width="240" height="104" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="40" y="320" width="240" height="104" rx="6" fill="#ffffff" stroke="#2d3142"/>
+            <text x="56" y="343" class="tag">RECOVERY SOURCE</text>
+            <text x="56" y="368" class="name">完整恢复汇编</text>
+            <text x="56" y="391" class="body">开发构建读取；保持独立基准</text>
+            <text x="56" y="410" class="mono">recovery/full_assembly/firmware.S</text>
+          </g>
+          <g data-node="prepare-legacy">
+            <rect x="376" y="128" width="256" height="112" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="376" y="128" width="256" height="112" rx="6" fill="#ffffff" stroke="#2d3142"/>
+            <text x="392" y="151" class="tag">BUILD ADAPTER</text>
+            <text x="392" y="176" class="name">生成 legacy.S</text>
+            <text x="392" y="199" class="body">7 × 16 字节入口；校验 FF 扩展区</text>
+            <text x="392" y="222" class="mono">firmware/tools/prepare_legacy.py</text>
+          </g>
+          <g data-node="new-sources">
+            <rect x="376" y="320" width="256" height="104" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="376" y="320" width="256" height="104" rx="6" fill="#ffffff" stroke="#2d3142"/>
+            <text x="392" y="343" class="tag">C11 + THUMB</text>
+            <text x="392" y="368" class="name">可移植 C + 平台适配 + ABI shims</text>
+            <text x="392" y="391" class="mono">firmware/src/</text>
+            <text x="392" y="410" class="mono">firmware/platform/apm32/</text>
+          </g>
+          <g data-node="native-linker">
+            <rect x="752" y="192" width="224" height="168" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="752" y="192" width="224" height="168" rx="6" fill="rgba(191,69,32,.08)" stroke="#bf4520" stroke-width="1.2"/>
+            <text x="768" y="215" class="tag" style="fill:#bf4520">NATIVE LINK</text>
+            <text x="768" y="240" class="name">固定 Flash 布局链接</text>
+            <text x="768" y="268" class="body">C 扩展区上限 10 KiB</text>
+            <text x="768" y="292" class="body">拒绝新增 .data / .bss</text>
+            <text x="768" y="316" class="mono">0x0800D000-0x0800F7FF</text>
+            <text x="768" y="340" class="mono">platform/apm32/firmware.ld</text>
+          </g>
+          <g data-node="development-image">
+            <rect x="1072" y="216" width="168" height="120" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="1072" y="216" width="168" height="120" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75"/>
+            <text x="1088" y="239" class="tag">DEVELOPMENT</text>
+            <text x="1088" y="264" class="name">64 KiB 开发镜像</text>
+            <text x="1088" y="287" class="body">与原固件字节不同</text>
+            <text x="1088" y="310" class="mono">charge.{elf,bin,hex}</text>
+          </g>
+          <g data-node="recovery-image">
+            <rect x="376" y="500" width="256" height="104" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="376" y="500" width="256" height="104" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75"/>
+            <text x="392" y="523" class="tag">INDEPENDENT RECOVERY</text>
+            <text x="392" y="548" class="name">64 KiB 恢复镜像</text>
+            <text x="392" y="571" class="body">已记录：解码后 Flash 字节一致</text>
+            <text x="392" y="590" class="mono">recovery/full_assembly/build/</text>
+          </g>
+          <g data-node="analysis-evidence">
+            <rect x="752" y="500" width="488" height="104" rx="6" fill="#f5f5f5"/>
+            <rect data-bounds="" x="752" y="500" width="488" height="104" rx="6" fill="rgba(45,49,66,.02)" stroke="#4f5d75" stroke-dasharray="4 3"/>
+            <text x="768" y="523" class="tag">ANALYSIS ONLY / EXCLUDED FROM MCU LINK</text>
+            <text x="768" y="548" class="name">CPU 语义模型 · 反编译稿 · 历史可读译文</text>
+            <text x="768" y="571" class="body">服务于理解与验证；不同证据层保留各自的结论边界</text>
+            <text x="768" y="590" class="mono">recovery/{full_c,decompiled,reconstructed}/</text>
+          </g>
+          <text x="40" y="636" class="figure-note">开发产物仅写 firmware/build/；原 Boot、metadata 与 config 区保留。</text>
+          <line x1="40" y1="660" x2="1240" y2="660" stroke="#bfc0c0" stroke-width=".8"/>
+          <path d="M40 688 H76" class="connector" marker-end="url(#build-arrow)"/><text x="88" y="692" class="legend">构建依赖</text>
+          <path d="M280 688 H316" class="connector passive" marker-end="url(#build-arrow)"/><text x="328" y="692" class="legend">只读校验</text>
+          <rect x="520" y="680" width="20" height="16" rx="2" fill="#f5f5f5" stroke="#4f5d75" stroke-dasharray="4 3"/><text x="552" y="692" class="legend">分析证据，不参与 MCU 链接</text>
+        </svg>
+      </div>
+    </figure>
+    <div class="notes">
+      <div><h3>布局约束</h3><p>Boot <code>0x08000000–0x08003FFF</code>；App <code>0x08004000–0x0800F7FF</code>，其中末尾 10 KiB 留给 C 扩展；metadata <code>0x0800F800–0x0800FBFF</code>；config <code>0x0800FC00–0x0800FFFF</code>。</p></div>
+      <div><h3>验证结论各有范围</h3><p>主机测试、原始 Thumb 差分、原生入口与调用链检查用于开发验证。恢复工程的字节一致记录独立存在。上述检查均不能代替真实设备上的时序、并发、栈与升级验收。</p></div>
+    </div>
+  </section>
+
+  <details>
+    <summary>查看 7 个原生替换入口与源码依据</summary>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>原入口地址</th><th>迁移职责</th><th>可移植模块</th></tr></thead>
+        <tbody>
+          <tr><td><code>0x08007498</code></td><td>存储读取</td><td><code>services/storage.c</code></td></tr>
+          <tr><td><code>0x080074C4</code></td><td>存储就绪轮询</td><td><code>services/storage.c</code></td></tr>
+          <tr><td><code>0x080074FC</code></td><td>存储分页写入</td><td><code>services/storage.c</code></td></tr>
+          <tr><td><code>0x08009E14</code></td><td>通道计量字段清理</td><td><code>domain/channel.c</code></td></tr>
+          <tr><td><code>0x0800BCD8</code></td><td>参数载荷转换</td><td><code>domain/config.c</code></td></tr>
+          <tr><td><code>0x0800C7C4</code></td><td>串口发送帧构造</td><td><code>protocol/serial.c</code></td></tr>
+          <tr><td><code>0x0800C85C</code></td><td>通道状态更新</td><td><code>domain/channel.c</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="source-note">按 2026-11-08 当前工作区源码绘制。依据：<a href="../../ARCHITECTURE.md">ARCHITECTURE.md</a>、<a href="../DESIGN.md">docs/DESIGN.md</a>、<a href="../../firmware/platform/apm32/legacy_bridge.c">legacy_bridge.c</a>、<a href="../../firmware/platform/apm32/abi_shims.S">abi_shims.S</a>、<a href="../../firmware/tools/prepare_legacy.py">prepare_legacy.py</a>、<a href="../../firmware/Makefile">firmware/Makefile</a> 与 <a href="../../firmware/platform/apm32/firmware.ld">firmware.ld</a>。图中只画代表性调用与依赖；特殊寄存器输入的兼容分支归入平台层。</p>
+    <p class="source-note">恢复一致性是仓库中的既有记录，本次绘图未重新执行固件构建或硬件验收。原始 HEX 文本 SHA-256：<code>22b4c0a573576b2f0f9ea93fc3459f22163f3c5305875a245f3ea82c4a373ccf</code>。</p>
+  </details>
+  <footer class="footer"><span>CHARGE · 当前工作区架构快照 · 2026-11-08</span><span>diagram-design · 默认浅色 · 两张 doc-wide 视图 · 中文工程概览</span></footer>
+</main>
+</body>
+</html>

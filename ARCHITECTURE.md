@@ -4,6 +4,16 @@ Source inspection: 2026-11-08. This map describes the current working tree, incl
 the development layer described in the existing [migration design](docs/architecture.md).
 It does not assert that the working tree equals the last committed recovery baseline.
 
+The [visual architecture overview](docs/diagrams/charge-architecture.html) provides
+two Chinese diagrams: current runtime integration, and development-build/recovery
+evidence boundaries. Open the self-contained HTML in a browser; it also includes
+the seven native replacement entries and source references.
+
+The [board interaction overview](docs/diagrams/charge-board-interactions.html)
+maps runtime communication, inputs, GPIO outputs, display, and external storage,
+with a companion command-to-output sequence. Unconfirmed device identities and
+connector mappings remain explicit.
+
 ## System and evidence boundaries
 
 The repository maintains an immutable original Intel HEX image, a reproducible recovery

@@ -13,6 +13,8 @@ test:
 	$(PYTHON) tests/check_domain_services.py
 verify: all test
 	$(PYTHON) tests/check_native.py
+	$(PYTHON) tests/check_native_edges.py
+	$(PYTHON) tests/check_native_sequences.py
 recovery:
 	$(MAKE) -C recovery all
 verify-recovery:

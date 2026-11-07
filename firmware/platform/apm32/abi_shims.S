@@ -74,4 +74,16 @@ charge_legacy_storage_read:
     pop {r1, r2, r4, pc}
 .size charge_legacy_storage_read, .-charge_legacy_storage_read
 
+/* The original frame builder may read mapped address zero. Keeping this
+ * machine access in assembly avoids undefined C NULL-pointer dereferences. */
+.section .text.charge_legacy_read_byte,"ax",%progbits
+.balign 2
+.global charge_legacy_read_byte
+.type charge_legacy_read_byte, %function
+.thumb_func
+charge_legacy_read_byte:
+    ldrb r0, [r0]
+    bx lr
+.size charge_legacy_read_byte, .-charge_legacy_read_byte
+
 .section .note.GNU-stack,"",%progbits

@@ -44,6 +44,19 @@ not the implementation used by current storage services.
 
 Legacy callers can depend on more than standard AAPCS preservation rules.
 Dedicated assembly shims and actual-caller tests protect observed dependencies.
+Native bridge signatures also receive raw 32-bit registers: a narrow C parameter
+does not establish that old machine callers performed truncation. The adapter
+explicitly preserves channel modulo-256 conversion, full-width enable tests,
+configuration endian selection, and frame length checks before byte conversion.
+
+Portable storage APIs retain their documented guards. Native exceptional inputs
+preserve the original wrapping range/page arithmetic and invoke the original
+drivers when their validation changes handle state or return values. Native TX
+can read mapped address zero through an assembly byte-load helper; this avoids
+undefined C NULL dereferences without weakening the portable frame-builder API.
+See the [2026-11-08 follow-up](verification.md#logic-compatibility-follow-up-2026-11-08)
+for counterexamples, regressions, and evidence limits.
+
 A changed implementation can still alter stack use, byte-write granularity, IRQ
 interleavings, or electrical timing; those require board evidence.
 

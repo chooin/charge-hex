@@ -20,7 +20,7 @@ Run these commands from the repository root when validating implementation work:
 | make host | C11 library at firmware/build/libcharge.a |
 | make native | ARM charge.elf, charge.bin, charge.hex |
 | make test | Host C tests, architecture constraints, protocol/config and domain/service differential tests |
-| make verify | Build, all tests above, native entry/layout/caller checks |
+| make verify | Build, all tests above, native entry/layout/caller checks, storage/config edges and persistent state sequences |
 | make verify-recovery | Independent recovery assembly/model/artifact and selected behavior checks |
 
 Sources: [root Makefile](../Makefile), [firmware Makefile](../firmware/Makefile),
@@ -34,6 +34,14 @@ Run assertion-based verification without Python -O or PYTHONOPTIMIZE.
 
 The native check writes firmware/build/native_verification.json with source/build
 and output hashes. That generated result must correspond to the code being reviewed.
+The extended [edge suite](../tests/check_native_edges.py) and
+[sequence suite](../tests/check_native_sequences.py) additionally write
+native_edges_verification.json and native_sequences_verification.json in the same
+build directory. They compare actual original/new ARM instructions, live SRAM,
+caller ABI and device-boundary effects, checking input hashes before/after each run.
+Only observed private stack frames are excluded from RAM comparisons. Real driver
+execution in the edge suite is limited to validation/busy/locked early exits before
+MMIO. See the [compatibility follow-up](verification.md#logic-compatibility-follow-up-2026-11-08).
 Sanitizer runs appear in historical evidence; ordinary Makefile targets do not
 automatically enable ASan/UBSan.
 

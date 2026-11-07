@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light"><title>Charge · 主板运行交互</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@400&amp;display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--background, #f5f5f5); color: var(--foreground, #2d3142); }
+    .architecture-page {
+      --dg-paper: #f5f5f5;
+      --dg-ink: #2d3142;
+      --dg-muted: #4f5d75;
+      --dg-soft: #5a6580;
+      --dg-rule: rgba(45,49,66,.12);
+      --dg-accent: #bf4520;
+      --dg-sans: 'Geist', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --dg-serif: 'Instrument Serif', 'Noto Serif SC', 'Songti SC', serif;
+      --dg-mono: 'Geist Mono', ui-monospace, Menlo, monospace;
+      max-width: 1376px; min-width: 0; margin: 0 auto; padding: 48px;
+      color: var(--dg-ink); background: var(--dg-paper); font-family: var(--dg-sans);
+      color-scheme: light;
+    }
+    p, h1, h2, h3, figure { margin: 0; }
+    .eyebrow { font-family: var(--dg-mono); color: var(--dg-soft); font-size: 10px; letter-spacing: .14em; }
+    .page-header { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding-bottom: 32px; border-bottom: 1px solid var(--dg-rule); }
+    h1 { margin: 14px 0 16px; font-family: var(--dg-serif); font-size: 44px; font-weight: 400; line-height: 1.25; letter-spacing: -.02em; }
+    .intro { max-width: 720px; font-size: 14px; line-height: 1.9; color: var(--dg-muted); }
+    .facts { display: flex; gap: 28px; }
+    .fact { padding-left: 20px; border-left: 1px solid var(--dg-rule); }
+    .fact strong { display: block; font-family: var(--dg-serif); font-size: 40px; font-weight: 400; line-height: 1.1; }
+    .fact span { display: block; margin-top: 8px; font-size: 12px; color: var(--dg-muted); white-space: nowrap; }
+    .figure-section { margin-top: 40px; }
+    .figure-heading { display: flex; gap: 20px; align-items: baseline; }
+    .figure-number { color: var(--dg-accent); font: 12px var(--dg-mono); }
+    h2 { font-size: 20px; font-weight: 600; line-height: 1.5; }
+    .figure-subtitle { margin: 10px 0 12px 38px; color: var(--dg-muted); font-size: 13px; line-height: 1.8; }
+    .scroll-hint { display: none; color: var(--dg-soft); font-size: 12px; margin: 0 0 8px; }
+    .diagram-container { width: 100%; max-width: 100%; min-width: 0; overflow-x: auto; }
+    .diagram-container:focus-visible { outline: 2px solid var(--dg-accent); outline-offset: 4px; }
+    svg { width: 100%; min-width: 1280px; display: block; }
+    svg text { font-family: var(--dg-sans); fill: var(--dg-ink); }
+    svg .name { font-size: 12px; font-weight: 600; }
+    svg .body, svg .label, svg .legend { font-size: 12px; font-weight: 400; fill: var(--dg-muted); }
+    svg .label { font-weight: 500; }
+    svg .mono { font-family: var(--dg-mono); font-size: 9px; fill: var(--dg-soft); }
+    svg .tag { font-family: var(--dg-mono); font-size: 8px; font-weight: 500; letter-spacing: .08em; fill: var(--dg-soft); }
+    svg .zone-title { font-size: 12px; font-weight: 500; fill: var(--dg-soft); }
+    svg .figure-note { font-size: 12px; fill: var(--dg-muted); }
+    svg .connector { fill: none; stroke: #4f5d75; stroke-width: 1.2; }
+    svg .passive { stroke-dasharray: 5 4; }
+    .notes { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; margin: 16px 0 0; padding: 24px 0; border-top: 1px solid var(--dg-rule); border-bottom: 1px solid var(--dg-rule); }
+    .notes h3 { font-size: 13px; margin-bottom: 8px; font-weight: 600; }
+    .notes p { color: var(--dg-muted); font-size: 12px; line-height: 1.9; }
+    code { font-family: var(--dg-mono); font-size: .92em; overflow-wrap: anywhere; }
+    details { margin-top: 24px; padding: 18px 20px; border: 1px solid var(--dg-rule); border-radius: 6px; background: #fff; }
+    summary { cursor: pointer; font-size: 13px; font-weight: 500; }
+    .table-scroll { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; font-size: 12px; text-align: left; }
+    th { color: var(--dg-soft); font-weight: 500; }
+    th, td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--dg-rule); vertical-align: top; }
+    tr:last-child td { border-bottom: 0; }
+    .source-note { margin-top: 16px; color: var(--dg-muted); font-size: 12px; line-height: 1.9; }
+    .source-note a { color: #2e5aa8; text-underline-offset: 3px; }
+    .footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--dg-rule); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--dg-soft); font-size: 11px; line-height: 1.8; }
+    @media (max-width: 760px) {
+      .architecture-page { padding: 24px 16px; }
+      .page-header { grid-template-columns: 1fr; gap: 24px; }
+      h1 { font-size: 32px; }
+      .facts { gap: 32px; }
+      .fact strong { font-size: 32px; }
+      .notes { grid-template-columns: 1fr; gap: 20px; }
+      .figure-subtitle { margin-left: 0; }
+      .scroll-hint { display: block; }
+    }
+    @media print {
+      .architecture-page { padding: 0; }
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+      .figure-section { break-inside: avoid; }
+      details { break-inside: avoid; }
+    }
+
+svg .section-name { font-size:12px; font-weight:600; }
+svg .lifeline { stroke:#bfc0c0; stroke-width:1; stroke-dasharray:3 4; }
+svg .activation { fill:#ececec; stroke:#4f5d75; stroke-width:.8; }
+</style>
+</head><body><main class="architecture-page">
+<header class="page-header">
+  <div><p class="eyebrow">CHARGE / BOARD INTERACTIONS / 2026-11-08</p>
+    <h1>Charge · 主板运行交互</h1>
+    <p class="intro">从固件入口到板级信号：输入进入主循环，状态变化再转成硬件动作。<br>依据当前源码、恢复记录与主板照片绘制；尚无板上运行实测。</p></div>
+  <div class="facts"><div class="fact"><strong>2</strong><span>串口通信链路</span></div><div class="fact"><strong>12</strong><span>逻辑通道</span></div></div>
+</header>
+<section class="figure-section" aria-labelledby="board-heading">
+  <div class="figure-heading"><span class="figure-number">01</span><h2 id="board-heading">主板交互总览</h2></div>
+  <p class="figure-subtitle">左侧为通信与输入，中间为主控运行职责，右侧为输出与存储。双向链路分别标出发送、接收和读写方向。</p>
+  <p class="scroll-hint">左右滑动图面，可查看完整交互。</p>
+  <figure><div class="diagram-container" tabindex="0" aria-label="主板交互架构图，窄屏可横向滚动"><svg id="board-diagram" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="charge-board-interactions-board-title charge-board-interactions-board-desc">
+<title id="charge-board-interactions-board-title">Charge 主板与外设交互总览</title>
+<desc id="charge-board-interactions-board-desc">APM32 主控通过两路串口、离散输入和 ADC 接收信息，通过移位输出、显示接口、PB10 脉宽命令及 I2C 存储与板级设备交互，器件身份与未确认接线均保留明确标记。</desc>
+<defs><marker id="board-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker><marker id="board-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker><marker id="board-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker></defs><rect x="0" y="0" width="1280" height="720" rx="0" fill="#f5f5f5"/>
+<text x="40" y="44" class="figure-note">功能连接图：箭头描述固件交互；不表示 PCB 走线、接插件脚序或已实测的电气行为。</text>
+<text x="40" y="91" class="zone-title">外部通信与输入</text>
+<text x="488" y="91" class="zone-title">主控芯片内部</text>
+<text x="960" y="91" class="zone-title">板级接口与外接器件</text>
+<path data-edge="uart1-rx" d="M328 168 H384 Q392 168 392 176 V184 Q392 192 400 192 H488" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="uart1-tx" d="M488 264 H424 Q416 264 416 256 V224 Q416 216 408 216 H328" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="uart2-rx" d="M328 336 H488" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="uart2-tx" d="M488 408 H424 Q416 408 416 400 V392 Q416 384 408 384 H328" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="inputs" d="M328 504 H384 Q392 504 392 496 V488 Q392 480 400 480 H488" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="adc" d="M328 600 H384 Q392 600 392 592 V560 Q392 552 400 552 H488" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="shift" d="M792 204 H960" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="display" d="M792 288 H888 Q896 288 896 296 V324 Q896 332 904 332 H960" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="pulse" d="M792 372 H856 Q864 372 864 380 V452 Q864 460 872 460 H960" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="storage-request" d="M792 456 H824 Q832 456 832 464 V564 Q832 572 840 572 H960" class="connector" marker-end="url(#board-arrow)"/>
+<path data-edge="storage-result" d="M960 604 H824 Q816 604 816 596 V548 Q816 540 808 540 H792" class="connector" marker-end="url(#board-arrow)"/>
+<g data-label="uart1-rx"><rect x="424" y="164" width="40" height="20" rx="2" fill="#f5f5f5"/><text x="444.0" y="178" class="mono" text-anchor="middle">RX</text></g>
+<g data-label="uart1-tx"><rect x="348" y="188" width="40" height="20" rx="2" fill="#f5f5f5"/><text x="368.0" y="202" class="mono" text-anchor="middle">TX</text></g>
+<g data-label="uart2-rx"><rect x="388" y="308" width="40" height="20" rx="2" fill="#f5f5f5"/><text x="408.0" y="322" class="mono" text-anchor="middle">RX</text></g>
+<g data-label="uart2-tx"><rect x="348" y="356" width="40" height="20" rx="2" fill="#f5f5f5"/><text x="368.0" y="370" class="mono" text-anchor="middle">TX</text></g>
+<g data-label="inputs"><rect x="408" y="452" width="72" height="20" rx="2" fill="#f5f5f5"/><text x="444.0" y="467" class="label" text-anchor="middle">输入轮询</text></g>
+<g data-label="adc"><rect x="416" y="524" width="56" height="20" rx="2" fill="#f5f5f5"/><text x="444.0" y="539" class="label" text-anchor="middle">采样</text></g>
+<g data-label="shift"><rect x="836" y="176" width="80" height="20" rx="2" fill="#f5f5f5"/><text x="876.0" y="191" class="label" text-anchor="middle">移位＋锁存</text></g>
+<g data-label="display"><rect x="808" y="260" width="72" height="20" rx="2" fill="#f5f5f5"/><text x="844.0" y="275" class="label" text-anchor="middle">显示写入</text></g>
+<g data-label="pulse"><rect x="880" y="432" width="72" height="20" rx="2" fill="#f5f5f5"/><text x="916.0" y="447" class="label" text-anchor="middle">脉宽命令</text></g>
+<g data-label="storage-request"><rect x="848" y="544" width="104" height="20" rx="2" fill="#f5f5f5"/><text x="900.0" y="559" class="label" text-anchor="middle">读写 / 就绪轮询</text></g>
+<g data-label="storage-result"><rect x="848" y="612" width="88" height="20" rx="2" fill="#f5f5f5"/><text x="892.0" y="627" class="label" text-anchor="middle">数据 / 状态</text></g>
+<g data-node="uart1-peer"><rect x="40" y="120" width="288" height="144" rx="6" fill="#f5f5f5"/><rect x="40" y="120" width="288" height="144" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="56" y="143" class="tag">USART1 / APP: 9600 BAUD</text><text x="56" y="168" class="name">外部通信链路一</text><text x="56" y="196" class="body">完整块接收 → XOR → 命令分派</text><text x="56" y="220" class="body">对端身份、接插件映射待确认</text><text x="56" y="244" class="mono">RX: 0x20000C10 / IRQ: 0x080094A4</text></g>
+<g data-node="uart2-peer"><rect x="40" y="288" width="288" height="144" rx="6" fill="#f5f5f5"/><rect x="40" y="288" width="288" height="144" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="56" y="311" class="tag">USART2 / APP: 9600 BAUD</text><text x="56" y="336" class="name">外部通信链路二</text><text x="56" y="364" class="body">逐字节处理 55 AA / 44 AA 帧</text><text x="56" y="388" class="body">具体外接设备身份待确认</text><text x="56" y="412" class="mono">RX: 0x20000E14 / IRQ: 0x080094D8</text></g>
+<g data-node="discrete-inputs"><rect x="40" y="472" width="288" height="64" rx="6" fill="#f5f5f5"/><rect x="40" y="472" width="288" height="64" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="56" y="497" class="name">离散输入 / 按键</text><text x="56" y="521" class="body">主循环轮询输入 1..15，含等待与消抖</text></g>
+<g data-node="adc-input"><rect x="40" y="568" width="288" height="64" rx="6" fill="#f5f5f5"/><rect x="40" y="568" width="288" height="64" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="56" y="593" class="name">模拟采样输入</text><text x="56" y="617" class="body">ADC1 通道 9；物理量与接线待确认</text></g>
+<g data-node="mcu"><rect x="488" y="120" width="304" height="504" rx="6" fill="#f5f5f5"/><rect x="488" y="120" width="304" height="504" rx="6" fill="rgba(191,69,32,.08)" stroke="#bf4520" data-bounds=""/><text x="504" y="143" class="tag" style="fill:#bf4520">MCU / BARE METAL</text><text x="504" y="172" class="name">Geehy APM32F030C8T6</text><text x="504" y="196" class="mono">64 KiB Flash / 8 KiB SRAM</text><line x1="504" y1="208" x2="776" y2="208" stroke="rgba(45,49,66,.12)"/><line x1="504" y1="296" x2="776" y2="296" stroke="rgba(45,49,66,.12)"/><line x1="504" y1="392" x2="776" y2="392" stroke="rgba(45,49,66,.12)"/><line x1="504" y1="488" x2="776" y2="488" stroke="rgba(45,49,66,.12)"/><line x1="504" y1="552" x2="776" y2="552" stroke="rgba(45,49,66,.12)"/><text x="504" y="232" class="section-name">启动 / 升级</text><text x="504" y="256" class="body">PB0 / 升级标记决定 Boot 路径</text><text x="504" y="280" class="body">初始化 → App 主循环</text><text x="504" y="320" class="section-name">应用循环</text><text x="504" y="344" class="body">喂狗 · 93 计时槽 · 12 通道</text><text x="504" y="368" class="body">输入 → 串口 → 队列 → 输出</text><text x="504" y="416" class="section-name">中断 / 共享状态</text><text x="504" y="440" class="body">USART / DMA / TIM / EXTI</text><text x="504" y="464" class="body">接收标志、时基与通道状态 RAM</text><text x="504" y="512" class="section-name">片内 Flash</text><text x="504" y="536" class="body">Boot / App / metadata / config</text><text x="504" y="580" class="name">7 个入口已接入可移植 C</text><text x="504" y="604" class="body">其余调度与多数 I/O 仍由旧汇编承担</text></g>
+<g data-node="shift-output"><rect x="960" y="144" width="280" height="120" rx="6" fill="#f5f5f5"/><rect x="960" y="144" width="280" height="120" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="976" y="167" class="tag">CHANNEL OUTPUT</text><text x="976" y="192" class="name">16 位串行移位输出</text><text x="976" y="216" class="body">低 12 位对应通道；端子映射待确认</text><text x="976" y="239" class="body">与 U8/U9 的 74HC595D 对应：推定</text><text x="976" y="254" class="mono">PB8 CLK / PB3 DATA / PB5 LATCH</text></g>
+<g data-node="display-device"><rect x="960" y="280" width="280" height="104" rx="6" fill="#f5f5f5"/><rect x="960" y="280" width="280" height="104" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="976" y="303" class="tag">DISPLAY INTERFACE</text><text x="976" y="328" class="name">显示输出 · 芯片型号待确认</text><text x="976" y="351" class="body">6 字节显示数据；低位先发</text><text x="976" y="370" class="mono">PB15 CLK / PA8 DATA / 0x0800882C</text></g>
+<g data-node="pulse-device"><rect x="960" y="408" width="280" height="104" rx="6" fill="#f5f5f5"/><rect x="960" y="408" width="280" height="104" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="976" y="431" class="tag">PULSE-WIDTH COMMAND</text><text x="976" y="456" class="name">PB10 外部命令接收器</text><text x="976" y="479" class="body">8 位，低位先发；设备身份待确认</text><text x="976" y="498" class="mono">PB10 / 0..0x49, 0xE0..0xE7</text></g>
+<g data-node="i2c-storage"><rect x="960" y="540" width="280" height="96" rx="6" fill="#f5f5f5"/><rect x="960" y="540" width="280" height="96" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" data-bounds=""/><text x="976" y="558" class="tag">I2C1 / 64 KIB ADDRESS SPACE</text><text x="976" y="580" class="name">外置 I²C 存储 · 型号待确认</text><text x="976" y="603" class="body">应用读写 + Boot 升级文件暂存</text><text x="976" y="622" class="mono">0xA0 (7-bit 0x50) / 128B PAGES</text></g>
+<line x1="40" y1="660" x2="1240" y2="660" stroke="#bfc0c0" stroke-width=".8"/>
+<path d="M40 688 H76" class="connector" marker-end="url(#board-arrow)"/>
+<text x="88" y="692" class="legend">固件交互方向</text>
+<rect x="288" y="680" width="20" height="16" rx="2" fill="rgba(191,69,32,.08)" stroke="#bf4520"/>
+<text x="320" y="692" class="legend">主控内部职责</text>
+<text x="552" y="692" class="legend">“推定 / 待确认”保留器件识别与板级接线边界</text>
+</svg></div></figure>
+  <div class="notes">
+    <div><h3>上电：Boot 交接到应用</h3><p>Boot 读取 PB0 和 <code>0x0800F802</code> 升级标记，选择升级等待或尝试进入 App。App 复制 45 项向量到 SRAM，初始化 GPIO、DMA、TIM、双串口、I²C、IWDG 与 ADC，再进入裸机主循环。</p></div>
+    <div><h3>升级：先暂存，再提交 Flash</h3><p>USART1 接收升级控制与文件 → I²C 设备暂存 → 按 1 KiB 页写入 App Flash → 更新 metadata → 结果上报 / 握手后尝试启动 App。当前 Boot 仍为旧实现；本项目没有已验收的升级包。</p></div>
+  </div>
+</section>
+<section class="figure-section" aria-labelledby="sequence-heading">
+  <div class="figure-heading"><span class="figure-number">02</span><h2 id="sequence-heading">运行时序：接收、更新状态，再刷新输出</h2></div>
+  <p class="figure-subtitle">每轮先喂狗、计算时基差值、扫描 93 个计时槽和 12 路业务，再轮询输入；下图展开随后的串口与输出阶段。</p>
+  <p class="scroll-hint">左右滑动图面，可查看完整时序。</p>
+  <figure><div class="diagram-container" tabindex="0" aria-label="命令到板级输出时序图，窄屏可横向滚动"><svg id="sequence-diagram" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="charge-board-interactions-sequence-title charge-board-interactions-sequence-desc">
+<title id="charge-board-interactions-sequence-title">Charge 从串口接收到板级输出的运行时序</title>
+<desc id="charge-board-interactions-sequence-desc">示例中串口接收侧异步写入缓冲，主循环读取数据并调用协议业务，通道状态先写 RAM，之后主循环调用旧驱动读取位图、移位锁存、刷新显示并采样状态。</desc>
+<defs><marker id="sequence-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker><marker id="sequence-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker><marker id="sequence-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker><marker id="sequence-arrow-open" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polyline points="0 0, 8 3, 0 6" fill="none" stroke="#4f5d75" stroke-width="1.2"/></marker></defs><rect x="0" y="0" width="1280" height="720" rx="0" fill="#f5f5f5"/>
+<text x="40" y="44" class="figure-note">示例条件：本轮消费有效的通道状态请求，且 PB10 队列非空；时间向下，间距不代表实测耗时。</text>
+<line x1="136" y1="136" x2="136" y2="640" class="lifeline"/>
+<line x1="376" y1="136" x2="376" y2="640" class="lifeline"/>
+<line x1="616" y1="136" x2="616" y2="640" class="lifeline"/>
+<line x1="856" y1="136" x2="856" y2="640" class="lifeline"/>
+<line x1="1120" y1="136" x2="1120" y2="640" class="lifeline"/>
+<rect x="132" y="168" width="8" height="24" rx="0" fill="#ececec" stroke="#4f5d75" class="activation"/>
+<rect x="132" y="232" width="8" height="40" rx="0" fill="#ececec" stroke="#4f5d75" class="activation"/>
+<rect x="372" y="220" width="8" height="412" rx="0" fill="#ececec" stroke="#4f5d75" class="activation"/>
+<rect x="612" y="312" width="8" height="80" rx="0" fill="#ececec" stroke="#4f5d75" class="activation"/>
+<rect x="852" y="352" width="8" height="16" rx="0" fill="#ececec" stroke="#4f5d75" class="activation"/>
+<rect x="852" y="512" width="8" height="16" rx="0" fill="#ececec" stroke="#4f5d75" class="activation"/>
+<rect x="1116" y="432" width="8" height="16" rx="0" fill="#ececec" stroke="#4f5d75" class="activation"/>
+<rect x="1116" y="472" width="8" height="112" rx="0" fill="#ececec" stroke="#4f5d75" class="activation"/>
+<rect x="1116" y="616" width="8" height="16" rx="0" fill="#ececec" stroke="#4f5d75" class="activation"/>
+<path data-edge="rx-fill" d="M140 168 H192 Q200 168 200 176 V184 Q200 192 192 192 H140" class="connector passive" marker-end="url(#sequence-arrow-open)"/>
+<path data-edge="main-read" d="M372 232 H140" class="connector" marker-end="url(#sequence-arrow)"/>
+<path data-edge="rx-return" d="M140 272 H372" class="connector passive" marker-end="url(#sequence-arrow)"/>
+<path data-edge="parse-dispatch" d="M380 312 H612" class="connector" marker-end="url(#sequence-arrow)"/>
+<path data-edge="update-state" d="M620 352 H852" class="connector" marker-end="url(#sequence-arrow-accent)" style="stroke:#bf4520"/>
+<path data-edge="dispatch-return" d="M612 392 H380" class="connector passive" marker-end="url(#sequence-arrow)"/>
+<path data-edge="pulse-queue" d="M380 432 H1116" class="connector" marker-end="url(#sequence-arrow)"/>
+<path data-edge="flush-output" d="M380 472 H1116" class="connector" marker-end="url(#sequence-arrow)"/>
+<path data-edge="read-bitmap" d="M1116 512 H860" class="connector" marker-end="url(#sequence-arrow)"/>
+<path data-edge="shift-latch" d="M1116 552 H1048 Q1040 552 1040 560 V568 Q1040 576 1048 576 H1116" class="connector" marker-end="url(#sequence-arrow)"/>
+<path data-edge="display-sample" d="M380 616 H1116" class="connector" marker-end="url(#sequence-arrow)"/>
+<g data-label="rx-fill"><rect x="208" y="168" width="136" height="24" rx="2" fill="#f5f5f5"/><text x="276.0" y="183" class="label" text-anchor="middle">入缓冲 / 置接收标志</text></g>
+<g data-label="main-read"><rect x="168" y="204" width="176" height="20" rx="2" fill="#f5f5f5"/><text x="256.0" y="219" class="label" text-anchor="middle">检查并清标志，读取接收块</text></g>
+<g data-label="rx-return"><rect x="204" y="244" width="104" height="20" rx="2" fill="#f5f5f5"/><text x="256.0" y="259" class="label" text-anchor="middle">缓冲 / 长度</text></g>
+<g data-label="parse-dispatch"><rect x="428" y="284" width="136" height="20" rx="2" fill="#f5f5f5"/><text x="496.0" y="299" class="label" text-anchor="middle">原解析与业务分派</text></g>
+<g data-label="update-state"><rect x="668" y="324" width="136" height="20" rx="2" fill="#f5f5f5"/><text x="736.0" y="339" class="label" text-anchor="middle">更新通道位图与状态</text></g>
+<g data-label="dispatch-return"><rect x="444" y="364" width="104" height="20" rx="2" fill="#f5f5f5"/><text x="496.0" y="379" class="label" text-anchor="middle">业务处理返回</text></g>
+<g data-label="pulse-queue"><rect x="684" y="404" width="128" height="20" rx="2" fill="#f5f5f5"/><text x="748.0" y="419" class="label" text-anchor="middle">消费 PB10 命令队列</text></g>
+<g data-label="flush-output"><rect x="692" y="444" width="112" height="20" rx="2" fill="#f5f5f5"/><text x="748.0" y="459" class="label" text-anchor="middle">调用通道输出刷新</text></g>
+<g data-label="read-bitmap"><rect x="928" y="484" width="120" height="20" rx="2" fill="#f5f5f5"/><text x="988.0" y="499" class="label" text-anchor="middle">读取 16 位位图</text></g>
+<g data-label="shift-latch"><rect x="912" y="552" width="120" height="24" rx="2" fill="#f5f5f5"/><text x="972.0" y="567" class="label" text-anchor="middle">移位后锁存输出</text></g>
+<g data-label="display-sample"><rect x="676" y="588" width="144" height="20" rx="2" fill="#f5f5f5"/><text x="748.0" y="603" class="label" text-anchor="middle">显示刷新与状态采样</text></g>
+<g data-node="rx-side"><rect x="40" y="72" width="192" height="64" rx="6" fill="#f5f5f5"/><rect x="40" y="72" width="192" height="64" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="136.0" y="99" class="name" text-anchor="middle">串口接收侧</text><text x="136.0" y="122" class="mono" text-anchor="middle">DMA / IRQ / 512B x2</text></g>
+<g data-node="main-loop"><rect x="280" y="72" width="192" height="64" rx="6" fill="#f5f5f5"/><rect x="280" y="72" width="192" height="64" rx="6" fill="rgba(191,69,32,.08)" stroke="#bf4520" data-bounds=""/><text x="376.0" y="99" class="name" text-anchor="middle">原主循环</text><text x="376.0" y="122" class="mono" text-anchor="middle">0x0800A708 / 0x0800A7D4</text></g>
+<g data-node="business-c"><rect x="520" y="72" width="192" height="64" rx="6" fill="#f5f5f5"/><rect x="520" y="72" width="192" height="64" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="616.0" y="99" class="name" text-anchor="middle">协议 / 业务 / C 接入</text><text x="616.0" y="122" class="mono" text-anchor="middle">0x0800B0DC / 0x0800C85C</text></g>
+<g data-node="channel-state"><rect x="760" y="72" width="192" height="64" rx="6" fill="#f5f5f5"/><rect x="760" y="72" width="192" height="64" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="856.0" y="99" class="name" text-anchor="middle">通道状态 RAM</text><text x="856.0" y="122" class="mono" text-anchor="middle">0x200000B8 / 0x200000DD</text></g>
+<g data-node="board-drivers"><rect x="1000" y="72" width="240" height="64" rx="6" fill="#f5f5f5"/><rect x="1000" y="72" width="240" height="64" rx="6" fill="#ffffff" stroke="#4f5d75" data-bounds=""/><text x="1120.0" y="99" class="name" text-anchor="middle">原驱动与板级输出</text><text x="1120.0" y="122" class="mono" text-anchor="middle">GPIO / DISPLAY / PB10</text></g>
+<line x1="40" y1="660" x2="1240" y2="660" stroke="#bfc0c0" stroke-width=".8"/>
+<path d="M40 688 H76" class="connector" marker-end="url(#sequence-arrow)"/>
+<text x="88" y="692" class="legend">调用 / 读写</text>
+<path d="M280 688 H316" class="connector passive" marker-end="url(#sequence-arrow)"/>
+<text x="328" y="692" class="legend">返回</text>
+<path d="M456 688 H492" class="connector passive" marker-end="url(#sequence-arrow-open)"/>
+<text x="504" y="692" class="legend">异步接收，可插入任意时刻</text>
+<rect x="848" y="680" width="20" height="16" rx="2" fill="rgba(191,69,32,.08)" stroke="#bf4520"/>
+<text x="880" y="692" class="legend">状态更新与引脚刷新分开</text>
+</svg></div></figure>
+  <div class="notes">
+    <div><h3>RAM 更新不等于引脚已经变化</h3><p><code>0x0800C85C</code> / <code>charge_channel_set_state()</code> 更新通道位图及双位状态。常规循环在 <code>0x0800B0A6</code> 调用 <code>0x08007474</code>，发送高、低两字节并锁存；部分专用业务路径也会主动调用刷新。</p></div>
+    <div><h3>接收侧与业务侧分工</h3><p>DMA / IRQ 维护接收缓冲及标志，主循环再消费。USART1 走完整块校验，USART2 走逐字节解析；其 mode 1 完成后不进行业务分派。新 C RX API 尚未接入原缓冲，图中解析仍为旧路径。</p></div>
+  </div>
+</section>
+<details open>
+  <summary>接口与证据索引</summary>
+  <div class="table-scroll"><table>
+    <thead><tr><th>交互</th><th>代码可确认内容</th><th>保留的未知项</th><th>依据</th></tr></thead>
+    <tbody>
+      <tr><td>双串口</td><td>应用 USART1/2 均配置 9600 baud；两组 512 B 接收缓冲</td><td>对端设备、接插件映射及电气接口</td><td><a href="../../recovery/notes/protocol.md">protocol.md</a> / <code>0x08008034, 0x0800806C</code></td></tr>
+      <tr><td>通道输出</td><td>PB8 时钟 / PB3 数据 / PB5 锁存；高字节先发、每字节高位先发</td><td>每一位到端子或负载的对应；照片中 U8/U9 的角色仍需追线</td><td><a href="../../recovery/notes/application.md">application.md</a> / <code>0x08007400, 0x08007474</code></td></tr>
+      <tr><td>显示</td><td>PB15 时钟 / PA8 数据；低位先发；显示写入 6 字节</td><td>具体显示驱动型号与显示内容含义</td><td><code>0x0800882C</code></td></tr>
+      <tr><td>外部命令</td><td>PB10 发送 8 位脉宽命令；支持 <code>0..0x49 / 0xE0..0xE7</code></td><td>“语音模块”为推测；设备型号、命令语义与延时物理单位未确认</td><td><code>0x0800CDB8</code></td></tr>
+      <tr><td>I²C 存储</td><td>设备参数 <code>0xA0</code>（7-bit <code>0x50</code>）；16-bit 存储地址；128 B 页</td><td>符合 24C512 类特征，实际器件料号未确认</td><td><a href="../../firmware/platform/apm32/legacy_bridge.c">legacy_bridge.c</a> / <a href="../../recovery/notes/update_protocol.md">update_protocol.md</a></td></tr>
+      <tr><td>输入 / ADC</td><td>输入编号 1..15 轮询；ADC1 通道 9 初始化</td><td>输入编号到触点映射；模拟量来源与单位</td><td><code>0x0800A2D0, 0x08007D44</code></td></tr>
+      <tr><td>调度与启动</td><td>原 main 轮询 + 中断；Boot → App；IWDG 喂狗</td><td>真实 IRQ / DMA 并发、最长阻塞与栈余量</td><td><a href="../../recovery/notes/application_main.md">application_main.md</a> / <a href="../../recovery/notes/startup.md">startup.md</a></td></tr>
+    </tbody>
+  </table></div>
+  <p class="source-note">以上是运行关系概览，未展开每条业务分支、所有外设初始化及板上供电电路。源依据以 <a href="../../recovery/full_assembly/firmware.S">完整恢复汇编</a>为准，<a href="../../recovery/reconstructed/application.c">历史可读译文</a>仅辅助理解；当前 I²C 就绪调用采用平台适配中的五参数原驱动契约。</p>
+  <p class="source-note">软件模块与构建边界见 <a href="charge-architecture.html">上一份项目架构图</a>。主机 / 仿真记录不等于硬件验收；本次绘图未进行烧录、设备通信或新的固件验证。</p>
+</details>
+<footer class="footer"><span>CHARGE · 当前源码及恢复证据 · 2026-11-08</span><span>diagram-design · 默认浅色 · Architecture + Sequence · doc-wide</span></footer>
+</main></body></html>
