@@ -33,6 +33,11 @@ def main():
     output.write_text(result.stdout)
     if result.returncode: raise SystemExit(f'REA failed; inspect {log} and {output}')
     record=json.loads(result.stdout)
-    print(json.dumps(record.get('normalized_result',record), indent=2))
+    manifest=record.get('normalized_result',record)
+    print(json.dumps(manifest, indent=2))
+    counts=manifest['counts']
+    if counts['failed'] or counts['remaining']:
+        raise SystemExit(f"REA export incomplete: {counts['failed']} failed, "
+                         f"{counts['remaining']} remaining; inspect {log} and {output}")
 
 if __name__=='__main__': main()

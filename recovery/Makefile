@@ -6,6 +6,7 @@ firmware:
 c-model:
 	$(MAKE) -C full_c all
 verify: all
+	$(PYTHON) verification/check_workflow.py
 	$(MAKE) -C full_assembly verify
 	$(PYTHON) tools/check_artifacts.py
 	$(PYTHON) verification/check_serial.py

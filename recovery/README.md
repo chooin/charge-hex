@@ -75,9 +75,12 @@ HEX全部2050条记录校验通过、连续64 KiB、无空洞；原HEX SHA-256�
 最终证据见 [rea-final-decompile-result.json](ghidra/rea-final-decompile-result.json)，Evidence ID `ev_1da03b3d2a8311a39a50a119a983782002a3b6f8b6b69061838f3bb5d7658dfe`。输入是完整汇编构建的ELF，SHA-256 `3ad2cf305acb090aef48d1b21055d4a0d2862daa8262946f3eed124b47537bcf`；其Flash字节与原HEX一致。各函数名称仍是分析名称，原始ELF没有找回。
 
 ```sh
-python3 recovery/ghidra/export_all.py --output recovery/decompiled-fresh
-python3 recovery/tools/audit_recovery.py
+make -C recovery/full_assembly
+python3 recovery/ghidra/export_all.py --output recovery/full_assembly/build/decompiled-fresh
+python3 recovery/tools/audit_recovery.py --decompiled-dir recovery/full_assembly/build/decompiled-fresh
 ```
+
+导出脚本在任一函数失败或仍有未完成项时返回非零退出码，并保留 REA 原始结果与日志。审计必须指定同一个导出目录；上例的审计报告和索引 README 写入该新目录，不覆盖历史证据。不传 `--decompiled-dir` 时仍审计已提交的 `recovery/decompiled`，报告位置保持不变。
 
 Ghidra输出保留所有警告；函数索引中的文件SHA-256、输入ELF身份及覆盖范围由审计脚本检查。移动源码目录后，REA的路径绑定可能变化，重新导出应选择新的输出目录。早期分析文件保留在工作区 `ghidra/initial_decompile` 和 `ghidra/prior_classification_decompile`（源码压缩包省略这两份过期副本），当前阅读以 `decompiled` 为准。
 
