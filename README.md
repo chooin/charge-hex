@@ -9,6 +9,11 @@ make verify      # 另验证新固件布局、实际 ARM C 入口及调用链
 make verify-recovery  # 独立复验原恢复工程
 ```
 
+`make verify` 和 `make verify-recovery` 会重新构建并创建独立的
+`recovery/build/verification/<run-id>/`。该目录的 `run.json` 记录源码/原始输入摘要、
+工具版本、实际构建参数、步骤结果和产物摘要，并保留日志与固件副本。
+本次结果不会覆盖已提交的历史验证报告；具体路径会打印到终端。
+
 新输出为 `firmware/build/charge.{elf,bin,hex}`，其中七个旧入口已经接入 C 模块，其余程序通过原汇编兼容层运行。**这是渐进重构的开发版本，尚未完成全部高层 C 迁移或板级验收；它与原固件不再字节一致。** 下文的字节一致性结论只针对 `recovery/full_assembly`。协议解析、计时和升级 CRC 的新 C API 已可独立使用，但原整机对应路径仍保留旧实现。
 
 ## 固件源码重建基准

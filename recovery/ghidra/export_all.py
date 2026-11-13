@@ -6,8 +6,11 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT/'recovery/tools'))
+from reporting import report_path
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
@@ -27,9 +30,9 @@ def main():
                '--provider','ghidra','--output',str(args.output.resolve()),'--format','json']
     if args.output.exists(): command.append('--resume')
     result = subprocess.run(command, env=env, capture_output=True, text=True)
-    log = ROOT/'recovery/ghidra/reproduce.log'
+    log = report_path('ghidra/reproduce.log')
     log.write_text(result.stderr)
-    output = ROOT/'recovery/ghidra/reproduce-result.json'
+    output = report_path('ghidra/reproduce-result.json')
     output.write_text(result.stdout)
     if result.returncode: raise SystemExit(f'REA failed; inspect {log} and {output}')
     record=json.loads(result.stdout)

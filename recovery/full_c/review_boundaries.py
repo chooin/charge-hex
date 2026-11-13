@@ -26,6 +26,8 @@ from unicorn.arm_const import (
 )
 
 HERE=Path(__file__).resolve().parent
+sys.path.insert(0,str(HERE.parent/'tools'))
+from reporting import report_path
 REGS=[UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3,
       UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7,
       UC_ARM_REG_R8,UC_ARM_REG_R9,UC_ARM_REG_R10,UC_ARM_REG_R11,
@@ -107,7 +109,7 @@ def main():
         'limitations':['Tests only four representative instruction addresses and listed values, not a complete architecture proof.',
             'No memory alignment, peripheral, fault-delivery, interrupt, or hardware timing semantics are exercised here.',
             'Unicorn is not used as authority for unaligned Cortex-M0+ memory access or low-bit MSP behavior.']}
-    (HERE/'review_boundaries.json').write_text(json.dumps(report,indent=2)+'\n')
+    report_path('full_c/review_boundaries.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
 
 

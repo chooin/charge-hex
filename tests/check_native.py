@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'recovery/tools'))
 sys.path.insert(0, str(ROOT / 'firmware/tools'))
 from parse_hex import parse_hex
+from reporting import report_path
 from prepare_legacy import ENTRIES, HEX_SHA
 EXPECTED_ENTRIES = {0x08007498, 0x080074c4, 0x080074fc, 0x08009e14,
                     0x0800bcd8, 0x0800c7c4, 0x0800c85c}
@@ -185,5 +186,5 @@ source_paths = sorted(set((ROOT / 'firmware/src').rglob('*.c')) |
                       {ROOT / 'Makefile', ROOT / 'firmware/Makefile'})
 result['source_sha256'] = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                            for p in source_paths}
-(ROOT / 'firmware/build/native_verification.json').write_text(json.dumps(result, indent=2) + '\n')
+report_path('firmware/native_verification.json').write_text(json.dumps(result, indent=2) + '\n')
 print(json.dumps({k: v for k, v in result.items() if k != 'source_sha256'}, indent=2))

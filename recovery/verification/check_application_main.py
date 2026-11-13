@@ -4,10 +4,12 @@ Only main's CFG is executed. No board/IO effects, real callee behavior or IRQs.
 """
 from pathlib import Path
 import ctypes as C
-import json,hashlib,random,subprocess,tempfile,struct
+import json,hashlib,random,subprocess,tempfile,struct,sys
 from unicorn import Uc,UC_ARCH_ARM,UC_MODE_THUMB,UC_MODE_MCLASS,UC_HOOK_CODE
 from unicorn.arm_const import *
 R=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(R/'tools'))
+from reporting import report_path
 B=(R/'artifacts/firmware.bin').read_bytes()
 COVER=json.loads((R/'artifacts/application_main_coverage.json').read_text())
 INS={int(x['address'],16) for x in COVER['instructions']}
@@ -145,5 +147,5 @@ with tempfile.TemporaryDirectory(prefix='main-lift-check-') as temp:
         _,_,_,visited,n=run_pair(lib,0x800a7d4,mem,rr,base_flags,sc)
         cases+=1;coverage|=visited;call_count+=n
     report={'result':'PASS','method':'Original Thumb main versus explicit compiled C lift, identical mocked external-call register effects','cases':cases,'main_instruction_count':len(INS),'executed_instruction_addresses':len(coverage),'instruction_coverage_fraction':len(coverage)/len(INS),'external_call_events_compared':call_count,'source_sha256':hashlib.sha256((R/'reconstructed/application_main.c').read_bytes()).hexdigest(),'uncovered_addresses':[hex(x) for x in sorted(INS-coverage)],'limitations':['External functions are mock callbacks, not real driver or business implementations.','No interrupts, hardware timing, input press loops, or asynchronous mutation modeled.','Full static CFG emitted; finite dynamic coverage does not prove every possible state.']}
-    (R/'verification/application_main_result.json').write_text(json.dumps(report,indent=2)+'\n')
+    report_path('verification/application_main_result.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({k:v for k,v in report.items() if k!='uncovered_addresses'},indent=2))

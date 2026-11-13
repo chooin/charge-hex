@@ -27,6 +27,20 @@ The recovery suite includes `recovery/verification/check_workflow.py`, which che
 REA export failure propagation and audit directory selection using isolated fixtures;
 these workflow regressions require neither REA nor Ghidra.
 
+`make verify` and `make verify-recovery` invoke
+[`run_verification.py`](../recovery/tools/run_verification.py). Each creates a new
+`recovery/build/verification/<run-id>/`, forces a rebuild, and records effective Make
+variables, tool versions, source/input hashes, step logs, reports, and image copies.
+`run.json` distinguishes RUNNING, PASS, FAIL and INTERRUPTED. A missing or failing
+current-run report, changed input, or failed subprocess prevents PASS. Suite logs
+retain expanded compiler/linker commands. `python3 recovery/tools/run_verification.py all`
+runs both suites under one identity. This does not add hardware acceptance.
+
+Direct verification scripts create separate standalone output directories. A standalone
+audit explicitly labels historical model results; a suite audit cannot fall back to them.
+Do not point `CHARGE_VERIFICATION_DIR` at a historical or reused directory: it is the
+internal run directory propagated by the runner. Use the runner for acceptance evidence.
+
 Sources: [root Makefile](../Makefile), [firmware Makefile](../firmware/Makefile),
 [recovery Makefile](../recovery/Makefile).
 
@@ -36,12 +50,12 @@ Unicorn 2.1.4 and Capstone 5.0.7. Python is host tooling, not a firmware depende
 Some historical recovery model checks use macOS-specific dynamic-library flags.
 Run assertion-based verification without Python -O or PYTHONOPTIMIZE.
 
-The native check writes firmware/build/native_verification.json with source/build
-and output hashes. That generated result must correspond to the code being reviewed.
+The native check writes `firmware/native_verification.json` inside the current run
+directory with source/build and output hashes. That result must correspond to the code being reviewed.
 The extended [edge suite](../tests/check_native_edges.py) and
 [sequence suite](../tests/check_native_sequences.py) additionally write
 native_edges_verification.json and native_sequences_verification.json in the same
-build directory. They compare actual original/new ARM instructions, live SRAM,
+run's `firmware/` directory. They compare actual original/new ARM instructions, live SRAM,
 caller ABI and device-boundary effects, checking input hashes before/after each run.
 Only observed private stack frames are excluded from RAM comparisons. Real driver
 execution in the edge suite is limited to validation/busy/locked early exits before
@@ -53,6 +67,8 @@ automatically enable ASan/UBSan.
 
 - [Architecture checks](../tests/check_architecture.py) protect portable boundaries and original HEX identity.
 - [Build preparation](../firmware/tools/prepare_legacy.py) constrains generated paths, replacement windows, and extension fill.
+- [Migration contract](../firmware/platform/apm32/migration.json) registers entry/ABI/state/caller/test dependencies;
+  [structural validation](../firmware/tools/migration_contract.py) runs before native linking.
 - [Linker assertions](../firmware/platform/apm32/firmware.ld) protect layout and prohibit new static RAM.
 - [Native checks](../tests/check_native.py) compare actual compiled ARM paths, permitted image differences,
   RAM effects, device-call traces, and selected original caller register dependencies.

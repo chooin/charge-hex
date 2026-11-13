@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Original Thumb versus recompiled manual business C, with deterministic opaque callees."""
 from pathlib import Path
-import subprocess,tempfile,re,struct,json,random,hashlib
+import subprocess,tempfile,re,struct,json,random,hashlib,sys
 from unicorn import Uc,UC_ARCH_ARM,UC_MODE_THUMB,UC_MODE_MCLASS,UC_HOOK_CODE
 from unicorn.arm_const import *
 ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/'recovery/tools'))
+from reporting import report_path
 SRC=ROOT/'recovery/reconstructed/business_handlers.c'
 FW=(ROOT/'recovery/artifacts/firmware.bin').read_bytes()
 F=0x08000000; C=0x08100000; R=0x20000000; STOP=0x0801f000
@@ -133,4 +135,4 @@ with tempfile.TemporaryDirectory(prefix='business-diff-') as t:
   hits=addresses&orig.visited
   coverage[name]={'static_instructions':len(addresses),'visited_instructions':len(hits),'not_visited':[hex(a) for a in sorted(addresses-hits)]}
  result={'result':'PASS' if not fails else 'FAIL','cases':counts,'instruction_coverage':coverage,'failures':fails,'source_sha256':hashlib.sha256(SRC.read_bytes()).hexdigest(),'firmware_sha256':hashlib.sha256(FW).hexdigest(),'limitations':['Opaque external callees have deterministic scripted return values/effects; this validates dispatcher/handler behavior under those stubs only.','Peripheral and full firmware execution are not verified.','Incoming dispatcher stack payload is supplied explicitly for invalid selectors.']}
- (ROOT/'recovery/verification/business_result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
+ report_path('verification/business_result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

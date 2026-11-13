@@ -12,6 +12,7 @@ HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
 sys.path.insert(0,str(ROOT/'recovery/tools'))
 from parse_hex import parse_hex
+from reporting import report_path
 
 # Use the existing strict decoder but do not rely on exported firmware.bin.
 parsed=parse_hex(ROOT/'stm32_fw.hex')
@@ -32,5 +33,5 @@ report={'result':'PASS','bytes':len(actual),'sha256':hashlib.sha256(actual).hexd
         'standalone_build_inputs':['firmware.S','firmware.ld','Makefile'],
         'standalone_build_without_input_binary':True,
         'source_sha256':hashlib.sha256((HERE/'firmware.S').read_bytes()).hexdigest()}
-(HERE/'roundtrip_result.json').write_text(json.dumps(report,indent=2)+'\n')
+report_path('full_assembly/roundtrip_result.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))

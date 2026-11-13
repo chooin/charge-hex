@@ -5,6 +5,8 @@ from pathlib import Path
 import hashlib
 import json
 import os
+from urllib.parse import quote
+from reporting import report_path, verification_input
 
 ROOT=Path(__file__).resolve().parents[1]
 def sha(b): return hashlib.sha256(b).hexdigest()
@@ -14,11 +16,6 @@ def main():
                     help='REA export directory to audit; defaults to the recorded export')
     args=ap.parse_args()
     decompiled=args.decompiled_dir.resolve()
-    # Fresh exports keep their reports alongside their own index and README.
-    # Preserve the historical report location for the default export only.
-    report_path=(ROOT/'verification/whole_recovery_audit.json'
-                 if decompiled==(ROOT/'decompiled').resolve()
-                 else decompiled/'whole_recovery_audit.json')
     binary=(ROOT/'artifacts/firmware.bin').read_bytes()
     rebuilt=(ROOT/'full_assembly/build/firmware.bin').read_bytes()
     assert binary==rebuilt, 'complete reconstruction byte mismatch'
@@ -38,7 +35,9 @@ def main():
         functions.append({'address':item['address'],'name':item['name'],'file':item['relative_path']})
     instructions=json.loads((ROOT/'full_assembly/instructions.json').read_text())
     model_coverage=json.loads((ROOT/'full_c/coverage.json').read_text())
-    model_verification=json.loads((ROOT/'full_c/verification.json').read_text())
+    model_result, model_result_kind=verification_input(
+        'full_c/verification.json', ROOT/'full_c/verification.json')
+    model_verification=json.loads(model_result.read_text())
     assert model_coverage['instruction_inventory_sha256']==sha((ROOT/'full_assembly/instructions.json').read_bytes()), 'C model generated from stale instruction inventory'
     assert model_coverage['translated_instructions']==len(instructions)
     assert model_coverage['untranslated_mnemonics']==[]
@@ -50,6 +49,9 @@ def main():
         if all(address+i in body for i in range(instruction['size'])):count+=1
         else:missing.append(instruction)
     report={'firmware_sha256':sha(binary),'rebuilt_sha256':sha(rebuilt),'byte_identical':True,
+        'decompiled_directory':str(decompiled),
+        'model_verification':{'kind':model_result_kind,'path':str(model_result),
+                              'sha256':sha(model_result.read_bytes())},
         'decompiled_functions':len(functions),'all_export_file_hashes_match':True,
         'classified_instructions':len(instructions),'instructions_within_decompiler_bodies':count,
         'whole_c_model_covers_inventory':True,'whole_c_model_matches_verified_source':True,
@@ -57,15 +59,20 @@ def main():
         'limitations':['Function bodies and code/data labels are analysis results, not original source metadata.',
                       'A successful C pseudocode export is not a successful C compilation or semantic equivalence proof.',
                       'Byte identity verifies the assembly build. C semantic tests have separate finite coverage.']}
-    report_path.write_text(json.dumps(report,indent=2)+'\n')
-    report_link=Path(os.path.relpath(report_path, decompiled)).as_posix()
+    output=report_path('verification/whole_recovery_audit.json')
+    output.write_text(json.dumps(report,indent=2)+'\n')
+    readme=report_path('decompiled/README.md')
+    report_link=Path(os.path.relpath(output, readme.parent)).as_posix()
     text=['# 全函数 C 反编译索引','',
       '由 REA + Ghidra 12.1.4 从重建 ELF 导出。保留自动生成名称和警告；这批文件是 C 反编译参考，不能直接当作可链接的 MCU C 工程。',
       '',f'共 {len(functions)} 个识别函数。覆盖/警告审计见 [whole_recovery_audit.json]({report_link})。',
       '', '| 地址 | 分析名称 | C 文件 |','|---|---|---|']
-    for f in functions:text.append(f"| `{f['address']}` | `{f['name']}` | [{Path(f['file']).name}]({f['file']}) |")
-    (decompiled/'README.md').write_text('\n'.join(text)+'\n')
+    for f in functions:
+        link=quote(Path(os.path.relpath(decompiled/f['file'],readme.parent)).as_posix(), safe='/')
+        text.append(f"| `{f['address']}` | `{f['name']}` | [{Path(f['file']).name}]({link}) |")
+    readme.write_text('\n'.join(text)+'\n')
     print(f'Audited export: {decompiled}')
+    print(f'Audit report: {output}; model verification: {model_result_kind}')
     print(json.dumps({k:v for k,v in report.items() if k not in ['decompiler_warnings','instructions_outside_decompiler_bodies']},indent=2))
     print('outside body instructions:',len(missing),'warning lines:',len(warnings))
 if __name__=='__main__':main()

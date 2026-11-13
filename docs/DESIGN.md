@@ -42,6 +42,9 @@ not the implementation used by current storage services.
 
 ## ABI and acceptance
 
+The [migration contract and verification-run design](design-docs/migration-contracts.md)
+defines registration checks and the separation of fresh results from historical evidence.
+
 Legacy callers can depend on more than standard AAPCS preservation rules.
 Dedicated assembly shims and actual-caller tests protect observed dependencies.
 Native bridge signatures also receive raw 32-bit registers: a narrow C parameter

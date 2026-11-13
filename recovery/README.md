@@ -20,6 +20,10 @@ make -C recovery
 make -C recovery verify
 ```
 
+整套验证在 `build/verification/<run-id>/` 保存本次报告和 `run.json`，并强制重新构建。
+历史报告不被覆盖；套件最终审计必须使用同一次运行的 C 模型验证结果。
+单独运行某个验证脚本也会创建新输出目录，但不会因此获得整套验证通过的结论。
+
 只构建板上固件：
 
 ```sh
@@ -80,7 +84,7 @@ python3 recovery/ghidra/export_all.py --output recovery/full_assembly/build/deco
 python3 recovery/tools/audit_recovery.py --decompiled-dir recovery/full_assembly/build/decompiled-fresh
 ```
 
-导出脚本在任一函数失败或仍有未完成项时返回非零退出码，并保留 REA 原始结果与日志。审计必须指定同一个导出目录；上例的审计报告和索引 README 写入该新目录，不覆盖历史证据。不传 `--decompiled-dir` 时仍审计已提交的 `recovery/decompiled`，报告位置保持不变。
+导出脚本在任一函数失败或仍有未完成项时返回非零退出码。REA 原始结果与日志、审计报告和索引 README 都写入终端打印的新运行目录，不覆盖导出目录或历史证据。审计必须指定同一个导出目录；不传 `--decompiled-dir` 时读取已提交的 `recovery/decompiled`。独立审计使用历史 C 模型验证时会明确标记 `historical_snapshot`；整套验证要求 `current_run`，缺失本次结果即失败。
 
 Ghidra输出保留所有警告；函数索引中的文件SHA-256、输入ELF身份及覆盖范围由审计脚本检查。移动源码目录后，REA的路径绑定可能变化，重新导出应选择新的输出目录。早期分析文件保留在工作区 `ghidra/initial_decompile` 和 `ghidra/prior_classification_decompile`（源码压缩包省略这两份过期副本），当前阅读以 `decompiled` 为准。
 

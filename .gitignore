@@ -1,3 +1,6 @@
 /firmware_recovered_source.zip
 /firmware/build/
+/recovery/build/
+/recovery/full_assembly/build/
+/recovery/full_c/build/
 __pycache__/

@@ -4,12 +4,14 @@ Hardware execution is never performed. No firmware calls are replaced by stubs.
 """
 from pathlib import Path
 import ctypes as C
-import hashlib,json,random,struct,subprocess,tempfile,time
+import hashlib,json,random,struct,subprocess,tempfile,time,sys
 from capstone import Cs,CS_ARCH_ARM,CS_MODE_THUMB,CS_MODE_MCLASS
 from capstone.arm import ARM_OP_MEM,ARM_OP_REG
 from unicorn import Uc,UC_ARCH_ARM,UC_MODE_THUMB,UC_MODE_MCLASS
 from unicorn.arm_const import *
 HERE=Path(__file__).resolve().parent;R=HERE.parent;FLASH=0x08000000;RAM=0x20000000
+sys.path.insert(0,str(R/'tools'))
+from reporting import report_path
 B=(R/'artifacts/firmware.bin').read_bytes();rows=json.loads((R/'full_assembly/instructions.json').read_text())
 REGS=[UC_ARM_REG_R0,UC_ARM_REG_R1,UC_ARM_REG_R2,UC_ARM_REG_R3,UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7,UC_ARM_REG_R8,UC_ARM_REG_R9,UC_ARM_REG_R10,UC_ARM_REG_R11,UC_ARM_REG_R12,UC_ARM_REG_SP,UC_ARM_REG_LR,UC_ARM_REG_PC]
 class State(C.Structure):pass
@@ -157,4 +159,4 @@ with tempfile.TemporaryDirectory(prefix='full-c-diff-') as tmp:
   assert len(bus_events)==1,('additional callbacks after first fault',mnemonic,bus_events)
   first_fault_tests.append({'instruction':row['address'],'access':mnemonic,'bus_calls':len(bus_events),'fault_address':hex(state.fault_address)})
  report={'result':'PASS','single_instruction_cases':micro,'instruction_addresses_tested':len(rows),'mnemonics_tested':sorted(covered),'whole_function_cases':function_cases,'explicit_fault_boundary_tests':fault_tests,'independent_alignment_tests':alignment_tests,'first_fault_retention_tests':first_fault_tests,'firmware_sha256':hashlib.sha256(B).hexdigest(),'model_source_sha256':hashlib.sha256((HERE/'firmware_model.c').read_bytes()).hexdigest(),'elapsed_seconds':round(time.monotonic()-start,3),'method':'Generated C compiled by host compiler, differential against original Thumb via Unicorn; no function stubs','comparison':['r0..r14','PC','APSR NZCV','PRIMASK','all 64KiB test SRAM'],'limitations':['Instruction tests use aligned mapped addresses and valid Thumb branch targets, not all possible CPU states.','Alignment faults are tested independently against the architecture rule, not Unicorn, which permits those accesses.','Faults retain the first address and suppress subsequent memory/bus effects, but precise exception entry/register rollback is not modeled.','Whole-function tests cover selected pure/state routines, not complete boot/main execution.','No IRQ/exception-return, peripheral, DMA, hardware timing, or Flash-controller validation.']}
- (HERE/'verification.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
+ report_path('full_c/verification.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

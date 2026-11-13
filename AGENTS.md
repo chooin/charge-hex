@@ -36,6 +36,8 @@ Geehy APM32F030C8T6 board identified in the existing recovery evidence.
 | Nonstandard register contracts | [ABI shims](firmware/platform/apm32/abi_shims.S) |
 | Flash layout and no-new-static-RAM check | [Linker script](firmware/platform/apm32/firmware.ld) |
 | Seven native entry replacements | [Build adapter](firmware/tools/prepare_legacy.py) |
+| Entry/ABI/state/caller/test registration | [Migration contract](firmware/platform/apm32/migration.json) |
+| Fresh verification runs and provenance | [Run coordinator](recovery/tools/run_verification.py) |
 | Host, differential, and native checks | [Tests](tests/) |
 | Original-function reading map | [Recovery map](recovery/MODULE_MAP.md) |
 
@@ -73,6 +75,8 @@ Run from the repository root; details and dependencies are in [Reliability](docs
 | make verify-recovery | Independent recovery verification |
 
 Verification scripts use assertions: do not run them with Python optimization enabled.
+`make verify` and `make verify-recovery` create isolated reports and image copies in
+`recovery/build/verification/<run-id>/`; inspect that run's `run.json`, not a historical PASS.
 Build and verification commands are documented here, not automatically run by documentation work.
 
 ## Knowledge Store

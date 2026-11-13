@@ -15,6 +15,7 @@ import shutil
 import subprocess
 import tempfile
 import time
+from reporting import report_path
 
 import capstone
 import unicorn
@@ -98,7 +99,7 @@ def main() -> int:
     recovery = Path(__file__).resolve().parents[1]
     source = recovery / 'reconstructed/application.c'
     firmware_path = recovery / 'artifacts/firmware.bin'
-    output = args.output or recovery / 'artifacts/verification_semantics.json'
+    output = args.output or report_path('artifacts/verification_semantics.json')
     firmware = firmware_path.read_bytes()
     source_hash = sha(source.read_bytes())
     for executable in ('arm-none-eabi-gcc', 'arm-none-eabi-objcopy', 'arm-none-eabi-nm'):

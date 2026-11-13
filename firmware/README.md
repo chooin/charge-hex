@@ -10,6 +10,7 @@
 | `src/services/` | I²C 存储分页及升级 CRC；存储通过回调访问设备 |
 | `platform/apm32/` | 原 RAM 布局、驱动调用、专用 ABI、Flash 链接布局 |
 | `tools/prepare_legacy.py` | 从只读恢复源码生成兼容汇编，只写 `build/` |
+| `platform/apm32/migration.json` | 原生替换的入口、ABI、状态、调用点和验证契约 |
 | `../tests/` | 行为测试、原始 HEX 差分、原生集成与架构约束 |
 
 在仓库根目录执行 `make host` 构建 `firmware/build/libcharge.a`，或 `make native` 生成完整 64 KiB 开发固件。`make verify` 包括所有新工程验证。需要系统 C 编译器、Make、Python 3.9+、GNU Arm Embedded GCC/binutils；差分测试的 Python 依赖见根目录 `requirements-dev.txt`。完整旧恢复检查还需要 Capstone。
@@ -23,3 +24,5 @@
 协议 API 的解析缓冲必须由调用者提供 256 字节；该 API 返回事件时已重置解析索引。它尚未接入原生 RX，因为原全局缓冲与相邻对象的边界、回调重入和中断时序需要单独处理。不要直接把旧 `0x20001024` 地址当作满足此 API 的新缓冲分配。
 
 首次台架验证应核对串口/存储、通道状态、IRQ 并发、最深栈与上电/升级流程，按[验收记录](../docs/verification.md)补证。主机和指令差分通过不代表这些硬件条件已验证。
+
+新增原生替换先登记迁移契约，再修改实现与独立差分场景。`make native` 会校验契约与链接布局、平台符号、已分类调用点及验证文件的一致性；结构检查不替代原 Thumb 行为验证。详见[迁移契约与验证运行](../docs/design-docs/migration-contracts.md)。
