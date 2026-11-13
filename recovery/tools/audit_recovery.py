@@ -1,23 +1,34 @@
 #!/usr/bin/env python3
 """Audit byte identity and export coverage, without treating coverage as correctness."""
+import argparse
 from pathlib import Path
 import hashlib
 import json
-import re
+import os
 
 ROOT=Path(__file__).resolve().parents[1]
 def sha(b): return hashlib.sha256(b).hexdigest()
 def main():
+    ap=argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--decompiled-dir', type=Path, default=ROOT/'decompiled',
+                    help='REA export directory to audit; defaults to the recorded export')
+    args=ap.parse_args()
+    decompiled=args.decompiled_dir.resolve()
+    # Fresh exports keep their reports alongside their own index and README.
+    # Preserve the historical report location for the default export only.
+    report_path=(ROOT/'verification/whole_recovery_audit.json'
+                 if decompiled==(ROOT/'decompiled').resolve()
+                 else decompiled/'whole_recovery_audit.json')
     binary=(ROOT/'artifacts/firmware.bin').read_bytes()
     rebuilt=(ROOT/'full_assembly/build/firmware.bin').read_bytes()
     assert binary==rebuilt, 'complete reconstruction byte mismatch'
-    index=json.loads((ROOT/'decompiled/decompile-index.json').read_text())
+    index=json.loads((decompiled/'decompile-index.json').read_text())
     target=(ROOT/'full_assembly/build/firmware.elf').read_bytes()
     assert sha(target)==index['target_sha256'], 'export belongs to a different analysis ELF'
     body=set();warnings=[];functions=[]
     for item in index['functions']:
         assert item['status']=='written',item
-        path=ROOT/'decompiled'/item['relative_path']
+        path=decompiled/item['relative_path']
         assert sha(path.read_bytes())==item['sha256'], f'export content changed: {path}'
         for r in item.get('body',{}).get('ranges',[]):
             body.update(range(int(r['start'],16),int(r['end'],16)+1))
@@ -46,13 +57,15 @@ def main():
         'limitations':['Function bodies and code/data labels are analysis results, not original source metadata.',
                       'A successful C pseudocode export is not a successful C compilation or semantic equivalence proof.',
                       'Byte identity verifies the assembly build. C semantic tests have separate finite coverage.']}
-    (ROOT/'verification/whole_recovery_audit.json').write_text(json.dumps(report,indent=2)+'\n')
+    report_path.write_text(json.dumps(report,indent=2)+'\n')
+    report_link=Path(os.path.relpath(report_path, decompiled)).as_posix()
     text=['# 全函数 C 反编译索引','',
       '由 REA + Ghidra 12.1.4 从重建 ELF 导出。保留自动生成名称和警告；这批文件是 C 反编译参考，不能直接当作可链接的 MCU C 工程。',
-      '',f'共 {len(functions)} 个识别函数。覆盖/警告审计见 [whole_recovery_audit.json](../verification/whole_recovery_audit.json)。',
+      '',f'共 {len(functions)} 个识别函数。覆盖/警告审计见 [whole_recovery_audit.json]({report_link})。',
       '', '| 地址 | 分析名称 | C 文件 |','|---|---|---|']
     for f in functions:text.append(f"| `{f['address']}` | `{f['name']}` | [{Path(f['file']).name}]({f['file']}) |")
-    (ROOT/'decompiled/README.md').write_text('\n'.join(text)+'\n')
+    (decompiled/'README.md').write_text('\n'.join(text)+'\n')
+    print(f'Audited export: {decompiled}')
     print(json.dumps({k:v for k,v in report.items() if k not in ['decompiler_warnings','instructions_outside_decompiler_bodies']},indent=2))
     print('outside body instructions:',len(missing),'warning lines:',len(warnings))
 if __name__=='__main__':main()

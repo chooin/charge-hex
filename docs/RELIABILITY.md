@@ -23,6 +23,10 @@ Run these commands from the repository root when validating implementation work:
 | make verify | Build, all tests above, native entry/layout/caller checks, storage/config edges and persistent state sequences |
 | make verify-recovery | Independent recovery assembly/model/artifact and selected behavior checks |
 
+The recovery suite includes `recovery/verification/check_workflow.py`, which checks
+REA export failure propagation and audit directory selection using isolated fixtures;
+these workflow regressions require neither REA nor Ghidra.
+
 Sources: [root Makefile](../Makefile), [firmware Makefile](../firmware/Makefile),
 [recovery Makefile](../recovery/Makefile).
 
