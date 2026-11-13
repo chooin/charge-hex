@@ -16,6 +16,8 @@ from unicorn.arm_const import UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_SP, UC_AR
 
 source = Path(__file__).resolve().parents[1] / "reconstructed/firmware_update.c"
 recovery = source.parents[1]
+sys.path.insert(0, str(recovery/'tools'))
+from reporting import report_path
 machine = Uc(UC_ARCH_ARM, UC_MODE_THUMB)
 machine.mem_map(0x08000000, 0x10000)
 machine.mem_write(0x08000000, (recovery / 'artifacts/firmware.bin').read_bytes())
@@ -63,5 +65,5 @@ with tempfile.TemporaryDirectory(prefix="recovered-crc-") as folder:
         assert original_crc == actual, (len(data), 'original Thumb mismatch', original_crc, actual)
         rows.append({'length': len(data), 'crc': f'{actual:04X}', 'original_thumb_match': True, 'python_reference_match': True})
         print(f"length={len(data):4d} crc=0x{actual:04x} matched")
-(recovery / 'verification/update_crc_result.json').write_text(json.dumps({'result': 'PASS', 'cases': rows,
+report_path('verification/update_crc_result.json').write_text(json.dumps({'result': 'PASS', 'cases': rows,
     'limitations': ['Only the pure CRC function is compared; hardware and update state machine are not executed.']}, indent=2)+'\n')

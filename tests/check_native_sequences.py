@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'recovery/tools'))
 sys.path.insert(0, str(ROOT / 'firmware/tools'))
 from parse_hex import parse_hex
+from reporting import report_path
 from prepare_legacy import HEX_SHA
 
 FLASH, RAM, STOP = 0x08000000, 0x20000000, 0x10000000
@@ -269,7 +270,7 @@ def main():
                         'Observed stack depths are selected-call measurements, not whole-system bounds.',
                         'No IRQ/DMA interleavings, physical timing, or dynamic caller completeness proof.'],
     }
-    output = ROOT / 'firmware/build/native_sequences_verification.json'
+    output = report_path('firmware/native_sequences_verification.json')
     output.write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps({k: v for k, v in report.items() if k != 'input_sha256'}, indent=2))
 

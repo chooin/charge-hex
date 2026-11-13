@@ -1,5 +1,6 @@
 CC ?= cc
 AR ?= ar
+PYTHON ?= python3
 CFLAGS ?= -std=c11 -O0 -Wall -Wextra -Werror
 
 .PHONY: all verify regenerate
@@ -18,10 +19,10 @@ build/libfirmware_model.a: build/firmware_model.o build/firmware_data.o
 	$(AR) rcs $@ $^
 
 verify:
-	python3 verify.py
+	$(PYTHON) verify.py
 
 regenerate:
-	python3 generate.py
+	$(PYTHON) generate.py
 
 build/demo: demo.c build/libfirmware_model.a
 	$(CC) $(CFLAGS) demo.c build/libfirmware_model.a -o $@

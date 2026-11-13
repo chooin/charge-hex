@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -24,7 +25,8 @@ class RecoveryWorkflowTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
         self.recovery = self.root / 'recovery'
-        for name in ('ghidra/export_all.py', 'tools/audit_recovery.py'):
+        self.run = self.root / 'build/run'
+        for name in ('ghidra/export_all.py', 'tools/audit_recovery.py', 'tools/reporting.py'):
             destination = self.recovery / name
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / 'recovery' / name, destination)
@@ -38,10 +40,15 @@ class RecoveryWorkflowTests(unittest.TestCase):
     def write_json(self, relative, value):
         return self.write(relative, json.dumps(value).encode())
 
-    def run_cli(self, script, *args, env=None):
+    def run_cli(self, script, *args, env=None, standalone=False):
+        environment = os.environ.copy() if env is None else env.copy()
+        if standalone:
+            environment.pop('CHARGE_VERIFICATION_DIR', None)
+        else:
+            environment['CHARGE_VERIFICATION_DIR'] = str(self.run)
         return subprocess.run(
             [sys.executable, str(self.recovery / script), *map(str, args)],
-            cwd=self.root, env=env, capture_output=True, text=True,
+            cwd=self.root, env=environment, capture_output=True, text=True,
         )
 
     def export(self, *, failed=0, remaining=0, skipped=0, exit_code=0):
@@ -62,6 +69,8 @@ class RecoveryWorkflowTests(unittest.TestCase):
         ).encode())
         rea.chmod(0o755)
         self.write('ghidra/support/analyzeHeadless', b'')
+        self.write('recovery/ghidra/reproduce-result.json', b'historical REA result')
+        self.write('recovery/ghidra/reproduce.log', b'historical REA log')
         output = self.root / 'export'
         if skipped:
             output.mkdir()
@@ -76,9 +85,12 @@ class RecoveryWorkflowTests(unittest.TestCase):
             '--ghidra', self.root / 'ghidra', '--java-home', self.root,
             env=env,
         )
-        self.assertEqual((self.recovery / 'ghidra/reproduce-result.json').read_text(), record)
-        self.assertEqual((self.recovery / 'ghidra/reproduce.log').read_text(),
+        self.assertEqual((self.run / 'ghidra/reproduce-result.json').read_text(), record)
+        self.assertEqual((self.run / 'ghidra/reproduce.log').read_text(),
                          'controlled REA diagnostics\n')
+        self.assertEqual((self.recovery / 'ghidra/reproduce-result.json').read_bytes(),
+                         b'historical REA result')
+        self.assertEqual((self.recovery / 'ghidra/reproduce.log').read_bytes(), b'historical REA log')
         return result
 
     def test_complete_export_succeeds(self):
@@ -110,9 +122,11 @@ class RecoveryWorkflowTests(unittest.TestCase):
             'instruction_inventory_sha256': sha(instructions.read_bytes()),
             'translated_instructions': 1, 'untranslated_mnemonics': [],
         })
-        self.write_json('recovery/full_c/verification.json', {
+        model_result = {
             'result': 'PASS', 'model_source_sha256': sha(source.read_bytes()),
-        })
+        }
+        self.write_json('recovery/full_c/verification.json', model_result)
+        self.write_json('build/run/full_c/verification.json', model_result)
         self.write('recovery/verification/whole_recovery_audit.json', b'original report')
         self.write('recovery/decompiled/README.md', b'original README')
         for directory, names in [('recovery/decompiled', ['old']),
@@ -136,30 +150,38 @@ class RecoveryWorkflowTests(unittest.TestCase):
         readme = (directory / 'README.md').read_text()
         match = re.search(r'\[whole_recovery_audit\.json\]\(([^)]+)\)', readme)
         self.assertIsNotNone(match, readme)
-        self.assertEqual((directory / match.group(1)).resolve(), report.resolve())
+        self.assertEqual((directory / unquote(match.group(1))).resolve(), report.resolve())
 
     def assert_original_outputs_unchanged(self):
         self.assertEqual((self.recovery / 'decompiled/README.md').read_bytes(), b'original README')
         self.assertEqual((self.recovery / 'verification/whole_recovery_audit.json').read_bytes(),
                          b'original report')
 
-    def test_default_audit_keeps_existing_output_locations(self):
+    def test_default_audit_writes_run_outputs_and_preserves_history(self):
         self.audit_fixture()
         result = self.run_cli('tools/audit_recovery.py')
         self.assertEqual(result.returncode, 0, result.stderr)
-        report = self.recovery / 'verification/whole_recovery_audit.json'
-        self.assertEqual(json.loads(report.read_text())['decompiled_functions'], 1)
-        self.assert_readme_report_link(self.recovery / 'decompiled', report)
+        report = self.run / 'verification/whole_recovery_audit.json'
+        result = json.loads(report.read_text())
+        self.assertEqual(result['decompiled_functions'], 1)
+        self.assertEqual(result['model_verification']['kind'], 'current_run')
+        self.assert_readme_report_link(self.run / 'decompiled', report)
+        self.assert_original_outputs_unchanged()
 
     def test_custom_audit_reads_and_reports_only_selected_export(self):
         directory = self.audit_fixture()
         result = self.run_cli('tools/audit_recovery.py', '--decompiled-dir',
                               directory.relative_to(self.root))
         self.assertEqual(result.returncode, 0, result.stderr)
-        report = directory / 'whole_recovery_audit.json'
+        report = self.run / 'verification/whole_recovery_audit.json'
         self.assertEqual(json.loads(report.read_text())['decompiled_functions'], 2)
-        self.assert_readme_report_link(directory, report)
-        self.assertIn('functions/fresh.c', (directory / 'README.md').read_text())
+        self.assert_readme_report_link(self.run / 'decompiled', report)
+        readme = (self.run / 'decompiled/README.md').read_text()
+        match = re.search(r'\[fresh\.c\]\(([^)]+)\)', readme)
+        self.assertIsNotNone(match)
+        self.assertEqual((self.run / 'decompiled' / unquote(match.group(1))).resolve(),
+                         (directory / 'functions/fresh.c').resolve())
+        self.assertFalse((directory / 'README.md').exists())
         self.assert_original_outputs_unchanged()
 
     def test_custom_export_corruption_fails_despite_valid_old_export(self):
@@ -168,7 +190,35 @@ class RecoveryWorkflowTests(unittest.TestCase):
         result = self.run_cli('tools/audit_recovery.py', '--decompiled-dir', directory)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('export content changed', result.stderr)
-        self.assertFalse((directory / 'whole_recovery_audit.json').exists())
+        self.assertFalse((self.run / 'verification/whole_recovery_audit.json').exists())
+        self.assert_original_outputs_unchanged()
+
+    def test_missing_run_model_result_cannot_use_historical_pass(self):
+        self.audit_fixture()
+        (self.run / 'full_c/verification.json').unlink()
+        result = self.run_cli('tools/audit_recovery.py')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Missing verification result in this run', result.stderr)
+        self.assertFalse((self.run / 'verification/whole_recovery_audit.json').exists())
+        self.assert_original_outputs_unchanged()
+
+    def test_failed_run_model_result_cannot_use_historical_pass(self):
+        self.audit_fixture()
+        self.write_json('build/run/full_c/verification.json', {'result': 'FAIL'})
+        result = self.run_cli('tools/audit_recovery.py')
+        self.assertNotEqual(result.returncode, 0)
+        self.assert_original_outputs_unchanged()
+
+    def test_standalone_audits_use_distinct_runs_and_label_historical_input(self):
+        self.audit_fixture()
+        for _ in range(2):
+            result = self.run_cli('tools/audit_recovery.py', standalone=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+        reports = list((self.recovery / 'build/verification').glob('*/verification/whole_recovery_audit.json'))
+        self.assertEqual(len(reports), 2)
+        for report in reports:
+            self.assertEqual(json.loads(report.read_text())['model_verification']['kind'],
+                             'historical_snapshot')
         self.assert_original_outputs_unchanged()
 
 

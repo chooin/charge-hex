@@ -10,6 +10,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(Path(__file__).parent))
 from parse_hex import parse_hex
+from reporting import report_path
 
 
 def sha(data):
@@ -38,7 +39,7 @@ def main():
               'image_bytes': len(binary), 'independent_objcopy_match': True, 'analysis_elf_flash_match': True,
               'c_syntax_checked': [str(f.relative_to(ROOT)) for f in files],
               'limitations': ['Syntax and byte identity do not prove reconstructed firmware links or is behaviorally equivalent.']}
-    out = ROOT / 'recovery/verification/artifact_result.json'
+    out = report_path('verification/artifact_result.json')
     out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result, indent=2))

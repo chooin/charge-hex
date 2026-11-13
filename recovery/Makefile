@@ -1,12 +1,15 @@
 PYTHON ?= python3
-.PHONY: all firmware c-model verify export-c
+.PHONY: all firmware c-model verify verify-checks export-c
 all: firmware c-model
 firmware:
 	$(MAKE) -C full_assembly all
 c-model:
 	$(MAKE) -C full_c all
-verify: all
+verify:
+	$(PYTHON) tools/run_verification.py recovery
+verify-checks: all
 	$(PYTHON) verification/check_workflow.py
+	$(PYTHON) verification/check_run_verification.py
 	$(MAKE) -C full_assembly verify
 	$(PYTHON) tools/check_artifacts.py
 	$(PYTHON) verification/check_serial.py

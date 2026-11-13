@@ -10,22 +10,19 @@ import hashlib
 import json
 from pathlib import Path
 import re
+from migration_contract import HEX_SHA, load_contract
 
 if not __debug__:
     raise RuntimeError("Run verification without Python optimization (-O)")
 
 ROOT = Path(__file__).resolve().parents[2]
-HEX_SHA = "22b4c0a573576b2f0f9ea93fc3459f22163f3c5305875a245f3ea82c4a373ccf"
+CONTRACT = load_contract()
 ENTRIES = {
-    0x08007498: "charge_legacy_storage_read",
-    0x080074c4: "charge_legacy_storage_wait_ready",
-    0x080074fc: "charge_legacy_storage_write",
-    0x08009e14: "charge_legacy_clear_channel",
-    0x0800bcd8: "charge_legacy_apply_config",
-    0x0800c7c4: "charge_legacy_send_frame",
-    0x0800c85c: "charge_legacy_set_channel",
+    int(entry['original_entry'], 16): entry['replacement_symbol']
+    for entry in CONTRACT['entries']
 }
-EXTENSION_START, EXTENSION_END = 0x0800d000, 0x0800f800
+EXTENSION_START = int(CONTRACT['flash']['extension']['start'], 16)
+EXTENSION_END = int(CONTRACT['flash']['extension']['end_exclusive'], 16)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

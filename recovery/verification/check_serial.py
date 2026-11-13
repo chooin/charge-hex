@@ -8,11 +8,14 @@ import json
 from pathlib import Path
 import random
 import subprocess
+import sys
 import tempfile
 from unicorn import Uc, UC_ARCH_ARM, UC_MODE_THUMB, UC_HOOK_CODE
 from unicorn.arm_const import UC_ARM_REG_R0, UC_ARM_REG_R1, UC_ARM_REG_R2, UC_ARM_REG_R3, UC_ARM_REG_SP, UC_ARM_REG_LR, UC_ARM_REG_PC
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/'recovery/tools'))
+from reporting import report_path
 rng = random.Random(0x8EAC)
 binary = (ROOT/'recovery/artifacts/firmware.bin').read_bytes()
 STOP = 0x0800F000
@@ -116,4 +119,5 @@ void fw_0800cdb8_event(uint8_t e){(void)e;}
             'limitations':['External frame dispatch and TX calls are intercepted, not emulated.',
                            'No hardware, DMA, peripheral timing, interrupt concurrency, or full application equivalence verified.',
                            'Parser buffer mapped as 256 bytes to observe malformed-input semantics; not a claim of firmware allocation.']}
+    report_path('verification/serial_result.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))

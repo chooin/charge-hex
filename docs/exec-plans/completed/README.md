@@ -1,10 +1,11 @@
 # Completed Execution Plans
 
-No execution plans were retroactively invented or archived by this documentation task.
-The existing [verification record](../../verification.md) documents earlier work but is
-not itself an owner-approved completed execution plan.
+| Plan | Completed scope | Date |
+| --- | --- | --- |
+| [Migration contracts and isolated verification](verification-contracts.md) | Seven-entry registration, fresh run evidence and unchanged binaries | 2026-11-13 |
 
-> **TODO(owner):** Identify any completed plans to archive with their scope, acceptance evidence, and unresolved follow-up work.
+The existing [verification record](../../verification.md) remains dated evidence of
+earlier work; it has not been retroactively converted into an execution plan.
 
 Archive a plan only with a completion decision and scoped validation results.
 See [planning workflow](../../PLANS.md) and [active plans](../active/README.md).

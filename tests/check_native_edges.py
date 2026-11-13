@@ -26,6 +26,7 @@ if not __debug__:
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'recovery/tools'))
 from parse_hex import parse_hex
+from reporting import report_path
 
 HEX_SHA = '22b4c0a573576b2f0f9ea93fc3459f22163f3c5305875a245f3ea82c4a373ccf'
 FLASH, RAM, STOP = 0x08000000, 0x20000000, 0x10000000
@@ -365,7 +366,7 @@ def main():
                               'Maximum valid transfers tested with immediate I/O failure; no full 64 KiB data buffer.',
                               'Finite samples and instruction coverage do not prove all state/branch combinations.'],
               'input_sha256': hashes}
-    target = ROOT/'firmware/build/native_edges_verification.json'
+    target = report_path('firmware/native_edges_verification.json')
     target.write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps({k: v for k, v in result.items() if k != 'input_sha256'}, indent=2))
 

@@ -1,0 +1,533 @@
+{
+  "schema_version": 1,
+  "original_hex_sha256": "22b4c0a573576b2f0f9ea93fc3459f22163f3c5305875a245f3ea82c4a373ccf",
+  "instruction_inventory_sha256": "bdf5e90bef28c2c9a7209fe0a1635d9513a5c737bd1f0ee1259634c1618bb4c1",
+  "flash": {
+    "legacy": {
+      "start": "0x08000000",
+      "end_exclusive": "0x0800d000"
+    },
+    "extension": {
+      "start": "0x0800d000",
+      "end_exclusive": "0x0800f800"
+    },
+    "persistent": {
+      "start": "0x0800f800",
+      "end_exclusive": "0x08010000"
+    },
+    "preserved_boot": {
+      "start": "0x08000000",
+      "end_exclusive": "0x08004000"
+    }
+  },
+  "sram": {
+    "start": "0x20000000",
+    "end_exclusive": "0x20002000"
+  },
+  "entries": [
+    {
+      "id": "storage_read",
+      "original_entry": "0x08007498",
+      "replacement_symbol": "charge_legacy_storage_read",
+      "window_bytes": 16,
+      "abi": {
+        "parameters": [
+          {
+            "name": "address",
+            "location": "r0",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Preserve full-register range subtraction before narrowing."
+          },
+          {
+            "name": "data",
+            "location": "r1",
+            "kind": "pointer",
+            "bits": 32,
+            "behavior": "NULL with nonzero size follows original driver validation."
+          },
+          {
+            "name": "size",
+            "location": "r2",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Retain raw width on exceptional driver path."
+          }
+        ],
+        "standard_preserved": [
+          "r4",
+          "r5",
+          "r6",
+          "r7",
+          "r8",
+          "r9",
+          "r10",
+          "r11",
+          "sp"
+        ],
+        "extra_preserved": [
+          "r1",
+          "r2",
+          "r12"
+        ],
+        "shim": "storage_read",
+        "return_value": "Raw read status in r0.",
+        "stack_alignment_bytes": 8
+      },
+      "state_bindings": [
+        {
+          "name": "i2c_context",
+          "address": "0x20000b6c",
+          "bytes": null,
+          "access": "read_write",
+          "notes": "Legacy driver-owned handle; full allocation extent is not established here."
+        }
+      ],
+      "ownership": "Legacy caller/platform owns state and interrupt serialization; this migration adds no static RAM.",
+      "direct_call_sites": [
+        "0x0800a472",
+        "0x0800a4f6"
+      ],
+      "caller_coverage": "All classified direct BL sites; dynamic targets remain unknown.",
+      "equivalence_scope": "Normal requests use portable storage; exceptional registers retain original validation and handle side effects. Caller buffer extent is size.",
+      "verification": [
+        "tests/check_native.py",
+        "tests/check_native_edges.py"
+      ],
+      "status": {
+        "portable_api": "implemented",
+        "native_integration": "integrated",
+        "board_acceptance": "unverified"
+      }
+    },
+    {
+      "id": "storage_wait_ready",
+      "original_entry": "0x080074c4",
+      "replacement_symbol": "charge_legacy_storage_wait_ready",
+      "window_bytes": 16,
+      "abi": {
+        "parameters": [],
+        "standard_preserved": [
+          "r4",
+          "r5",
+          "r6",
+          "r7",
+          "r8",
+          "r9",
+          "r10",
+          "r11",
+          "sp"
+        ],
+        "extra_preserved": [
+          "r12"
+        ],
+        "shim": "preserve_ip_entry",
+        "return_value": "Zero on ready; one on timeout in r0.",
+        "stack_alignment_bytes": 8
+      },
+      "state_bindings": [
+        {
+          "name": "i2c_context",
+          "address": "0x20000b6c",
+          "bytes": null,
+          "access": "read_write",
+          "notes": "Legacy driver-owned handle; full allocation extent is not established here."
+        }
+      ],
+      "ownership": "Legacy caller/platform owns state and interrupt serialization; this migration adds no static RAM.",
+      "direct_call_sites": [
+        "0x0800752a",
+        "0x08007564",
+        "0x08007592"
+      ],
+      "caller_coverage": "All classified direct BL sites; dynamic targets remain unknown.",
+      "equivalence_scope": "Zero-length five-argument probe; unsigned elapsed ticks greater than 500 times out. Tick must advance.",
+      "verification": [
+        "tests/check_native.py",
+        "tests/check_native_edges.py"
+      ],
+      "status": {
+        "portable_api": "implemented",
+        "native_integration": "integrated",
+        "board_acceptance": "unverified"
+      }
+    },
+    {
+      "id": "storage_write",
+      "original_entry": "0x080074fc",
+      "replacement_symbol": "charge_legacy_storage_write",
+      "window_bytes": 16,
+      "abi": {
+        "parameters": [
+          {
+            "name": "address",
+            "location": "r0",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Preserve full-register range subtraction and page address wrapping."
+          },
+          {
+            "name": "data",
+            "location": "r1",
+            "kind": "pointer",
+            "bits": 32,
+            "behavior": "Preserve exceptional NULL/raw integer address behavior."
+          },
+          {
+            "name": "size",
+            "location": "r2",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Preserve signed adjustment followed by 16-bit page/tail masks."
+          }
+        ],
+        "standard_preserved": [
+          "r4",
+          "r5",
+          "r6",
+          "r7",
+          "r8",
+          "r9",
+          "r10",
+          "r11",
+          "sp"
+        ],
+        "extra_preserved": [],
+        "shim": "direct_c",
+        "return_value": "Zero on success; normalized one on write/probe failure in r0.",
+        "stack_alignment_bytes": 8
+      },
+      "state_bindings": [
+        {
+          "name": "i2c_context",
+          "address": "0x20000b6c",
+          "bytes": null,
+          "access": "read_write",
+          "notes": "Legacy driver-owned handle; full allocation extent is not established here."
+        }
+      ],
+      "ownership": "Legacy caller/platform owns state and interrupt serialization; this migration adds no static RAM.",
+      "direct_call_sites": [
+        "0x0800a482",
+        "0x0800a638"
+      ],
+      "caller_coverage": "All classified direct BL sites; dynamic targets remain unknown.",
+      "equivalence_scope": "Normal requests use portable storage; exceptional paths retain legacy page arithmetic and driver effects. Caller buffer extent is size.",
+      "verification": [
+        "tests/check_native.py",
+        "tests/check_native_edges.py"
+      ],
+      "status": {
+        "portable_api": "implemented",
+        "native_integration": "integrated",
+        "board_acceptance": "unverified"
+      }
+    },
+    {
+      "id": "clear_channel",
+      "original_entry": "0x08009e14",
+      "replacement_symbol": "charge_legacy_clear_channel",
+      "window_bytes": 16,
+      "abi": {
+        "parameters": [
+          {
+            "name": "channel",
+            "location": "r0",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Preserve unsigned address arithmetic base + channel * 52; callers establish valid index."
+          }
+        ],
+        "standard_preserved": [
+          "r4",
+          "r5",
+          "r6",
+          "r7",
+          "r8",
+          "r9",
+          "r10",
+          "r11",
+          "sp"
+        ],
+        "extra_preserved": [
+          "r3",
+          "r12"
+        ],
+        "shim": "preserve_r3_entry",
+        "return_value": "No portable return value; r3 remains the entry value.",
+        "stack_alignment_bytes": 8
+      },
+      "state_bindings": [
+        {
+          "name": "channel_records",
+          "address": "0x200005e4",
+          "bytes": 624,
+          "access": "read_write",
+          "notes": "Twelve 52-byte records for valid channel inputs; exceptional register arithmetic is not constrained to this range."
+        }
+      ],
+      "ownership": "Legacy caller/platform owns state and interrupt serialization; this migration adds no static RAM.",
+      "direct_call_sites": [
+        "0x08009dde",
+        "0x08009e98",
+        "0x08009f5c",
+        "0x0800c664"
+      ],
+      "caller_coverage": "All classified direct BL sites; dynamic targets remain unknown.",
+      "equivalence_scope": "Clear only six observed fields and preserve r3 required by the real reset caller.",
+      "verification": [
+        "tests/check_native.py",
+        "tests/check_native_sequences.py"
+      ],
+      "status": {
+        "portable_api": "implemented",
+        "native_integration": "integrated",
+        "board_acceptance": "unverified"
+      }
+    },
+    {
+      "id": "apply_config",
+      "original_entry": "0x0800bcd8",
+      "replacement_symbol": "charge_legacy_apply_config",
+      "window_bytes": 16,
+      "abi": {
+        "parameters": [
+          {
+            "name": "payload",
+            "location": "r0",
+            "kind": "pointer",
+            "bits": 32,
+            "behavior": "NULL is a no-op; otherwise reads 23 bytes under original caller contract."
+          },
+          {
+            "name": "big_endian",
+            "location": "r1",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Only full-register value exactly one selects big endian."
+          }
+        ],
+        "standard_preserved": [
+          "r4",
+          "r5",
+          "r6",
+          "r7",
+          "r8",
+          "r9",
+          "r10",
+          "r11",
+          "sp"
+        ],
+        "extra_preserved": [],
+        "shim": "direct_c",
+        "return_value": "No portable return value.",
+        "stack_alignment_bytes": 8
+      },
+      "state_bindings": [
+        {
+          "name": "configuration",
+          "address": "0x20000854",
+          "bytes": 120,
+          "access": "read_write",
+          "notes": "Payload and configuration are disjoint in established callers."
+        }
+      ],
+      "ownership": "Legacy caller/platform owns state and interrupt serialization; this migration adds no static RAM.",
+      "direct_call_sites": [
+        "0x0800b490",
+        "0x0800c84a"
+      ],
+      "caller_coverage": "All classified direct BL sites; dynamic targets remain unknown.",
+      "equivalence_scope": "Preserve payload mapping, clamping and dirty byte; physical units of unknown fields remain unspecified.",
+      "verification": [
+        "tests/check_native.py",
+        "tests/check_native_edges.py"
+      ],
+      "status": {
+        "portable_api": "implemented",
+        "native_integration": "integrated",
+        "board_acceptance": "unverified"
+      }
+    },
+    {
+      "id": "send_frame",
+      "original_entry": "0x0800c7c4",
+      "replacement_symbol": "charge_legacy_send_frame",
+      "window_bytes": 16,
+      "abi": {
+        "parameters": [
+          {
+            "name": "command",
+            "location": "r0",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Narrow to low byte after length validation."
+          },
+          {
+            "name": "length",
+            "location": "r1",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Reject full-register values greater than 166."
+          },
+          {
+            "name": "subcommand",
+            "location": "r2",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Narrow to low byte after length validation."
+          },
+          {
+            "name": "payload",
+            "location": "r3",
+            "kind": "pointer",
+            "bits": 32,
+            "behavior": "Mapped address zero is a valid machine source; preserved by assembly byte load."
+          },
+          {
+            "name": "prefix",
+            "location": "stack+0",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Fifth original stack argument, narrowed to low byte."
+          }
+        ],
+        "standard_preserved": [
+          "r4",
+          "r5",
+          "r6",
+          "r7",
+          "r8",
+          "r9",
+          "r10",
+          "r11",
+          "sp"
+        ],
+        "extra_preserved": [],
+        "shim": "direct_c",
+        "return_value": "No portable return value.",
+        "stack_alignment_bytes": 8
+      },
+      "state_bindings": [
+        {
+          "name": "tx_buffer",
+          "address": "0x20000a18",
+          "bytes": 171,
+          "access": "read_write",
+          "notes": "Shared legacy TX buffer; caller owns serialization and payload does not overlap in established callers."
+        }
+      ],
+      "ownership": "Legacy caller/platform owns state and interrupt serialization; this migration adds no static RAM.",
+      "direct_call_sites": [
+        "0x08005284",
+        "0x0800968a",
+        "0x0800b212",
+        "0x0800b310",
+        "0x0800b336",
+        "0x0800b946",
+        "0x0800ba64",
+        "0x0800baaa",
+        "0x0800bb2c",
+        "0x0800bb74",
+        "0x0800bc1a"
+      ],
+      "caller_coverage": "All classified direct BL sites; dynamic targets remain unknown.",
+      "equivalence_scope": "Preserve frame bytes and UART call; no claim about IRQ/DMA interleavings or transmission timing.",
+      "verification": [
+        "tests/check_native.py",
+        "tests/check_native_sequences.py"
+      ],
+      "status": {
+        "portable_api": "implemented",
+        "native_integration": "integrated",
+        "board_acceptance": "unverified"
+      }
+    },
+    {
+      "id": "set_channel",
+      "original_entry": "0x0800c85c",
+      "replacement_symbol": "charge_legacy_set_channel",
+      "window_bytes": 16,
+      "abi": {
+        "parameters": [
+          {
+            "name": "channel",
+            "location": "r0",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Normalize to low eight bits before valid-channel check."
+          },
+          {
+            "name": "enabled",
+            "location": "r1",
+            "kind": "uint32",
+            "bits": 32,
+            "behavior": "Compare the full register against zero before narrowing."
+          }
+        ],
+        "standard_preserved": [
+          "r4",
+          "r5",
+          "r6",
+          "r7",
+          "r8",
+          "r9",
+          "r10",
+          "r11",
+          "sp"
+        ],
+        "extra_preserved": [
+          "r12"
+        ],
+        "shim": "preserve_ip_entry",
+        "return_value": "No portable return value; original r3 scratch result is not a preserved-register promise.",
+        "stack_alignment_bytes": 8
+      },
+      "state_bindings": [
+        {
+          "name": "channel_bitmap",
+          "address": "0x200000b8",
+          "bytes": 4,
+          "access": "read_write",
+          "notes": "Related packed-state update is not atomic."
+        },
+        {
+          "name": "channel_packed_state",
+          "address": "0x200000dd",
+          "bytes": 3,
+          "access": "read_write",
+          "notes": "Two bits per channel; caller owns interrupt serialization."
+        }
+      ],
+      "ownership": "Legacy caller/platform owns state and interrupt serialization; this migration adds no static RAM.",
+      "direct_call_sites": [
+        "0x08004d00",
+        "0x08009de8",
+        "0x08009eca",
+        "0x08009f78",
+        "0x0800a23c",
+        "0x0800a492",
+        "0x0800a844",
+        "0x0800af06",
+        "0x0800ca66",
+        "0x0800cc02"
+      ],
+      "caller_coverage": "All classified direct BL sites; dynamic targets remain unknown.",
+      "equivalence_scope": "Retain bitmap and packed-state rules and raw channel/enable register conversions.",
+      "verification": [
+        "tests/check_native.py",
+        "tests/check_native_sequences.py"
+      ],
+      "status": {
+        "portable_api": "implemented",
+        "native_integration": "integrated",
+        "board_acceptance": "unverified"
+      }
+    }
+  ],
+  "limitations": [
+    "This manifest records reviewed compatibility contracts; structural checks do not prove their semantics.",
+    "Original HEX and native differential expectations remain independent oracles.",
+    "No board acceptance, cycle accuracy, full IRQ/DMA schedule or dynamic-call completeness is established."
+  ]
+}
